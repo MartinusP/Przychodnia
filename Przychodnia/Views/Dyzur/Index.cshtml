@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Przychodnia.Repository.DYZUR>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DZIEN_DYZURU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ODDZIAL.NAZWA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DZIEN_DYZURU)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ODDZIAL.NAZWA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRACOWNIK.IMIE)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_PRACOWNIK }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_PRACOWNIK }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_PRACOWNIK })
+        </td>
+    </tr>
+}
+
+</table>
