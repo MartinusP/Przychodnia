@@ -183,7 +183,7 @@
     <Compile Include="Models\PacjentModel.cs" />
     <Compile Include="Models\PlacowkaModel.cs" />
     <Compile Include="Models\PracownikModel.cs" />
-    <Compile Include="Models\ReceptyModel.cs" />
+    <Compile Include="Models\ReceptaModel.cs" />
     <Compile Include="Models\SalaModel.cs" />
     <Compile Include="Models\SpecjalizacjaModel.cs" />
     <Compile Include="Models\WizytaModel.cs" />

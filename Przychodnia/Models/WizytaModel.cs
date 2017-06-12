@@ -9,6 +9,7 @@ namespace Przychodnia.Models
     {
         public int ID_Wizyta { get; set; }
         public DateTime DataWizyty { get; set; }
-  
+        public string Uwagi { get; set; }
+
     }
 }
