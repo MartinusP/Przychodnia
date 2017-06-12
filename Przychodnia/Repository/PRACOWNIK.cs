@@ -18,7 +18,7 @@ namespace Przychodnia.Repository
         public PRACOWNIK()
         {
             this.ODDZIAL_PRACOWNIK = new HashSet<ODDZIAL_PRACOWNIK>();
-            this.WIZYTA = new HashSet<WIZYTA>();
+            this.WIZYTAs = new HashSet<WIZYTA>();
         }
     
         public int ID_PRACOWNIK { get; set; }
@@ -35,6 +35,6 @@ namespace Przychodnia.Repository
         public virtual DYZUR DYZUR { get; set; }
         public virtual SPECJALIZACJA SPECJALIZACJA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WIZYTA> WIZYTA { get; set; }
+        public virtual ICollection<WIZYTA> WIZYTAs { get; set; }
     }
 }

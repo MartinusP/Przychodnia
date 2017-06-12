@@ -17,7 +17,7 @@ namespace Przychodnia.Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ODDZIAL_PRACOWNIK()
         {
-            this.PRACOWNIK1 = new HashSet<PRACOWNIK>();
+            this.PRACOWNIKs = new HashSet<PRACOWNIK>();
         }
     
         public int ID_ODDZIAL_PRACOWNIK { get; set; }
@@ -27,6 +27,6 @@ namespace Przychodnia.Repository
         public virtual ODDZIAL ODDZIAL { get; set; }
         public virtual PRACOWNIK PRACOWNIK { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PRACOWNIK> PRACOWNIK1 { get; set; }
+        public virtual ICollection<PRACOWNIK> PRACOWNIKs { get; set; }
     }
 }

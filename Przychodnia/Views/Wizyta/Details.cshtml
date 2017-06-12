@@ -1,0 +1,66 @@
+﻿@model Przychodnia.Repository.WIZYTA
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WIZYTA</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DATA_WIZYTY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATA_WIZYTY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UWAGI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UWAGI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ODDZIAL.NAZWA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ODDZIAL.NAZWA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PACJENT.IMIE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PACJENT.IMIE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRACOWNIK.IMIE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SALA.ID_SALA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SALA.ID_SALA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_WIZYTA }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
