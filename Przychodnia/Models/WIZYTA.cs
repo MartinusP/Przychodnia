@@ -1,14 +1,12 @@
-namespace Przychodnia.Repository
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-    [Table("WIZYTA")]
+namespace Przychodnia.Models
+{
     public partial class WIZYTA
     {
-        [Key]
         public int ID_WIZYTA { get; set; }
         public Nullable<System.DateTime> DATA_WIZYTY { get; set; }
         public Nullable<int> ID_SALA { get; set; }
@@ -16,7 +14,7 @@ namespace Przychodnia.Repository
         public Nullable<int> ID_ODDZIAL { get; set; }
         public Nullable<int> ID_PACJENT { get; set; }
         public string UWAGI { get; set; }
-    
+
         public virtual ODDZIAL ODDZIAL { get; set; }
         public virtual PACJENT PACJENT { get; set; }
         public virtual PRACOWNIK PRACOWNIK { get; set; }

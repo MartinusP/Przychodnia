@@ -1,14 +1,12 @@
-namespace Przychodnia.Repository
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-    [Table("RECEPTA")]
+namespace Przychodnia.Models
+{
     public partial class RECEPTA
     {
-        [Key]
         public int ID_RECEPTA { get; set; }
         public Nullable<System.DateTime> DATA_WYKORZYSTANIA { get; set; }
         public string NAZWA_LEKU { get; set; }

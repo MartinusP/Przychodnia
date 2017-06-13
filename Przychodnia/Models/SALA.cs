@@ -1,11 +1,10 @@
-namespace Przychodnia.Repository
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-    [Table("SALA")]
+namespace Przychodnia.Models
+{
     public partial class SALA
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -14,10 +13,9 @@ namespace Przychodnia.Repository
             this.WIZYTAs = new HashSet<WIZYTA>();
         }
 
-        [Key]
         public int ID_SALA { get; set; }
         public int NUMER_SALI { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WIZYTA> WIZYTAs { get; set; }
     }
