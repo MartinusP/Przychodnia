@@ -123,11 +123,29 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>Anwendungsname</value>
   </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Zurück zur Liste</value>
+  </data>
   <data name="ChangeLanguage" xml:space="preserve">
     <value>Sprache ändern</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Erstellen</value>
+  </data>
+  <data name="CreateNew" xml:space="preserve">
+    <value>Erstelle neu</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Bearbeiten</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>Englisch</value>
@@ -135,11 +153,17 @@
   <data name="German" xml:space="preserve">
     <value>Deutsch</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hallo</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Startseite</value>
   </data>
   <data name="LogIn" xml:space="preserve">
     <value>Einloggen</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Ausloggen</value>
   </data>
   <data name="Polish" xml:space="preserve">
     <value>Polnisch</value>
@@ -149,6 +173,9 @@
   </data>
   <data name="RolesAdmin" xml:space="preserve">
     <value>RollenAdmin</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Sparen</value>
   </data>
   <data name="UsersAdmin" xml:space="preserve">
     <value>BenutzerAdmin</value>
