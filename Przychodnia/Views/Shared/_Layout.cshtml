@@ -25,8 +25,8 @@
                     <li>@Html.ActionLink(MultiLanguage.Home, "Index", "Home")</li>
                     <li>@Html.ActionLink(MultiLanguage.About, "About", "Home")</li>
                     <li>@Html.ActionLink(MultiLanguage.Contact, "Contact", "Home")</li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">@Html.ActionLink(MultiLanguage.ChangeLanguage, "Index", "Home")</a>
-                        <ul class="dropdown-menu">
+                    <li class="dropdown">@Html.ActionLink(MultiLanguage.ChangeLanguage, "Index", "Home")
+                        <ul>
                             <li>@Html.ActionLink(MultiLanguage.English, "ChangeLanguage", "Home", new { lang = "en-GB" }, null)</li>
                             <li>@Html.ActionLink(MultiLanguage.German, "ChangeLanguage", "Home", new { lang = "de-DE" }, null)</li>
                             <li>@Html.ActionLink(MultiLanguage.Polish, "ChangeLanguage", "Home", new { lang = "pl-PL" }, null)</li>
