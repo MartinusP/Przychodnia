@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Przychodnia.App_GlobalResources;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,13 +22,21 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink(MultiLanguage.Home, "Index", "Home")</li>
+                    <li>@Html.ActionLink(MultiLanguage.About, "About", "Home")</li>
+                    <li>@Html.ActionLink(MultiLanguage.Contact, "Contact", "Home")</li>
+                    <li class="dropdown">@Html.ActionLink(MultiLanguage.ChangeLanguage, "Index", "Home")
+                        <ul>
+                            <li>@Html.ActionLink(MultiLanguage.English, "ChangeLanguage", "Home", new { lang = "en-GB" }, null)</li>
+                            <li>@Html.ActionLink(MultiLanguage.German, "ChangeLanguage", "Home", new { lang = "de-DE" }, null)</li>
+                            <li>@Html.ActionLink(MultiLanguage.Polish, "ChangeLanguage", "Home", new { lang = "pl-PL" }, null)</li>
+                        </ul>
+                    </li>
+                   
 
                     @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
-                        <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
-                        <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
+                        <li>@Html.ActionLink(MultiLanguage.RolesAdmin, "Index", "RolesAdmin")</li>
+                        <li>@Html.ActionLink(MultiLanguage.UsersAdmin, "Index", "UsersAdmin")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

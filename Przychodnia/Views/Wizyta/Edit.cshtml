@@ -1,4 +1,5 @@
-﻿@model Przychodnia.Repository.WIZYTA
+﻿@using Przychodnia.App_GlobalResources;
+@model Przychodnia.Repository.WIZYTA
 
 @{
     ViewBag.Title = "Edit";
@@ -74,7 +75,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(MultiLanguage.BackToList, "Index")
 </div>
 
 @section Scripts {

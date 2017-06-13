@@ -1,4 +1,5 @@
-﻿@model IdentitySample.Models.ApplicationUser
+﻿@using Przychodnia.App_GlobalResources;
+@model IdentitySample.Models.ApplicationUser
 
 @{
     ViewBag.Title = "Details";
@@ -37,8 +38,8 @@
     }
 </table>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(MultiLanguage.Edit, "Edit", new { id = Model.Id }) |
+    @Html.ActionLink(MultiLanguage.BackToList, "Index")
 </p>
 
 
