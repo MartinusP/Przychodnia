@@ -1,4 +1,7 @@
 ﻿using System.Web.Mvc;
+using System.Threading;
+using System.Globalization;
+using System.Web;
 
 namespace IdentitySample.Controllers
 {
@@ -22,6 +25,20 @@ namespace IdentitySample.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult ChangeLanguage(string lang)
+        {
+            if(lang != null)
+            {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(lang);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+            }
+
+            HttpCookie cookie = new HttpCookie("_lang");
+            cookie.Value = lang;
+            Response.Cookies.Add(cookie);
+            return View("Index");
         }
     }
 }
