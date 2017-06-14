@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -15,20 +16,20 @@ namespace Przychodnia
         private PRZYCHODNIAEntities db = new PRZYCHODNIAEntities();
 
         // GET: OddzialPracownik
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var oddzial_pracownik = db.ODDZIAL_PRACOWNIK.Include(o => o.ODDZIAL).Include(o => o.PRACOWNIK);
-            return View(oddzial_pracownik.ToList());
+            return View(await oddzial_pracownik.ToListAsync());
         }
 
         // GET: OddzialPracownik/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL_PRACOWNIK oddzial_pracownik = db.ODDZIAL_PRACOWNIK.Find(id);
+            ODDZIAL_PRACOWNIK oddzial_pracownik = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
             if (oddzial_pracownik == null)
             {
                 return HttpNotFound();
@@ -47,12 +48,12 @@ namespace Przychodnia
         // POST: OddzialPracownik/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_ODDZIAL_PRACOWNIK,ID_PRACOWNIK,ID_ODDZIAL")] ODDZIAL_PRACOWNIK oddzial_pracownik)
+        public async Task<ActionResult> Create([Bind(Include = "ID_ODDZIAL_PRACOWNIK,ID_PRACOWNIK,ID_ODDZIAL")] ODDZIAL_PRACOWNIK oddzial_pracownik)
         {
             if (ModelState.IsValid)
             {
                 db.ODDZIAL_PRACOWNIK.Add(oddzial_pracownik);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -62,13 +63,13 @@ namespace Przychodnia
         }
 
         // GET: OddzialPracownik/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL_PRACOWNIK oddzial_pracownik = db.ODDZIAL_PRACOWNIK.Find(id);
+            ODDZIAL_PRACOWNIK oddzial_pracownik = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
             if (oddzial_pracownik == null)
             {
                 return HttpNotFound();
@@ -81,12 +82,12 @@ namespace Przychodnia
         // POST: OddzialPracownik/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_ODDZIAL_PRACOWNIK,ID_PRACOWNIK,ID_ODDZIAL")] ODDZIAL_PRACOWNIK oddzial_pracownik)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_ODDZIAL_PRACOWNIK,ID_PRACOWNIK,ID_ODDZIAL")] ODDZIAL_PRACOWNIK oddzial_pracownik)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(oddzial_pracownik).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", oddzial_pracownik.ID_ODDZIAL);
@@ -95,13 +96,13 @@ namespace Przychodnia
         }
 
         // GET: OddzialPracownik/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL_PRACOWNIK oddzial_pracownik = db.ODDZIAL_PRACOWNIK.Find(id);
+            ODDZIAL_PRACOWNIK oddzial_pracownik = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
             if (oddzial_pracownik == null)
             {
                 return HttpNotFound();
@@ -112,11 +113,11 @@ namespace Przychodnia
         // POST: OddzialPracownik/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ODDZIAL_PRACOWNIK oddzial_pracownik = db.ODDZIAL_PRACOWNIK.Find(id);
+            ODDZIAL_PRACOWNIK oddzial_pracownik = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
             db.ODDZIAL_PRACOWNIK.Remove(oddzial_pracownik);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

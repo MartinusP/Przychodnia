@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -15,19 +16,19 @@ namespace Przychodnia
         private PRZYCHODNIAEntities db = new PRZYCHODNIAEntities();
 
         // GET: Pacjent
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(db.PACJENCI.ToList());
+            return View(await db.PACJENCI.ToListAsync());
         }
 
         // GET: Pacjent/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PACJENT pacjent = db.PACJENCI.Find(id);
+            PACJENT pacjent = await db.PACJENCI.FindAsync(id);
             if (pacjent == null)
             {
                 return HttpNotFound();
@@ -44,12 +45,12 @@ namespace Przychodnia
         // POST: Pacjent/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_PACJENT,IMIE,NAZWISKO,ADRES,PESEL,TELEFON_KONTAKTOWY,EMAIL_KONTAKTOWY")] PACJENT pacjent)
+        public async Task<ActionResult> Create([Bind(Include = "ID_PACJENT,IMIE,NAZWISKO,ADRES,PESEL,TELEFON_KONTAKTOWY,EMAIL_KONTAKTOWY")] PACJENT pacjent)
         {
             if (ModelState.IsValid)
             {
                 db.PACJENCI.Add(pacjent);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -57,13 +58,13 @@ namespace Przychodnia
         }
 
         // GET: Pacjent/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PACJENT pacjent = db.PACJENCI.Find(id);
+            PACJENT pacjent = await db.PACJENCI.FindAsync(id);
             if (pacjent == null)
             {
                 return HttpNotFound();
@@ -74,25 +75,25 @@ namespace Przychodnia
         // POST: Pacjent/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_PACJENT,IMIE,NAZWISKO,ADRES,PESEL,TELEFON_KONTAKTOWY,EMAIL_KONTAKTOWY")] PACJENT pacjent)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_PACJENT,IMIE,NAZWISKO,ADRES,PESEL,TELEFON_KONTAKTOWY,EMAIL_KONTAKTOWY")] PACJENT pacjent)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(pacjent).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(pacjent);
         }
 
         // GET: Pacjent/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PACJENT pacjent = db.PACJENCI.Find(id);
+            PACJENT pacjent = await db.PACJENCI.FindAsync(id);
             if (pacjent == null)
             {
                 return HttpNotFound();
@@ -103,11 +104,11 @@ namespace Przychodnia
         // POST: Pacjent/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            PACJENT pacjent = db.PACJENCI.Find(id);
+            PACJENT pacjent = await db.PACJENCI.FindAsync(id);
             db.PACJENCI.Remove(pacjent);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
