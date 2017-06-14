@@ -7,8 +7,6 @@ namespace Przychodnia.Repository
     public partial class DYZUR
     { 
 
-        [Key]
-        [Required]
         public int ID_PRACOWNIK { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DZIEN_DYZURU { get; set; }

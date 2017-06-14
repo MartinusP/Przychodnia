@@ -15,7 +15,7 @@ namespace Przychodnia.Repository
         }
 
         [Key]
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_PRACOWNIK { get; set; }
         public string IMIE { get; set; }
         public string NAZWISKO { get; set; }

@@ -3,6 +3,7 @@ namespace Przychodnia.Repository
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class SPECJALIZACJA
     {
@@ -13,7 +14,7 @@ namespace Przychodnia.Repository
         }
 
         [Key]
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_SPECJALIZACJA { get; set; }
         public string NAZWA { get; set; }
     
