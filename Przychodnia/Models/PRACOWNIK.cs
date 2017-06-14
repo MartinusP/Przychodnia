@@ -1,33 +1,26 @@
-namespace Przychodnia.Repository
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
+namespace Przychodnia.Models
+{
     public partial class PRACOWNIK
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRACOWNIK()
         {
             this.ODDZIAL_PRACOWNIK = new HashSet<ODDZIAL_PRACOWNIK>();
-            this.WIZYTY = new HashSet<WIZYTA>();
+            this.WIZYTAs = new HashSet<WIZYTA>();
         }
 
-        [Key]
-        [Required]
         public int ID_PRACOWNIK { get; set; }
         public string IMIE { get; set; }
         public string NAZWISKO { get; set; }
         public string ADRES { get; set; }
-        [EmailAddress]
         public string EMAIL_KONTAKTOWY { get; set; }
         public Nullable<int> ID_SPECJALIZACJA { get; set; }
         public Nullable<int> ID_ODDZIAL_PRACOWNIK { get; set; }
-
-        [NotMapped]
-        [Display(Name = "Nazwisko i imie pracownika")]
-        public string NazwiskoImie => NAZWISKO + " " + IMIE;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNIK { get; set; }
@@ -35,6 +28,6 @@ namespace Przychodnia.Repository
         public virtual DYZUR DYZUR { get; set; }
         public virtual SPECJALIZACJA SPECJALIZACJA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WIZYTA> WIZYTY { get; set; }
+        public virtual ICollection<WIZYTA> WIZYTAs { get; set; }
     }
 }

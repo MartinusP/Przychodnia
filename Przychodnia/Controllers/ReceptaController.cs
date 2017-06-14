@@ -17,7 +17,7 @@ namespace Przychodnia
         // GET: Recepta
         public ActionResult Index()
         {
-            return View(db.RECEPTAs.ToList());
+            return View(db.RECEPTY.ToList());
         }
 
         // GET: Recepta/Details/5
@@ -27,12 +27,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RECEPTA rECEPTA = db.RECEPTAs.Find(id);
-            if (rECEPTA == null)
+            RECEPTA recepta = db.RECEPTY.Find(id);
+            if (recepta == null)
             {
                 return HttpNotFound();
             }
-            return View(rECEPTA);
+            return View(recepta);
         }
 
         // GET: Recepta/Create
@@ -42,20 +42,18 @@ namespace Przychodnia
         }
 
         // POST: Recepta/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_RECEPTA,DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA rECEPTA)
+        public ActionResult Create([Bind(Include = "ID_RECEPTA,DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA recepta)
         {
             if (ModelState.IsValid)
             {
-                db.RECEPTAs.Add(rECEPTA);
+                db.RECEPTY.Add(recepta);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(rECEPTA);
+            return View(recepta);
         }
 
         // GET: Recepta/Edit/5
@@ -65,28 +63,26 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RECEPTA rECEPTA = db.RECEPTAs.Find(id);
-            if (rECEPTA == null)
+            RECEPTA recepta = db.RECEPTY.Find(id);
+            if (recepta == null)
             {
                 return HttpNotFound();
             }
-            return View(rECEPTA);
+            return View(recepta);
         }
 
         // POST: Recepta/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_RECEPTA,DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA rECEPTA)
+        public ActionResult Edit([Bind(Include = "ID_RECEPTA,DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA recepta)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(rECEPTA).State = EntityState.Modified;
+                db.Entry(recepta).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(rECEPTA);
+            return View(recepta);
         }
 
         // GET: Recepta/Delete/5
@@ -96,12 +92,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RECEPTA rECEPTA = db.RECEPTAs.Find(id);
-            if (rECEPTA == null)
+            RECEPTA recepta = db.RECEPTY.Find(id);
+            if (recepta == null)
             {
                 return HttpNotFound();
             }
-            return View(rECEPTA);
+            return View(recepta);
         }
 
         // POST: Recepta/Delete/5
@@ -109,8 +105,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RECEPTA rECEPTA = db.RECEPTAs.Find(id);
-            db.RECEPTAs.Remove(rECEPTA);
+            RECEPTA recepta = db.RECEPTY.Find(id);
+            db.RECEPTY.Remove(recepta);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

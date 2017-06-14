@@ -17,7 +17,7 @@ namespace Przychodnia
         // GET: Specjalizacja
         public ActionResult Index()
         {
-            return View(db.SPECJALIZACJAs.ToList());
+            return View(db.SPECJALIZACJE.ToList());
         }
 
         // GET: Specjalizacja/Details/5
@@ -27,12 +27,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SPECJALIZACJA sPECJALIZACJA = db.SPECJALIZACJAs.Find(id);
-            if (sPECJALIZACJA == null)
+            SPECJALIZACJA specjalizacja = db.SPECJALIZACJE.Find(id);
+            if (specjalizacja == null)
             {
                 return HttpNotFound();
             }
-            return View(sPECJALIZACJA);
+            return View(specjalizacja);
         }
 
         // GET: Specjalizacja/Create
@@ -42,20 +42,18 @@ namespace Przychodnia
         }
 
         // POST: Specjalizacja/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_SPECJALIZACJA,NAZWA")] SPECJALIZACJA sPECJALIZACJA)
+        public ActionResult Create([Bind(Include = "ID_SPECJALIZACJA,NAZWA")] SPECJALIZACJA specjalizacja)
         {
             if (ModelState.IsValid)
             {
-                db.SPECJALIZACJAs.Add(sPECJALIZACJA);
+                db.SPECJALIZACJE.Add(specjalizacja);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(sPECJALIZACJA);
+            return View(specjalizacja);
         }
 
         // GET: Specjalizacja/Edit/5
@@ -65,28 +63,26 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SPECJALIZACJA sPECJALIZACJA = db.SPECJALIZACJAs.Find(id);
-            if (sPECJALIZACJA == null)
+            SPECJALIZACJA specjalizacja = db.SPECJALIZACJE.Find(id);
+            if (specjalizacja == null)
             {
                 return HttpNotFound();
             }
-            return View(sPECJALIZACJA);
+            return View(specjalizacja);
         }
 
         // POST: Specjalizacja/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_SPECJALIZACJA,NAZWA")] SPECJALIZACJA sPECJALIZACJA)
+        public ActionResult Edit([Bind(Include = "ID_SPECJALIZACJA,NAZWA")] SPECJALIZACJA specjalizacja)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sPECJALIZACJA).State = EntityState.Modified;
+                db.Entry(specjalizacja).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(sPECJALIZACJA);
+            return View(specjalizacja);
         }
 
         // GET: Specjalizacja/Delete/5
@@ -96,12 +92,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SPECJALIZACJA sPECJALIZACJA = db.SPECJALIZACJAs.Find(id);
-            if (sPECJALIZACJA == null)
+            SPECJALIZACJA specjalizacja = db.SPECJALIZACJE.Find(id);
+            if (specjalizacja == null)
             {
                 return HttpNotFound();
             }
-            return View(sPECJALIZACJA);
+            return View(specjalizacja);
         }
 
         // POST: Specjalizacja/Delete/5
@@ -109,8 +105,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SPECJALIZACJA sPECJALIZACJA = db.SPECJALIZACJAs.Find(id);
-            db.SPECJALIZACJAs.Remove(sPECJALIZACJA);
+            SPECJALIZACJA specjalizacja = db.SPECJALIZACJE.Find(id);
+            db.SPECJALIZACJE.Remove(specjalizacja);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

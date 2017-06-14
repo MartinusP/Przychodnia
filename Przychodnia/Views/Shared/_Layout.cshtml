@@ -34,7 +34,7 @@
                     </li>
                    
 
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
+                    @if (Request.IsAuthenticated && User.IsInRole("Administrator")) {
                         <li>@Html.ActionLink(MultiLanguage.RolesAdmin, "Index", "RolesAdmin")</li>
                         <li>@Html.ActionLink(MultiLanguage.UsersAdmin, "Index", "UsersAdmin")</li>
                     }

@@ -17,7 +17,7 @@ namespace Przychodnia
         // GET: Oddzial
         public ActionResult Index()
         {
-            return View(db.ODDZIALs.ToList());
+            return View(db.ODDZIALY.ToList());
         }
 
         // GET: Oddzial/Details/5
@@ -27,12 +27,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = db.ODDZIALs.Find(id);
-            if (oDDZIAL == null)
+            ODDZIAL oddzial = db.ODDZIALY.Find(id);
+            if (oddzial == null)
             {
                 return HttpNotFound();
             }
-            return View(oDDZIAL);
+            return View(oddzial);
         }
 
         // GET: Oddzial/Create
@@ -42,20 +42,18 @@ namespace Przychodnia
         }
 
         // POST: Oddzial/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_ODDZIAL,NAZWA,MIEJSCOWOSC")] ODDZIAL oDDZIAL)
+        public ActionResult Create([Bind(Include = "ID_ODDZIAL,NAZWA,MIEJSCOWOSC")] ODDZIAL oddzial)
         {
             if (ModelState.IsValid)
             {
-                db.ODDZIALs.Add(oDDZIAL);
+                db.ODDZIALY.Add(oddzial);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(oDDZIAL);
+            return View(oddzial);
         }
 
         // GET: Oddzial/Edit/5
@@ -65,28 +63,26 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = db.ODDZIALs.Find(id);
-            if (oDDZIAL == null)
+            ODDZIAL oddzial = db.ODDZIALY.Find(id);
+            if (oddzial == null)
             {
                 return HttpNotFound();
             }
-            return View(oDDZIAL);
+            return View(oddzial);
         }
 
         // POST: Oddzial/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_ODDZIAL,NAZWA,MIEJSCOWOSC")] ODDZIAL oDDZIAL)
+        public ActionResult Edit([Bind(Include = "ID_ODDZIAL,NAZWA,MIEJSCOWOSC")] ODDZIAL oddzial)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(oDDZIAL).State = EntityState.Modified;
+                db.Entry(oddzial).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(oDDZIAL);
+            return View(oddzial);
         }
 
         // GET: Oddzial/Delete/5
@@ -96,12 +92,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = db.ODDZIALs.Find(id);
-            if (oDDZIAL == null)
+            ODDZIAL oddzial = db.ODDZIALY.Find(id);
+            if (oddzial == null)
             {
                 return HttpNotFound();
             }
-            return View(oDDZIAL);
+            return View(oddzial);
         }
 
         // POST: Oddzial/Delete/5
@@ -109,8 +105,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ODDZIAL oDDZIAL = db.ODDZIALs.Find(id);
-            db.ODDZIALs.Remove(oDDZIAL);
+            ODDZIAL oddzial = db.ODDZIALY.Find(id);
+            db.ODDZIALY.Remove(oddzial);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

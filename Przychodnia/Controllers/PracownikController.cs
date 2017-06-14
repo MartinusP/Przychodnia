@@ -17,8 +17,8 @@ namespace Przychodnia
         // GET: Pracownik
         public ActionResult Index()
         {
-            var pRACOWNIKs = db.PRACOWNIKs.Include(p => p.ODDZIAL_PRACOWNIK1).Include(p => p.DYZUR).Include(p => p.SPECJALIZACJA);
-            return View(pRACOWNIKs.ToList());
+            var pracownicy = db.PRACOWNICY.Include(p => p.ODDZIAL_PRACOWNIK1).Include(p => p.DYZUR).Include(p => p.SPECJALIZACJA);
+            return View(pracownicy.ToList());
         }
 
         // GET: Pracownik/Details/5
@@ -28,41 +28,39 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = db.PRACOWNIKs.Find(id);
-            if (pRACOWNIK == null)
+            PRACOWNIK pracownik = db.PRACOWNICY.Find(id);
+            if (pracownik == null)
             {
                 return HttpNotFound();
             }
-            return View(pRACOWNIK);
+            return View(pracownik);
         }
 
         // GET: Pracownik/Create
         public ActionResult Create()
         {
             ViewBag.ID_ODDZIAL_PRACOWNIK = new SelectList(db.ODDZIAL_PRACOWNIK, "ID_ODDZIAL_PRACOWNIK", "ID_ODDZIAL_PRACOWNIK");
-            ViewBag.ID_PRACOWNIK = new SelectList(db.DYZURs, "ID_PRACOWNIK", "ID_PRACOWNIK");
-            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJAs, "ID_SPECJALIZACJA", "NAZWA");
+            ViewBag.ID_PRACOWNIK = new SelectList(db.DYZURY, "ID_PRACOWNIK", "ID_PRACOWNIK");
+            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA");
             return View();
         }
 
         // POST: Pracownik/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY,ID_SPECJALIZACJA,ID_ODDZIAL_PRACOWNIK")] PRACOWNIK pRACOWNIK)
+        public ActionResult Create([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY,ID_SPECJALIZACJA,ID_ODDZIAL_PRACOWNIK")] PRACOWNIK pracownik)
         {
             if (ModelState.IsValid)
             {
-                db.PRACOWNIKs.Add(pRACOWNIK);
+                db.PRACOWNICY.Add(pracownik);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_ODDZIAL_PRACOWNIK = new SelectList(db.ODDZIAL_PRACOWNIK, "ID_ODDZIAL_PRACOWNIK", "ID_ODDZIAL_PRACOWNIK", pRACOWNIK.ID_ODDZIAL_PRACOWNIK);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.DYZURs, "ID_PRACOWNIK", "ID_PRACOWNIK", pRACOWNIK.ID_PRACOWNIK);
-            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJAs, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
-            return View(pRACOWNIK);
+            ViewBag.ID_ODDZIAL_PRACOWNIK = new SelectList(db.ODDZIAL_PRACOWNIK, "ID_ODDZIAL_PRACOWNIK", "ID_ODDZIAL_PRACOWNIK", pracownik.ID_ODDZIAL_PRACOWNIK);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.DYZURY, "ID_PRACOWNIK", "ID_PRACOWNIK", pracownik.ID_PRACOWNIK);
+            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA", pracownik.ID_SPECJALIZACJA);
+            return View(pracownik);
         }
 
         // GET: Pracownik/Edit/5
@@ -72,34 +70,32 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = db.PRACOWNIKs.Find(id);
-            if (pRACOWNIK == null)
+            PRACOWNIK pracownik = db.PRACOWNICY.Find(id);
+            if (pracownik == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_ODDZIAL_PRACOWNIK = new SelectList(db.ODDZIAL_PRACOWNIK, "ID_ODDZIAL_PRACOWNIK", "ID_ODDZIAL_PRACOWNIK", pRACOWNIK.ID_ODDZIAL_PRACOWNIK);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.DYZURs, "ID_PRACOWNIK", "ID_PRACOWNIK", pRACOWNIK.ID_PRACOWNIK);
-            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJAs, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
-            return View(pRACOWNIK);
+            ViewBag.ID_ODDZIAL_PRACOWNIK = new SelectList(db.ODDZIAL_PRACOWNIK, "ID_ODDZIAL_PRACOWNIK", "ID_ODDZIAL_PRACOWNIK", pracownik.ID_ODDZIAL_PRACOWNIK);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.DYZURY, "ID_PRACOWNIK", "ID_PRACOWNIK", pracownik.ID_PRACOWNIK);
+            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA", pracownik.ID_SPECJALIZACJA);
+            return View(pracownik);
         }
 
         // POST: Pracownik/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY,ID_SPECJALIZACJA,ID_ODDZIAL_PRACOWNIK")] PRACOWNIK pRACOWNIK)
+        public ActionResult Edit([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY,ID_SPECJALIZACJA,ID_ODDZIAL_PRACOWNIK")] PRACOWNIK pracownik)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pRACOWNIK).State = EntityState.Modified;
+                db.Entry(pracownik).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_ODDZIAL_PRACOWNIK = new SelectList(db.ODDZIAL_PRACOWNIK, "ID_ODDZIAL_PRACOWNIK", "ID_ODDZIAL_PRACOWNIK", pRACOWNIK.ID_ODDZIAL_PRACOWNIK);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.DYZURs, "ID_PRACOWNIK", "ID_PRACOWNIK", pRACOWNIK.ID_PRACOWNIK);
-            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJAs, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
-            return View(pRACOWNIK);
+            ViewBag.ID_ODDZIAL_PRACOWNIK = new SelectList(db.ODDZIAL_PRACOWNIK, "ID_ODDZIAL_PRACOWNIK", "ID_ODDZIAL_PRACOWNIK", pracownik.ID_ODDZIAL_PRACOWNIK);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.DYZURY, "ID_PRACOWNIK", "ID_PRACOWNIK", pracownik.ID_PRACOWNIK);
+            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA", pracownik.ID_SPECJALIZACJA);
+            return View(pracownik);
         }
 
         // GET: Pracownik/Delete/5
@@ -109,12 +105,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = db.PRACOWNIKs.Find(id);
-            if (pRACOWNIK == null)
+            PRACOWNIK pracownik = db.PRACOWNICY.Find(id);
+            if (pracownik == null)
             {
                 return HttpNotFound();
             }
-            return View(pRACOWNIK);
+            return View(pracownik);
         }
 
         // POST: Pracownik/Delete/5
@@ -122,8 +118,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PRACOWNIK pRACOWNIK = db.PRACOWNIKs.Find(id);
-            db.PRACOWNIKs.Remove(pRACOWNIK);
+            PRACOWNIK pracownik = db.PRACOWNICY.Find(id);
+            db.PRACOWNICY.Remove(pracownik);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

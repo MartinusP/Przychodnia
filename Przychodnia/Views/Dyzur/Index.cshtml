@@ -13,7 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DZIEN_DYZURU)
+            DZIEŃ DYŻURU
         </th>
         <th>
             @Html.DisplayNameFor(model => model.OD)
@@ -25,7 +25,7 @@
             @Html.DisplayNameFor(model => model.ODDZIAL.NAZWA)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
+            PRACOWNIK
         </th>
         <th></th>
     </tr>
@@ -45,7 +45,7 @@
             @Html.DisplayFor(modelItem => item.ODDZIAL.NAZWA)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PRACOWNIK.IMIE)
+            @Html.DisplayFor(modelItem => item.PRACOWNIK.NazwiskoImie)
         </td>
         <td>
             @Html.ActionLink(MultiLanguage.Edit, "Edit", new { id=item.ID_PRACOWNIK }) |
