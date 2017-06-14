@@ -553,59 +553,59 @@ warning 6002: The table/view 'PRZYCHODNIA.dbo.DYZUR' does not have a primary key
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PRZYCHODNIAEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ODDZIALs" EntityType="Self.ODDZIAL" />
+          <EntitySet Name="ODDZIALY" EntityType="Self.ODDZIAL" />
           <EntitySet Name="ODDZIAL_PRACOWNIK" EntityType="Self.ODDZIAL_PRACOWNIK" />
-          <EntitySet Name="PACJENTs" EntityType="Self.PACJENT" />
-          <EntitySet Name="PLACOWKAs" EntityType="Self.PLACOWKA" />
-          <EntitySet Name="PRACOWNIKs" EntityType="Self.PRACOWNIK" />
-          <EntitySet Name="RECEPTAs" EntityType="Self.RECEPTA" />
-          <EntitySet Name="SALAs" EntityType="Self.SALA" />
-          <EntitySet Name="SPECJALIZACJAs" EntityType="Self.SPECJALIZACJA" />
-          <EntitySet Name="WIZYTAs" EntityType="Self.WIZYTA" />
-          <EntitySet Name="DYZURs" EntityType="Self.DYZUR" />
+          <EntitySet Name="PACJENCI" EntityType="Self.PACJENT" />
+          <EntitySet Name="PLACOWKI" EntityType="Self.PLACOWKA" />
+          <EntitySet Name="PRACOWNICY" EntityType="Self.PRACOWNIK" />
+          <EntitySet Name="RECEPTY" EntityType="Self.RECEPTA" />
+          <EntitySet Name="SALE" EntityType="Self.SALA" />
+          <EntitySet Name="SPECJALIZACJE" EntityType="Self.SPECJALIZACJA" />
+          <EntitySet Name="WIZYTY" EntityType="Self.WIZYTA" />
+          <EntitySet Name="DYZURY" EntityType="Self.DYZUR" />
           <AssociationSet Name="fk_DYZUR_ID_ODDZIAL" Association="Self.fk_DYZUR_ID_ODDZIAL">
-            <End Role="ODDZIAL" EntitySet="ODDZIALs" />
-            <End Role="DYZUR" EntitySet="DYZURs" />
+            <End Role="ODDZIAL" EntitySet="ODDZIALY" />
+            <End Role="DYZUR" EntitySet="DYZURY" />
           </AssociationSet>
           <AssociationSet Name="fk_ODDZIAL_PRACOWNIK_ID_ODDZIAL" Association="Self.fk_ODDZIAL_PRACOWNIK_ID_ODDZIAL">
-            <End Role="ODDZIAL" EntitySet="ODDZIALs" />
+            <End Role="ODDZIAL" EntitySet="ODDZIALY" />
             <End Role="ODDZIAL_PRACOWNIK" EntitySet="ODDZIAL_PRACOWNIK" />
           </AssociationSet>
           <AssociationSet Name="fk_PLACOWKA_ID_ODDZIAL" Association="Self.fk_PLACOWKA_ID_ODDZIAL">
-            <End Role="ODDZIAL" EntitySet="ODDZIALs" />
-            <End Role="PLACOWKA" EntitySet="PLACOWKAs" />
+            <End Role="ODDZIAL" EntitySet="ODDZIALY" />
+            <End Role="PLACOWKA" EntitySet="PLACOWKI" />
           </AssociationSet>
           <AssociationSet Name="fk_WIZYTA_ID_ODDZIAL" Association="Self.fk_WIZYTA_ID_ODDZIAL">
-            <End Role="ODDZIAL" EntitySet="ODDZIALs" />
-            <End Role="WIZYTA" EntitySet="WIZYTAs" />
+            <End Role="ODDZIAL" EntitySet="ODDZIALY" />
+            <End Role="WIZYTA" EntitySet="WIZYTY" />
           </AssociationSet>
           <AssociationSet Name="fk_ODDZIAL_PRACOWNIK_ID_PRACOWNIK" Association="Self.fk_ODDZIAL_PRACOWNIK_ID_PRACOWNIK">
-            <End Role="PRACOWNIK" EntitySet="PRACOWNIKs" />
+            <End Role="PRACOWNIK" EntitySet="PRACOWNICY" />
             <End Role="ODDZIAL_PRACOWNIK" EntitySet="ODDZIAL_PRACOWNIK" />
           </AssociationSet>
           <AssociationSet Name="fk_PRACOWNIK_ID_ODDZIAL_PRACOWNIK" Association="Self.fk_PRACOWNIK_ID_ODDZIAL_PRACOWNIK">
             <End Role="ODDZIAL_PRACOWNIK" EntitySet="ODDZIAL_PRACOWNIK" />
-            <End Role="PRACOWNIK" EntitySet="PRACOWNIKs" />
+            <End Role="PRACOWNIK" EntitySet="PRACOWNICY" />
           </AssociationSet>
           <AssociationSet Name="fk_WIZYTA_ID_PRACJENT" Association="Self.fk_WIZYTA_ID_PRACJENT">
-            <End Role="PACJENT" EntitySet="PACJENTs" />
-            <End Role="WIZYTA" EntitySet="WIZYTAs" />
+            <End Role="PACJENT" EntitySet="PACJENCI" />
+            <End Role="WIZYTA" EntitySet="WIZYTY" />
           </AssociationSet>
           <AssociationSet Name="fk_DYZUR_ID_PRACOWNIK" Association="Self.fk_DYZUR_ID_PRACOWNIK">
-            <End Role="PRACOWNIK" EntitySet="PRACOWNIKs" />
-            <End Role="DYZUR" EntitySet="DYZURs" />
+            <End Role="PRACOWNIK" EntitySet="PRACOWNICY" />
+            <End Role="DYZUR" EntitySet="DYZURY" />
           </AssociationSet>
           <AssociationSet Name="fk_PRACOWNIK_ID_SPECJALIZACJA" Association="Self.fk_PRACOWNIK_ID_SPECJALIZACJA">
-            <End Role="SPECJALIZACJA" EntitySet="SPECJALIZACJAs" />
-            <End Role="PRACOWNIK" EntitySet="PRACOWNIKs" />
+            <End Role="SPECJALIZACJA" EntitySet="SPECJALIZACJE" />
+            <End Role="PRACOWNIK" EntitySet="PRACOWNICY" />
           </AssociationSet>
           <AssociationSet Name="fk_WIZYTA_ID_PRACOWNIK" Association="Self.fk_WIZYTA_ID_PRACOWNIK">
-            <End Role="PRACOWNIK" EntitySet="PRACOWNIKs" />
-            <End Role="WIZYTA" EntitySet="WIZYTAs" />
+            <End Role="PRACOWNIK" EntitySet="PRACOWNICY" />
+            <End Role="WIZYTA" EntitySet="WIZYTY" />
           </AssociationSet>
           <AssociationSet Name="fk_WIZYTA_ID_SALA" Association="Self.fk_WIZYTA_ID_SALA">
-            <End Role="SALA" EntitySet="SALAs" />
-            <End Role="WIZYTA" EntitySet="WIZYTAs" />
+            <End Role="SALA" EntitySet="SALE" />
+            <End Role="WIZYTA" EntitySet="WIZYTY" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -614,7 +614,7 @@ warning 6002: The table/view 'PRZYCHODNIA.dbo.DYZUR' does not have a primary key
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PRZYCHODNIAModelStoreContainer" CdmEntityContainer="PRZYCHODNIAEntities">
-          <EntitySetMapping Name="ODDZIALs">
+          <EntitySetMapping Name="ODDZIALY">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.ODDZIAL">
               <MappingFragment StoreEntitySet="ODDZIAL">
                 <ScalarProperty Name="ID_ODDZIAL" ColumnName="ID_ODDZIAL" />
@@ -632,7 +632,7 @@ warning 6002: The table/view 'PRZYCHODNIA.dbo.DYZUR' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PACJENTs">
+          <EntitySetMapping Name="PACJENCI">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.PACJENT">
               <MappingFragment StoreEntitySet="PACJENT">
                 <ScalarProperty Name="ID_PACJENT" ColumnName="ID_PACJENT" />
@@ -645,7 +645,7 @@ warning 6002: The table/view 'PRZYCHODNIA.dbo.DYZUR' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PLACOWKAs">
+          <EntitySetMapping Name="PLACOWKI">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.PLACOWKA">
               <MappingFragment StoreEntitySet="PLACOWKA">
                 <ScalarProperty Name="ID_PLACOWKA" ColumnName="ID_PLACOWKA" />
@@ -656,7 +656,7 @@ warning 6002: The table/view 'PRZYCHODNIA.dbo.DYZUR' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PRACOWNIKs">
+          <EntitySetMapping Name="PRACOWNICY">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.PRACOWNIK">
               <MappingFragment StoreEntitySet="PRACOWNIK">
                 <ScalarProperty Name="ID_PRACOWNIK" ColumnName="ID_PRACOWNIK" />
@@ -669,7 +669,7 @@ warning 6002: The table/view 'PRZYCHODNIA.dbo.DYZUR' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RECEPTAs">
+          <EntitySetMapping Name="RECEPTY">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.RECEPTA">
               <MappingFragment StoreEntitySet="RECEPTA">
                 <ScalarProperty Name="ID_RECEPTA" ColumnName="ID_RECEPTA" />
@@ -679,7 +679,7 @@ warning 6002: The table/view 'PRZYCHODNIA.dbo.DYZUR' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SALAs">
+          <EntitySetMapping Name="SALE">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.SALA">
               <MappingFragment StoreEntitySet="SALA">
                 <ScalarProperty Name="ID_SALA" ColumnName="ID_SALA" />
@@ -687,7 +687,7 @@ warning 6002: The table/view 'PRZYCHODNIA.dbo.DYZUR' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SPECJALIZACJAs">
+          <EntitySetMapping Name="SPECJALIZACJE">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.SPECJALIZACJA">
               <MappingFragment StoreEntitySet="SPECJALIZACJA">
                 <ScalarProperty Name="ID_SPECJALIZACJA" ColumnName="ID_SPECJALIZACJA" />
@@ -695,7 +695,7 @@ warning 6002: The table/view 'PRZYCHODNIA.dbo.DYZUR' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WIZYTAs">
+          <EntitySetMapping Name="WIZYTY">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.WIZYTA">
               <MappingFragment StoreEntitySet="WIZYTA">
                 <ScalarProperty Name="ID_WIZYTA" ColumnName="ID_WIZYTA" />
@@ -708,7 +708,7 @@ warning 6002: The table/view 'PRZYCHODNIA.dbo.DYZUR' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DYZURs">
+          <EntitySetMapping Name="DYZURY">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.DYZUR">
               <MappingFragment StoreEntitySet="DYZUR">
                 <ScalarProperty Name="ID_PRACOWNIK" ColumnName="ID_PRACOWNIK" />

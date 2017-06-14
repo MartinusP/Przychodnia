@@ -1,5 +1,4 @@
-﻿@using Przychodnia.App_GlobalResources;
-@model Przychodnia.Repository.DYZUR
+﻿@model Przychodnia.Repository.DYZUR
 
 @{
     ViewBag.Title = "Delete";
@@ -45,11 +44,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PRACOWNIK.NazwiskoImie)
+            @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PRACOWNIK.NazwiskoImie)
+            @Html.DisplayFor(model => model.PRACOWNIK.IMIE)
         </dd>
 
     </dl>
@@ -59,7 +58,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink(MultiLanguage.BackToList, "Index")
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

@@ -1,5 +1,4 @@
-﻿@using Przychodnia.App_GlobalResources;
-@model IEnumerable<Przychodnia.Repository.SALA>
+﻿@model IEnumerable<Przychodnia.Repository.SALA>
 
 @{
     ViewBag.Title = "Index";
@@ -8,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink(MultiLanguage.CreateNew, "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -24,9 +23,9 @@
             @Html.DisplayFor(modelItem => item.NUMER_SALI)
         </td>
         <td>
-            @Html.ActionLink(MultiLanguage.Edit, "Edit", new { id=item.ID_SALA }) |
-            @Html.ActionLink(MultiLanguage.Details, "Details", new { id=item.ID_SALA }) |
-            @Html.ActionLink(MultiLanguage.Delete, "Delete", new { id=item.ID_SALA })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_SALA }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_SALA }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_SALA })
         </td>
     </tr>
 }

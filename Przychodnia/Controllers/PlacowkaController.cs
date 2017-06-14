@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -15,20 +16,20 @@ namespace Przychodnia
         private PRZYCHODNIAEntities db = new PRZYCHODNIAEntities();
 
         // GET: Placowka
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var placowki = db.PLACOWKI.Include(p => p.ODDZIAL);
-            return View(placowki.ToList());
+            return View(await placowki.ToListAsync());
         }
 
         // GET: Placowka/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA placowka = db.PLACOWKI.Find(id);
+            PLACOWKA placowka = await db.PLACOWKI.FindAsync(id);
             if (placowka == null)
             {
                 return HttpNotFound();
@@ -46,12 +47,12 @@ namespace Przychodnia
         // POST: Placowka/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_PLACOWKA,NAZWA,MIEJSCOWOSC,ADRES,ID_ODDZIAL")] PLACOWKA placowka)
+        public async Task<ActionResult> Create([Bind(Include = "ID_PLACOWKA,NAZWA,MIEJSCOWOSC,ADRES,ID_ODDZIAL")] PLACOWKA placowka)
         {
             if (ModelState.IsValid)
             {
                 db.PLACOWKI.Add(placowka);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -60,13 +61,13 @@ namespace Przychodnia
         }
 
         // GET: Placowka/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA placowka = db.PLACOWKI.Find(id);
+            PLACOWKA placowka = await db.PLACOWKI.FindAsync(id);
             if (placowka == null)
             {
                 return HttpNotFound();
@@ -78,12 +79,12 @@ namespace Przychodnia
         // POST: Placowka/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_PLACOWKA,NAZWA,MIEJSCOWOSC,ADRES,ID_ODDZIAL")] PLACOWKA placowka)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_PLACOWKA,NAZWA,MIEJSCOWOSC,ADRES,ID_ODDZIAL")] PLACOWKA placowka)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(placowka).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", placowka.ID_ODDZIAL);
@@ -91,13 +92,13 @@ namespace Przychodnia
         }
 
         // GET: Placowka/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA placowka = db.PLACOWKI.Find(id);
+            PLACOWKA placowka = await db.PLACOWKI.FindAsync(id);
             if (placowka == null)
             {
                 return HttpNotFound();
@@ -108,11 +109,11 @@ namespace Przychodnia
         // POST: Placowka/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            PLACOWKA placowka = db.PLACOWKI.Find(id);
+            PLACOWKA placowka = await db.PLACOWKI.FindAsync(id);
             db.PLACOWKI.Remove(placowka);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

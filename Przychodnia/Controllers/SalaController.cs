@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -15,19 +16,19 @@ namespace Przychodnia
         private PRZYCHODNIAEntities db = new PRZYCHODNIAEntities();
 
         // GET: Sala
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(db.SALE.ToList());
+            return View(await db.SALE.ToListAsync());
         }
 
         // GET: Sala/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALA sala = db.SALE.Find(id);
+            SALA sala = await db.SALE.FindAsync(id);
             if (sala == null)
             {
                 return HttpNotFound();
@@ -44,12 +45,12 @@ namespace Przychodnia
         // POST: Sala/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_SALA,NUMER_SALI")] SALA sala)
+        public async Task<ActionResult> Create([Bind(Include = "ID_SALA,NUMER_SALI")] SALA sala)
         {
             if (ModelState.IsValid)
             {
                 db.SALE.Add(sala);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -57,13 +58,13 @@ namespace Przychodnia
         }
 
         // GET: Sala/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALA sala = db.SALE.Find(id);
+            SALA sala = await db.SALE.FindAsync(id);
             if (sala == null)
             {
                 return HttpNotFound();
@@ -74,25 +75,25 @@ namespace Przychodnia
         // POST: Sala/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_SALA,NUMER_SALI")] SALA sala)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_SALA,NUMER_SALI")] SALA sala)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(sala).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(sala);
         }
 
         // GET: Sala/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALA sala = db.SALE.Find(id);
+            SALA sala = await db.SALE.FindAsync(id);
             if (sala == null)
             {
                 return HttpNotFound();
@@ -103,11 +104,11 @@ namespace Przychodnia
         // POST: Sala/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            SALA sala = db.SALE.Find(id);
+            SALA sala = await db.SALE.FindAsync(id);
             db.SALE.Remove(sala);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

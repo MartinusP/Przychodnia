@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -15,20 +16,20 @@ namespace Przychodnia
         private PRZYCHODNIAEntities db = new PRZYCHODNIAEntities();
 
         // GET: Wizyta
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var wizyty = db.WIZYTY.Include(w => w.ODDZIAL).Include(w => w.PACJENT).Include(w => w.PRACOWNIK).Include(w => w.SALA);
-            return View(wizyty.ToList());
+            return View(await wizyty.ToListAsync());
         }
 
         // GET: Wizyta/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WIZYTA wizyta = db.WIZYTY.Find(id);
+            WIZYTA wizyta = await db.WIZYTY.FindAsync(id);
             if (wizyta == null)
             {
                 return HttpNotFound();
@@ -49,12 +50,12 @@ namespace Przychodnia
         // POST: Wizyta/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_WIZYTA,DATA_WIZYTY,ID_SALA,ID_PRACOWNIK,ID_ODDZIAL,ID_PACJENT,UWAGI")] WIZYTA wizyta)
+        public async Task<ActionResult> Create([Bind(Include = "ID_WIZYTA,DATA_WIZYTY,ID_SALA,ID_PRACOWNIK,ID_ODDZIAL,ID_PACJENT,UWAGI")] WIZYTA wizyta)
         {
             if (ModelState.IsValid)
             {
                 db.WIZYTY.Add(wizyta);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -66,13 +67,13 @@ namespace Przychodnia
         }
 
         // GET: Wizyta/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WIZYTA wizyta = db.WIZYTY.Find(id);
+            WIZYTA wizyta = await db.WIZYTY.FindAsync(id);
             if (wizyta == null)
             {
                 return HttpNotFound();
@@ -87,12 +88,12 @@ namespace Przychodnia
         // POST: Wizyta/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_WIZYTA,DATA_WIZYTY,ID_SALA,ID_PRACOWNIK,ID_ODDZIAL,ID_PACJENT,UWAGI")] WIZYTA wizyta)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_WIZYTA,DATA_WIZYTY,ID_SALA,ID_PRACOWNIK,ID_ODDZIAL,ID_PACJENT,UWAGI")] WIZYTA wizyta)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(wizyta).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", wizyta.ID_ODDZIAL);
@@ -103,13 +104,13 @@ namespace Przychodnia
         }
 
         // GET: Wizyta/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WIZYTA wizyta = db.WIZYTY.Find(id);
+            WIZYTA wizyta = await db.WIZYTY.FindAsync(id);
             if (wizyta == null)
             {
                 return HttpNotFound();
@@ -120,11 +121,11 @@ namespace Przychodnia
         // POST: Wizyta/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            WIZYTA wizyta = db.WIZYTY.Find(id);
+            WIZYTA wizyta = await db.WIZYTY.FindAsync(id);
             db.WIZYTY.Remove(wizyta);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

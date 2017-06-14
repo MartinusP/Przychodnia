@@ -1,5 +1,4 @@
-﻿@using Przychodnia.App_GlobalResources;
-@model IEnumerable<Przychodnia.Repository.DYZUR>
+﻿@model IEnumerable<Przychodnia.Repository.DYZUR>
 
 @{
     ViewBag.Title = "Index";
@@ -8,12 +7,12 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink(MultiLanguage.CreateNew, "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            DZIEŃ DYŻURU
+            @Html.DisplayNameFor(model => model.DZIEN_DYZURU)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.OD)
@@ -25,7 +24,7 @@
             @Html.DisplayNameFor(model => model.ODDZIAL.NAZWA)
         </th>
         <th>
-            PRACOWNIK
+            @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
         </th>
         <th></th>
     </tr>
@@ -45,12 +44,12 @@
             @Html.DisplayFor(modelItem => item.ODDZIAL.NAZWA)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PRACOWNIK.NazwiskoImie)
+            @Html.DisplayFor(modelItem => item.PRACOWNIK.IMIE)
         </td>
         <td>
-            @Html.ActionLink(MultiLanguage.Edit, "Edit", new { id=item.ID_PRACOWNIK }) |
-            @Html.ActionLink(MultiLanguage.Details, "Details", new { id=item.ID_PRACOWNIK }) |
-            @Html.ActionLink(MultiLanguage.Delete, "Delete", new { id=item.ID_PRACOWNIK })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_PRACOWNIK }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_PRACOWNIK }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_PRACOWNIK })
         </td>
     </tr>
 }

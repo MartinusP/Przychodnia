@@ -1,5 +1,4 @@
-﻿@using Przychodnia.App_GlobalResources;
-@model Przychodnia.Repository.PRACOWNIK
+﻿@model Przychodnia.Repository.PRACOWNIK
 
 @{
     ViewBag.Title = "Delete";
@@ -75,7 +74,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink(MultiLanguage.BackToList, "Index")
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>
