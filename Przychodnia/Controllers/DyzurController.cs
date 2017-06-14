@@ -40,7 +40,7 @@ namespace Przychodnia
         public ActionResult Create()
         {
             ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA");
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE");
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "NazwiskoImie");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace Przychodnia
             }
 
             ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dyzur.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dyzur.ID_PRACOWNIK);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "NazwiskoImie", dyzur.ID_PRACOWNIK);
             return View(dyzur);
         }
 
@@ -74,7 +74,7 @@ namespace Przychodnia
                 return HttpNotFound();
             }
             ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dyzur.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dyzur.ID_PRACOWNIK);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "NazwiskoImie", dyzur.ID_PRACOWNIK);
             return View(dyzur);
         }
 
@@ -90,7 +90,7 @@ namespace Przychodnia
                 return RedirectToAction("Index");
             }
             ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dyzur.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dyzur.ID_PRACOWNIK);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "NazwiskoImie", dyzur.ID_PRACOWNIK);
             return View(dyzur);
         }
 
