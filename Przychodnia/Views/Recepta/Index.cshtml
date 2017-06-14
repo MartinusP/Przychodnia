@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Przychodnia.Repository.RECEPTA>
+﻿@using Przychodnia.App_GlobalResources;
+@model IEnumerable<Przychodnia.Repository.RECEPTA>
 
 @{
     ViewBag.Title = "Index";
@@ -35,9 +36,9 @@
             @Html.DisplayFor(modelItem => item.UWAGI)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_RECEPTA }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_RECEPTA }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_RECEPTA })
+            @Html.ActionLink(MultiLanguage.Edit, "Edit", new { id=item.ID_RECEPTA }) |
+            @Html.ActionLink(MultiLanguage.Details, "Details", new { id=item.ID_RECEPTA }) |
+            @Html.ActionLink(MultiLanguage.Delete, "Delete", new { id=item.ID_RECEPTA })
         </td>
     </tr>
 }

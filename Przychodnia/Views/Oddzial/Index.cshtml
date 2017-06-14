@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Przychodnia.Repository.ODDZIAL>
+﻿@using Przychodnia.App_GlobalResources;
+@model IEnumerable<Przychodnia.Repository.ODDZIAL>
 
 @{
     ViewBag.Title = "Index";
@@ -29,9 +30,9 @@
             @Html.DisplayFor(modelItem => item.MIEJSCOWOSC)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_ODDZIAL }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_ODDZIAL }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_ODDZIAL })
+            @Html.ActionLink(MultiLanguage.Edit, "Edit", new { id=item.ID_ODDZIAL }) |
+            @Html.ActionLink(MultiLanguage.Details, "Details", new { id=item.ID_ODDZIAL }) |
+            @Html.ActionLink(MultiLanguage.Delete, "Delete", new { id=item.ID_ODDZIAL })
         </td>
     </tr>
 }
