@@ -17,8 +17,8 @@ namespace Przychodnia
         // GET: Dyzur
         public ActionResult Index()
         {
-            var dYZURs = db.DYZURs.Include(d => d.ODDZIAL).Include(d => d.PRACOWNIK);
-            return View(dYZURs.ToList());
+            var dyzury = db.DYZURY.Include(d => d.ODDZIAL).Include(d => d.PRACOWNIK);
+            return View(dyzury.ToList());
         }
 
         // GET: Dyzur/Details/5
@@ -28,39 +28,37 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DYZUR dYZUR = db.DYZURs.Find(id);
-            if (dYZUR == null)
+            DYZUR dyzur = db.DYZURY.Find(id);
+            if (dyzur == null)
             {
                 return HttpNotFound();
             }
-            return View(dYZUR);
+            return View(dyzur);
         }
 
         // GET: Dyzur/Create
         public ActionResult Create()
         {
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA");
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE");
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA");
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE");
             return View();
         }
 
         // POST: Dyzur/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_PRACOWNIK,DZIEN_DYZURU,OD,DO,ID_ODDZIAL")] DYZUR dYZUR)
+        public ActionResult Create([Bind(Include = "ID_PRACOWNIK,DZIEN_DYZURU,OD,DO,ID_ODDZIAL")] DYZUR dyzur)
         {
             if (ModelState.IsValid)
             {
-                db.DYZURs.Add(dYZUR);
+                db.DYZURY.Add(dyzur);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA", dYZUR.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE", dYZUR.ID_PRACOWNIK);
-            return View(dYZUR);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dyzur.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dyzur.ID_PRACOWNIK);
+            return View(dyzur);
         }
 
         // GET: Dyzur/Edit/5
@@ -70,32 +68,30 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DYZUR dYZUR = db.DYZURs.Find(id);
-            if (dYZUR == null)
+            DYZUR dyzur = db.DYZURY.Find(id);
+            if (dyzur == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA", dYZUR.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE", dYZUR.ID_PRACOWNIK);
-            return View(dYZUR);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dyzur.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dyzur.ID_PRACOWNIK);
+            return View(dyzur);
         }
 
         // POST: Dyzur/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_PRACOWNIK,DZIEN_DYZURU,OD,DO,ID_ODDZIAL")] DYZUR dYZUR)
+        public ActionResult Edit([Bind(Include = "ID_PRACOWNIK,DZIEN_DYZURU,OD,DO,ID_ODDZIAL")] DYZUR dyzur)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(dYZUR).State = EntityState.Modified;
+                db.Entry(dyzur).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA", dYZUR.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE", dYZUR.ID_PRACOWNIK);
-            return View(dYZUR);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dyzur.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dyzur.ID_PRACOWNIK);
+            return View(dyzur);
         }
 
         // GET: Dyzur/Delete/5
@@ -105,12 +101,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DYZUR dYZUR = db.DYZURs.Find(id);
-            if (dYZUR == null)
+            DYZUR dyzur = db.DYZURY.Find(id);
+            if (dyzur == null)
             {
                 return HttpNotFound();
             }
-            return View(dYZUR);
+            return View(dyzur);
         }
 
         // POST: Dyzur/Delete/5
@@ -118,8 +114,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            DYZUR dYZUR = db.DYZURs.Find(id);
-            db.DYZURs.Remove(dYZUR);
+            DYZUR dyzur = db.DYZURY.Find(id);
+            db.DYZURY.Remove(dyzur);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

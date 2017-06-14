@@ -17,7 +17,7 @@ namespace Przychodnia
         // GET: Sala
         public ActionResult Index()
         {
-            return View(db.SALAs.ToList());
+            return View(db.SALE.ToList());
         }
 
         // GET: Sala/Details/5
@@ -27,12 +27,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALA sALA = db.SALAs.Find(id);
-            if (sALA == null)
+            SALA sala = db.SALE.Find(id);
+            if (sala == null)
             {
                 return HttpNotFound();
             }
-            return View(sALA);
+            return View(sala);
         }
 
         // GET: Sala/Create
@@ -42,20 +42,18 @@ namespace Przychodnia
         }
 
         // POST: Sala/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_SALA,NUMER_SALI")] SALA sALA)
+        public ActionResult Create([Bind(Include = "ID_SALA,NUMER_SALI")] SALA sala)
         {
             if (ModelState.IsValid)
             {
-                db.SALAs.Add(sALA);
+                db.SALE.Add(sala);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(sALA);
+            return View(sala);
         }
 
         // GET: Sala/Edit/5
@@ -65,28 +63,26 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALA sALA = db.SALAs.Find(id);
-            if (sALA == null)
+            SALA sala = db.SALE.Find(id);
+            if (sala == null)
             {
                 return HttpNotFound();
             }
-            return View(sALA);
+            return View(sala);
         }
 
         // POST: Sala/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_SALA,NUMER_SALI")] SALA sALA)
+        public ActionResult Edit([Bind(Include = "ID_SALA,NUMER_SALI")] SALA sala)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sALA).State = EntityState.Modified;
+                db.Entry(sala).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(sALA);
+            return View(sala);
         }
 
         // GET: Sala/Delete/5
@@ -96,12 +92,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALA sALA = db.SALAs.Find(id);
-            if (sALA == null)
+            SALA sala = db.SALE.Find(id);
+            if (sala == null)
             {
                 return HttpNotFound();
             }
-            return View(sALA);
+            return View(sala);
         }
 
         // POST: Sala/Delete/5
@@ -109,8 +105,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SALA sALA = db.SALAs.Find(id);
-            db.SALAs.Remove(sALA);
+            SALA sala = db.SALE.Find(id);
+            db.SALE.Remove(sala);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

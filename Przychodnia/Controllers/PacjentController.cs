@@ -17,7 +17,7 @@ namespace Przychodnia
         // GET: Pacjent
         public ActionResult Index()
         {
-            return View(db.PACJENTs.ToList());
+            return View(db.PACJENCI.ToList());
         }
 
         // GET: Pacjent/Details/5
@@ -27,12 +27,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PACJENT pACJENT = db.PACJENTs.Find(id);
-            if (pACJENT == null)
+            PACJENT pacjent = db.PACJENCI.Find(id);
+            if (pacjent == null)
             {
                 return HttpNotFound();
             }
-            return View(pACJENT);
+            return View(pacjent);
         }
 
         // GET: Pacjent/Create
@@ -42,20 +42,18 @@ namespace Przychodnia
         }
 
         // POST: Pacjent/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_PACJENT,IMIE,NAZWISKO,ADRES,PESEL,TELEFON_KONTAKTOWY,EMAIL_KONTAKTOWY")] PACJENT pACJENT)
+        public ActionResult Create([Bind(Include = "ID_PACJENT,IMIE,NAZWISKO,ADRES,PESEL,TELEFON_KONTAKTOWY,EMAIL_KONTAKTOWY")] PACJENT pacjent)
         {
             if (ModelState.IsValid)
             {
-                db.PACJENTs.Add(pACJENT);
+                db.PACJENCI.Add(pacjent);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(pACJENT);
+            return View(pacjent);
         }
 
         // GET: Pacjent/Edit/5
@@ -65,28 +63,26 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PACJENT pACJENT = db.PACJENTs.Find(id);
-            if (pACJENT == null)
+            PACJENT pacjent = db.PACJENCI.Find(id);
+            if (pacjent == null)
             {
                 return HttpNotFound();
             }
-            return View(pACJENT);
+            return View(pacjent);
         }
 
         // POST: Pacjent/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_PACJENT,IMIE,NAZWISKO,ADRES,PESEL,TELEFON_KONTAKTOWY,EMAIL_KONTAKTOWY")] PACJENT pACJENT)
+        public ActionResult Edit([Bind(Include = "ID_PACJENT,IMIE,NAZWISKO,ADRES,PESEL,TELEFON_KONTAKTOWY,EMAIL_KONTAKTOWY")] PACJENT pacjent)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pACJENT).State = EntityState.Modified;
+                db.Entry(pacjent).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(pACJENT);
+            return View(pacjent);
         }
 
         // GET: Pacjent/Delete/5
@@ -96,12 +92,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PACJENT pACJENT = db.PACJENTs.Find(id);
-            if (pACJENT == null)
+            PACJENT pacjent = db.PACJENCI.Find(id);
+            if (pacjent == null)
             {
                 return HttpNotFound();
             }
-            return View(pACJENT);
+            return View(pacjent);
         }
 
         // POST: Pacjent/Delete/5
@@ -109,8 +105,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PACJENT pACJENT = db.PACJENTs.Find(id);
-            db.PACJENTs.Remove(pACJENT);
+            PACJENT pacjent = db.PACJENCI.Find(id);
+            db.PACJENCI.Remove(pacjent);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
