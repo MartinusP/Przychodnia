@@ -22,11 +22,12 @@ namespace Przychodnia.Repository
         public string ADRES { get; set; }
         [EmailAddress]
         public string EMAIL_KONTAKTOWY { get; set; }
+        [Display(Name = "SPECJALIZACJA")]
         public Nullable<int> ID_SPECJALIZACJA { get; set; }
         public Nullable<int> ID_ODDZIAL_PRACOWNIK { get; set; }
 
         [NotMapped]
-        [Display(Name = "Nazwisko i imie pracownika")]
+        [Display(Name = "NAZWISKO I IMIE PRACOWNIKA")]
         public string NazwiskoImie => NAZWISKO + " " + IMIE;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
