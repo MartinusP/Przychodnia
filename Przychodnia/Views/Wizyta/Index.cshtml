@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(MultiLanguage.CreateNew, "Create")
 </p>
 <table class="table">
     <tr>
@@ -48,7 +48,7 @@
             @Html.DisplayFor(modelItem => item.PACJENT.IMIE)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PRACOWNIK.IMIE)
+            @Html.DisplayFor(modelItem => item.PRACOWNIK.NazwiskoImie)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SALA.ID_SALA)
