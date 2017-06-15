@@ -1,0 +1,22 @@
+﻿@using Przychodnia.App_GlobalResources;
+@using Microsoft.AspNet.Identity
+<aside id="left-panel">
+
+    <!-- User info -->
+    @{ Html.RenderPartial("_CurrentUser"); }
+    <!-- end user info -->
+    <!-- NAVIGATION : This navigation is also responsive
+    -->
+    <nav>
+        <ul>
+            <li class="@Html.RouteIf("Index", "active")">
+                <a href="@Url.Action("Index", "Home")" title=@Resources.MultiLanguage.Home><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">@Resources.MultiLanguage.Home</span></a>
+            </li>
+        </ul>
+    </nav>
+    <span class="minifyme" data-action="minifyMenu">
+        <i class="fa fa-arrow-circle-left hit"></i>
+    </span>
+
+</aside>
+<!-- END NAVIGATION -->

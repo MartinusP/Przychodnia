@@ -275,14 +275,19 @@
     <Compile Include="Controllers\WizytaController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content2\bootstrap-theme.css" />
+    <Content Include="Content2\bootstrap-theme.min.css" />
+    <Content Include="Content2\bootstrap.css" />
+    <Content Include="Content2\bootstrap.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content2\Site.css" />
     <Content Include="Repository\Przychodnia.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Przychodnia.edmx</DependentUpon>
@@ -304,18 +309,18 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Scripts\app.config.js" />
-    <Content Include="Scripts\app.config.seed.js" />
-    <Content Include="Scripts\app.config.seed.min.js" />
-    <Content Include="Scripts\app.min.js" />
-    <Content Include="Scripts\app.seed.js" />
-    <Content Include="Scripts\app.seed.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content2\bootstrap.min.css.map" />
+    <Content Include="Content2\bootstrap.css.map" />
+    <Content Include="Content2\bootstrap-theme.min.css.map" />
+    <Content Include="Content2\bootstrap-theme.css.map" />
+    <Content Include="Scripts2\app.config.js" />
+    <Content Include="Scripts2\app.config.seed.js" />
+    <Content Include="Scripts2\app.config.seed.min.js" />
+    <Content Include="Scripts2\app.min.js" />
+    <Content Include="Scripts2\app.seed.js" />
+    <Content Include="Scripts2\app.seed.min.js" />
+    <Content Include="Scripts2\bootstrap.js" />
+    <Content Include="Scripts2\bootstrap.min.js" />
     <EmbeddedResource Include="App_GlobalResources\MultiLanguage.en-GB.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MultiLanguage.en-GB.designer.cs</LastGenOutput>
@@ -336,13 +341,33 @@
       <LastGenOutput>MultiLanguage.pl-PL.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Content Include="Scripts\app.config.seed.min.js.map" />
-    <Content Include="Scripts\app.seed.min.js.map" />
+    <Content Include="Scripts2\app.config.seed.min.js.map" />
+    <Content Include="Scripts2\app.seed.min.js.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <None Include="Scripts2\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts2\demo.min.js" />
+    <Content Include="Scripts2\jquery-1.12.4.js" />
+    <Content Include="Scripts2\jquery-1.12.4.min.js" />
+    <Content Include="Scripts2\jquery-1.12.4.min.map" />
+    <None Include="Scripts2\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts2\jquery.validate.js" />
+    <Content Include="Scripts2\jquery.validate.min.js" />
+    <Content Include="Scripts2\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts2\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts2\modernizr-2.8.3.js" />
+    <Content Include="Scripts2\respond.js" />
+    <Content Include="Scripts2\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts2\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts2\respond.min.js" />
+    <Content Include="Scripts2\_references.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
-    <Content Include="Scripts\demo.min.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
-    <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -353,7 +378,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\_references.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -366,8 +391,8 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared2\Error.cshtml" />
-    <Content Include="Views\Shared2\_Layout.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -388,8 +413,8 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Shared2\Lockout.cshtml" />
-    <Content Include="Views\Shared2\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Details.cshtml" />
@@ -451,32 +476,33 @@
     <Content Include="Views\Sala\Details.cshtml" />
     <Content Include="Views\Sala\Edit.cshtml" />
     <Content Include="Views\Sala\Index.cshtml" />
-    <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_Aside.cshtml" />
-    <Content Include="Views\Shared\_CurrentUser.cshtml" />
-    <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_Ribbon.cshtml" />
-    <Content Include="Views\Shared\_Scripts.cshtml" />
-    <Content Include="Views\Shared\_TermsAndConditions.cshtml" />
-    <Content Include="Views\Shared\_Tiles.cshtml" />
-    <Content Include="Views\Shared\_TopRight.cshtml" />
+    <Content Include="Views\Home\Index3.cshtml" />
+    <Content Include="Views\Shared3\_Aside.cshtml" />
+    <Content Include="Views\Shared3\_CurrentUser.cshtml" />
+    <Content Include="Views\Shared3\_Footer.cshtml" />
+    <Content Include="Views\Shared3\_Header.cshtml" />
+    <Content Include="Views\Shared3\_Layout.cshtml" />
+    <Content Include="Views\Shared3\_Ribbon.cshtml" />
+    <Content Include="Views\Shared3\_Scripts.cshtml" />
+    <Content Include="Views\Shared3\_TermsAndConditions.cshtml" />
+    <Content Include="Views\Shared3\_Tiles.cshtml" />
+    <Content Include="Views\Shared3\_TopRight.cshtml" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\ajax\" />
-    <Folder Include="Content\css\" />
-    <Folder Include="Content\fonts\" />
-    <Folder Include="Content\img\" />
-    <Folder Include="Scripts\bootstrap\" />
-    <Folder Include="Scripts\libs\" />
-    <Folder Include="Scripts\notification\" />
-    <Folder Include="Scripts\plugin\" />
-    <Folder Include="Scripts\smart-chat-ui\" />
-    <Folder Include="Scripts\smartwidgets\" />
-    <Folder Include="Scripts\speech\" />
+    <Folder Include="Content2\ajax\" />
+    <Folder Include="Content2\css\" />
+    <Folder Include="Content2\fonts\" />
+    <Folder Include="Content2\img\" />
+    <Folder Include="Scripts2\bootstrap\" />
+    <Folder Include="Scripts2\libs\" />
+    <Folder Include="Scripts2\notification\" />
+    <Folder Include="Scripts2\plugin\" />
+    <Folder Include="Scripts2\smart-chat-ui\" />
+    <Folder Include="Scripts2\smartwidgets\" />
+    <Folder Include="Scripts2\speech\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
