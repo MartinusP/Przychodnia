@@ -1,21 +1,16 @@
-﻿@using Przychodnia.App_GlobalResources;
-@{
-    ViewBag.Title = "Home Page";
-}
-
-<div class="jumbotron">
-    <h1>Aplikacja Przychodnia</h1>
-    <p>@Html.ActionLink("Dodaj dyżur", "Create", "Dyzur")</p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <dl>
-            <dt>Register a user and login</dt>
-            <dd>
-                Click @Html.ActionLink(MultiLanguage.RegisterNewUser, "Register", "Account") and see the code in AccountController.cs and Register Action.
-                Click @Html.ActionLink(MultiLanguage.LogIn, "Login", "Account") and see the code in AccountController.cs and Login Action.
-            </dd>
-        </dl>
+﻿<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+        <h1 class="page-title txt-color-blueDark">
+            <i class="fa-fw fa fa-home"></i>
+            Page Header
+            <span>
+                >
+                Subtitle
+            </span>
+        </h1>
     </div>
 </div>
+<!-- END MAIN CONTENT -->
+@section pagespecific {
+}

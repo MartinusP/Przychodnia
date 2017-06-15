@@ -155,4 +155,13 @@ namespace Przychodnia.Models
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
+
+    public static class IdentityConfig
+    {
+        public static void RegisterIdentities()
+        {
+            // Ensures the default demo user is available to login with
+            UserManager.Seed();
+        }
+    }
 }

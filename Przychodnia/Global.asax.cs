@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Przychodnia.Models;
+using System;
 using System.Data.Entity;
 using System.Globalization;
 using System.Threading;
@@ -16,6 +17,7 @@ namespace Przychodnia
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            IdentityConfig.RegisterIdentities();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

@@ -1,0 +1,118 @@
+﻿@using Przychodnia.App_GlobalResources;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.PageId - My ASP.NET Application</title>
+    @Przychodnia.Sett/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Styles.Render("~/content/smartadmin")
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
+                        <li>@Html.ActionLink(MultiLanguage.Home, "Index", "Home")</li>
+                        <li>@Html.ActionLink("Dyżur", "Index", "Dyzur")</li>
+                        <li>@Html.ActionLink("Oddział", "Index", "Oddzial")</li>
+                        <li>@Html.ActionLink("Pacjent", "Index", "Pacjent")</li>
+                        <li>@Html.ActionLink("Placówka", "Index", "Placowka")</li>
+                        <li>@Html.ActionLink("Pracownik", "Index", "Pracownik")</li>
+                        <li>@Html.ActionLink("Recepta", "Index", "Recepta")</li>
+                        <li>@Html.ActionLink("Sala", "Index", "Sala")</li>
+                        <li>@Html.ActionLink("Specjalizacja", "Index", "Specjalizacja")</li>
+                        <li>@Html.ActionLink("Wizyta", "Index", "Wizyta")</li>
+                        <li>@Html.ActionLink(MultiLanguage.RolesAdmin, "Index", "RolesAdmin")</li>
+                        <li>@Html.ActionLink(MultiLanguage.UsersAdmin, "Index", "UsersAdmin")</li>
+                        <li class="dropdown">
+                            @Html.ActionLink(MultiLanguage.ChangeLanguage, "Index", "Home")
+                        <ul>
+                            <li>@Html.ActionLink(MultiLanguage.English, "ChangeLanguage", "Home", new { lang = "en-GB" }, null)</li>
+                            <li>@Html.ActionLink(MultiLanguage.German, "ChangeLanguage", "Home", new { lang = "de-DE" }, null)</li>
+                            <li>@Html.ActionLink(MultiLanguage.Polish, "ChangeLanguage", "Home", new { lang = "pl-PL" }, null)</li>
+                        </ul>
+                    </li>
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("Lekarz"))
+                    {
+                        <li>@Html.ActionLink(MultiLanguage.Home, "Index", "Home")</li>
+                        <li>@Html.ActionLink("Dyżur", "Index", "Dyzur")</li>
+                        <li>@Html.ActionLink("Pacjent", "Index", "Pacjent")</li>
+                        <li>@Html.ActionLink("Recepta", "Index", "Recepta")</li>
+                        <li>@Html.ActionLink("Wizyta", "Index", "Wizyta")</li>
+                        <li>@Html.ActionLink(MultiLanguage.RolesAdmin, "Index", "RolesAdmin")</li>
+                        <li>@Html.ActionLink(MultiLanguage.UsersAdmin, "Index", "UsersAdmin")</li>
+                        <li class="dropdown">
+                            @Html.ActionLink(MultiLanguage.ChangeLanguage, "Index", "Home")
+                            <ul>
+                                <li>@Html.ActionLink(MultiLanguage.English, "ChangeLanguage", "Home", new { lang = "en-GB" }, null)</li>
+                                <li>@Html.ActionLink(MultiLanguage.German, "ChangeLanguage", "Home", new { lang = "de-DE" }, null)</li>
+                                <li>@Html.ActionLink(MultiLanguage.Polish, "ChangeLanguage", "Home", new { lang = "pl-PL" }, null)</li>
+                            </ul>
+                        </li>
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("Pacjent"))
+                    {
+                        <li>@Html.ActionLink(MultiLanguage.Home, "Index", "Home")</li>
+                        <li>@Html.ActionLink("Recepta", "Index", "Recepta")</li>
+                        <li>@Html.ActionLink("Wizyta", "Index", "Wizyta")</li>
+                        <li class="dropdown">
+                            @Html.ActionLink(MultiLanguage.ChangeLanguage, "Index", "Home")
+                            <ul>
+                                <li>@Html.ActionLink(MultiLanguage.English, "ChangeLanguage", "Home", new { lang = "en-GB" }, null)</li>
+                                <li>@Html.ActionLink(MultiLanguage.German, "ChangeLanguage", "Home", new { lang = "de-DE" }, null)</li>
+                                <li>@Html.ActionLink(MultiLanguage.Polish, "ChangeLanguage", "Home", new { lang = "pl-PL" }, null)</li>
+                            </ul>
+                        </li>
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("Recepcja"))
+                    {
+                        <li>@Html.ActionLink(MultiLanguage.Home, "Index", "Home")</li>
+                        <li>@Html.ActionLink("Dyżur", "Index", "Dyzur")</li>
+                        <li>@Html.ActionLink("Pacjent", "Index", "Pacjent")</li>
+                        <li>@Html.ActionLink("Recepta", "Index", "Recepta")</li>
+                        <li>@Html.ActionLink("Wizyta", "Index", "Wizyta")</li>
+                        <li class="dropdown">
+                            @Html.ActionLink(MultiLanguage.ChangeLanguage, "Index", "Home")
+                            <ul>
+                                <li>@Html.ActionLink(MultiLanguage.English, "ChangeLanguage", "Home", new { lang = "en-GB" }, null)</li>
+                                <li>@Html.ActionLink(MultiLanguage.German, "ChangeLanguage", "Home", new { lang = "de-DE" }, null)</li>
+                                <li>@Html.ActionLink(MultiLanguage.Polish, "ChangeLanguage", "Home", new { lang = "pl-PL" }, null)</li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @Przychodnia.Settings.CurrentTheme - WSIU - Przychodnia - Zespołowy projekt bazodanowy.</p>
+            <p>Autorzy: Łukasz Budrewicz, Piotr Jankowski, Paweł Rzęsa, Marcin Popiołek, Paweł Karsz</p>
+        </footer>
+    </div>
+
+    @     Html.RenderPartial("_Header", RenderSection("topright", false)); 
+
+#line default
+#line hidden
+
+rline 7 "O:\ASP\Przychodnia\Przychodnia\Przychodnia\Views\Shared\_Layout.cshtml")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderBody()
+</body>
+</html>
