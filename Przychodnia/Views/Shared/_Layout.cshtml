@@ -24,26 +24,30 @@
                 <ul class="nav navbar-nav">
                     @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
                     {
-                        <li>@Html.ActionLink(MultiLanguage.Home, "Index", "Home")</li>
                         <li>@Html.ActionLink("Dyżur", "Index", "Dyzur")</li>
-                        <li>@Html.ActionLink("Oddział", "Index", "Oddzial")</li>
-                        <li>@Html.ActionLink("Pacjent", "Index", "Pacjent")</li>
-                        <li>@Html.ActionLink("Placówka", "Index", "Placowka")</li>
-                        <li>@Html.ActionLink("Pracownik", "Index", "Pracownik")</li>
-                        <li>@Html.ActionLink("Recepta", "Index", "Recepta")</li>
-                        <li>@Html.ActionLink("Sala", "Index", "Sala")</li>
-                        <li>@Html.ActionLink("Specjalizacja", "Index", "Specjalizacja")</li>
-                        <li>@Html.ActionLink("Wizyta", "Index", "Wizyta")</li>
-                        <li>@Html.ActionLink(MultiLanguage.RolesAdmin, "Index", "RolesAdmin")</li>
-                        <li>@Html.ActionLink(MultiLanguage.UsersAdmin, "Index", "UsersAdmin")</li>
-                        <li class="dropdown">
-                            @Html.ActionLink(MultiLanguage.ChangeLanguage, "Index", "Home")
-                        <ul>
-                            <li>@Html.ActionLink(MultiLanguage.English, "ChangeLanguage", "Home", new { lang = "en-GB" }, null)</li>
-                            <li>@Html.ActionLink(MultiLanguage.German, "ChangeLanguage", "Home", new { lang = "de-DE" }, null)</li>
-                            <li>@Html.ActionLink(MultiLanguage.Polish, "ChangeLanguage", "Home", new { lang = "pl-PL" }, null)</li>
-                        </ul>
-                    </li>
+                                <li>@Html.ActionLink("Pacjent", "Index", "Pacjent")</li>
+                                <li>@Html.ActionLink("Recepta", "Index", "Recepta")</li>
+                                <li>@Html.ActionLink("Wizyta", "Index", "Wizyta")</li>
+                                <li>
+                                    @Html.ActionLink(MultiLanguage.CreateNew, "Index", "Home", new { data_toggle = "dropdown", @class = "dropdown-toggle", aria_expanded = "true" })
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Pracownik", "Index", "Pracownik")</li>
+                                        <li>@Html.ActionLink("Oddział", "Index", "Oddzial")</li>
+                                        <li>@Html.ActionLink("Placówka", "Index", "Placowka")</li>
+                                        <li>@Html.ActionLink("Sala", "Index", "Sala")</li>
+                                        <li>@Html.ActionLink("Specjalizacja", "Index", "Specjalizacja")</li>
+                                        <li>@Html.ActionLink(MultiLanguage.RolesAdmin, "Index", "RolesAdmin")</li>
+                                        <li>@Html.ActionLink(MultiLanguage.UsersAdmin, "Index", "UsersAdmin")</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    @Html.ActionLink(MultiLanguage.ChangeLanguage, "Index", "Home", new { data_toggle = "dropdown", @class = "dropdown-toggle", aria_expanded = "true" })
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink(MultiLanguage.English, "ChangeLanguage", "Home", new { lang = "en-GB" }, null)</li>
+                                        <li>@Html.ActionLink(MultiLanguage.German, "ChangeLanguage", "Home", new { lang = "de-DE" }, null)</li>
+                                        <li>@Html.ActionLink(MultiLanguage.Polish, "ChangeLanguage", "Home", new { lang = "pl-PL" }, null)</li>
+                                    </ul>
+                                </li>
                     }
                     @if (Request.IsAuthenticated && User.IsInRole("Lekarz"))
                     {

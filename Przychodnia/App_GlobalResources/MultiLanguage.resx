@@ -144,11 +144,23 @@
   <data name="Details" xml:space="preserve">
     <value>Details</value>
   </data>
+  <data name="DutyDay" xml:space="preserve">
+    <value>DUTY DAY</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="Employee" xml:space="preserve">
+    <value>EMPLOYEE</value>
+  </data>
   <data name="English" xml:space="preserve">
     <value>English</value>
+  </data>
+  <data name="ForgetYourPassword" xml:space="preserve">
+    <value>Forget your password</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>FROM</value>
   </data>
   <data name="German" xml:space="preserve">
     <value>German</value>
@@ -158,6 +170,9 @@
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="HospitalWard" xml:space="preserve">
+    <value>HOSPITAL WARD</value>
   </data>
   <data name="LogIn" xml:space="preserve">
     <value>Log in</value>
@@ -171,11 +186,17 @@
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="RegisterNewUser" xml:space="preserve">
+    <value>Register a new user</value>
+  </data>
   <data name="RolesAdmin" xml:space="preserve">
     <value>Roles Admin</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>TO</value>
   </data>
   <data name="UsersAdmin" xml:space="preserve">
     <value>Users Admin</value>

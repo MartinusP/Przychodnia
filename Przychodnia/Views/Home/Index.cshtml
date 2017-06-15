@@ -5,7 +5,7 @@
 
 <div class="jumbotron">
     <h1>Aplikacja Przychodnia</h1>
-        <p>@Html.ActionLink("Dodaj dyżur", "Create", "Dyzur")</p>
+    <p>@Html.ActionLink("Dodaj dyżur", "Create", "Dyzur")</p>
 </div>
 
 <div class="row">
@@ -13,8 +13,8 @@
         <dl>
             <dt>Register a user and login</dt>
             <dd>
-                Click @Html.ActionLink("Register", "Register", "Account") and see the code in AccountController.cs and Register Action.
-                Click @Html.ActionLink("Log in", "Login", "Account") and see the code in AccountController.cs and Login Action.
+                Click @Html.ActionLink(MultiLanguage.RegisterNewUser, "Register", "Account") and see the code in AccountController.cs and Register Action.
+                Click @Html.ActionLink(MultiLanguage.LogIn, "Login", "Account") and see the code in AccountController.cs and Login Action.
             </dd>
         </dl>
     </div>

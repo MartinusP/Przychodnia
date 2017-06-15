@@ -1,5 +1,5 @@
 ﻿@using Przychodnia.App_GlobalResources;
-@model IdentitySample.Models.ApplicationUser
+@model Przychodnia.Models.ApplicationUser
 
 @{
     ViewBag.Title = "Delete";
@@ -25,7 +25,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="@Resources.MultiLanguage.Delete" class="btn btn-default" /> |
             @Html.ActionLink(MultiLanguage.BackToList, "Index")
         </div>
     }

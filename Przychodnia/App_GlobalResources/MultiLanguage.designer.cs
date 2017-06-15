@@ -142,6 +142,15 @@ namespace Przychodnia.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DUTY DAY.
+        /// </summary>
+        public static string DutyDay {
+            get {
+                return ResourceManager.GetString("DutyDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
@@ -151,11 +160,38 @@ namespace Przychodnia.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EMPLOYEE.
+        /// </summary>
+        public static string Employee {
+            get {
+                return ResourceManager.GetString("Employee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         public static string English {
             get {
                 return ResourceManager.GetString("English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forget your password.
+        /// </summary>
+        public static string ForgetYourPassword {
+            get {
+                return ResourceManager.GetString("ForgetYourPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FROM.
+        /// </summary>
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
             }
         }
         
@@ -183,6 +219,15 @@ namespace Przychodnia.App_GlobalResources {
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HOSPITAL WARD.
+        /// </summary>
+        public static string HospitalWard {
+            get {
+                return ResourceManager.GetString("HospitalWard", resourceCulture);
             }
         }
         
@@ -223,6 +268,15 @@ namespace Przychodnia.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register a new user.
+        /// </summary>
+        public static string RegisterNewUser {
+            get {
+                return ResourceManager.GetString("RegisterNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Roles Admin.
         /// </summary>
         public static string RolesAdmin {
@@ -237,6 +291,15 @@ namespace Przychodnia.App_GlobalResources {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TO.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
             }
         }
         

@@ -11,7 +11,7 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace IdentitySample.Models
+namespace Przychodnia.Models
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 
@@ -153,6 +153,15 @@ namespace IdentitySample.Models
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+        }
+    }
+
+    public static class IdentityConfig
+    {
+        public static void RegisterIdentities()
+        {
+            // Ensures the default demo user is available to login with
+            UserManager.Seed();
         }
     }
 }

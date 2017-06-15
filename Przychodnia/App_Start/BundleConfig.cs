@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace IdentitySample
+namespace Przychodnia
 {
     public class BundleConfig
     {
@@ -25,6 +25,17 @@ namespace IdentitySample
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            //
+            /*
+            bundles.Add(new StyleBundle("~/content/smartadmin").IncludeDirectory("~/content/css", "*.min.css"));
+
+            bundles.Add(new ScriptBundle("~/scripts/smartadmin").Include(
+                "~/scripts/app.config.seed.min.js",
+                "~/scripts/bootstrap/bootstrap.min.js",
+                "~/scripts/app.seed.min.js"));
+            */
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
