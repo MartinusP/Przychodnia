@@ -150,6 +150,9 @@
   <data name="English" xml:space="preserve">
     <value>Angielski</value>
   </data>
+  <data name="ForgetYourPassword" xml:space="preserve">
+    <value>Zapomniałeś hasła</value>
+  </data>
   <data name="German" xml:space="preserve">
     <value>Niemiecki</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Register" xml:space="preserve">
     <value>Rejestracja</value>
+  </data>
+  <data name="RegisterNewUser" xml:space="preserve">
+    <value>Zarejestruj nowego użytkownika</value>
   </data>
   <data name="RolesAdmin" xml:space="preserve">
     <value>Role</value>

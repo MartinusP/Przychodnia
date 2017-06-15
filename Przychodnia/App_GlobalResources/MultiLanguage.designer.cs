@@ -160,6 +160,15 @@ namespace Przychodnia.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forget your password.
+        /// </summary>
+        public static string ForgetYourPassword {
+            get {
+                return ResourceManager.GetString("ForgetYourPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to German.
         /// </summary>
         public static string German {
@@ -219,6 +228,15 @@ namespace Przychodnia.App_GlobalResources {
         public static string Register {
             get {
                 return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register a new user.
+        /// </summary>
+        public static string RegisterNewUser {
+            get {
+                return ResourceManager.GetString("RegisterNewUser", resourceCulture);
             }
         }
         

@@ -42,13 +42,41 @@
                     </div>
                 </div>
                 <p>
-                    @Html.ActionLink("Register a new user?", "Register")
+                    @Html.ActionLink(MultiLanguage.RegisterNewUser + " ?", "Register")
                 </p>
                 <p>
-                    @Html.ActionLink("Forget your password?", "ForgotPassword")
+                    @Html.ActionLink(MultiLanguage.ForgetYourPassword + " ?", "ForgotPassword")
                 </p>
             }
         </section>
+    </div>
+    <div class="col-md-4">
+        <p class="bg-info"> 
+            Rola: Administrator <br />
+            Email: admin@example.com <br />
+            Hasło: admin@example.com <br />
+        </p>
+    </div>
+    <div class="col-md-4">
+        <p class="bg-info">
+            Rola: Lekarz <br />
+            Email: <br />
+            Hasło: <br />
+        </p>
+    </div>
+    <div class="col-md-4">
+        <p class="bg-info">
+            Rola: Pacjent <br />
+            Email: <br />
+            Hasło: <br />
+        </p>
+    </div>
+    <div class="col-md-4">
+        <p class="bg-info">
+            Rola: Recepcja <br />
+            Email: <br />
+            Hasło: <br />
+        </p>
     </div>
 </div>
 @section Scripts {
