@@ -1,5 +1,4 @@
-﻿using IdentitySample.Models;
-using System;
+﻿using System;
 using System.Data.Entity;
 using System.Globalization;
 using System.Threading;
@@ -8,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace IdentitySample
+namespace Przychodnia
 {
     // Note: For instructions on enabling IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=301868

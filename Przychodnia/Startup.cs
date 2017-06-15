@@ -1,6 +1,6 @@
 ﻿using Owin;
 
-namespace IdentitySample
+namespace Przychodnia
 {
     public partial class Startup
     {

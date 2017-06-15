@@ -1,4 +1,4 @@
-﻿using IdentitySample.Models;
+﻿using Przychodnia.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
 
-namespace IdentitySample.Controllers
+namespace Przychodnia.Controllers
 {
     [Authorize(Roles = "Administrator")]
     public class RolesAdminController : Controller

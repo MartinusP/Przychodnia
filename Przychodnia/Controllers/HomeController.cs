@@ -2,8 +2,9 @@
 using System.Threading;
 using System.Globalization;
 using System.Web;
+using Przychodnia;
 
-namespace IdentitySample.Controllers
+namespace Przychodnia.Controllers
 {
     public class HomeController : Controller
     {
@@ -40,5 +41,6 @@ namespace IdentitySample.Controllers
             Response.Cookies.Add(cookie);
             return View("Index");
         }
+
     }
 }
