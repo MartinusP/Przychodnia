@@ -70,7 +70,7 @@ namespace Przychodnia.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Application Name.
+        ///   Looks up a localized string similar to Clinic.
         /// </summary>
         public static string ApplicationName {
             get {

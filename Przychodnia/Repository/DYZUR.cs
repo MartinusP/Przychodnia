@@ -9,6 +9,7 @@ namespace Przychodnia.Repository
 
         public int ID_PRACOWNIK { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "DZIEÑ DY¯URU")]
         public Nullable<System.DateTime> DZIEN_DYZURU { get; set; }
         [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> OD { get; set; }

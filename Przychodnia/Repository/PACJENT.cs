@@ -26,5 +26,9 @@ namespace Przychodnia.Repository
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WIZYTA> WIZYTY { get; set; }
+
+        [NotMapped]
+        [Display(Name = "NAZWISKO I IMIE PACJENTA")]
+        public string NazwiskoImie => NAZWISKO + " " + IMIE;
     }
 }

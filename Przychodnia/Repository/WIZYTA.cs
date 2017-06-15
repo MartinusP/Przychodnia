@@ -11,10 +11,15 @@ namespace Przychodnia.Repository
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_WIZYTA { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "DATA WIZYTY")]
         public Nullable<System.DateTime> DATA_WIZYTY { get; set; }
+        [Display(Name = "SALA")]
         public Nullable<int> ID_SALA { get; set; }
+        [Display(Name = "PRACOWNIK")]
         public Nullable<int> ID_PRACOWNIK { get; set; }
+        [Display(Name = "ODDZIA£")]
         public Nullable<int> ID_ODDZIAL { get; set; }
+        [Display(Name = "PACJENT")]
         public Nullable<int> ID_PACJENT { get; set; }
         public string UWAGI { get; set; }
     
