@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Przychodnia.Repository;
+using Przychodnia.Models;
+using Przychodnia.Context;
 
 namespace Przychodnia
 {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Przychodnia.Repository
+namespace Przychodnia.Models
 {
     using System;
     using System.Collections.Generic;

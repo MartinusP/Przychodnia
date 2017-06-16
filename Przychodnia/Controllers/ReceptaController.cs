@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Przychodnia.Repository;
+using Przychodnia.Models;
+using Przychodnia.Context;
 
 namespace Przychodnia
 {
@@ -47,7 +48,7 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID_RECEPTA,DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA rECEPTA)
+        public async Task<ActionResult> Create([Bind(Include = "DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA rECEPTA)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +80,7 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID_RECEPTA,DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA rECEPTA)
+        public async Task<ActionResult> Edit([Bind(Include = "DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA rECEPTA)
         {
             if (ModelState.IsValid)
             {
