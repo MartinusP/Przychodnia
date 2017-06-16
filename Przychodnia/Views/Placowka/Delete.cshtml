@@ -2,7 +2,7 @@
 @model Przychodnia.Repository.PLACOWKA
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "@Resources.MultiLanguage.Delete";
 }
 
 <h2>Delete</h2>
@@ -42,8 +42,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="@Resources.MultiLanguage.Delete" class="btn btn-default" /> |
+            @Html.ActionLink(MultiLanguage.BackToList, "Index")
         </div>
     }
 </div>
