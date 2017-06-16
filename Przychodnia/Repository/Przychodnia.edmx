@@ -315,10 +315,10 @@
           <Property Name="NAZWA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MIEJSCOWOSC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_PLACOWKA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DYZURs" Relationship="Self.fk_DYZUR_ID_ODDZIAL" FromRole="ODDZIAL" ToRole="DYZUR" />
+          <NavigationProperty Name="DYZURY" Relationship="Self.fk_DYZUR_ID_ODDZIAL" FromRole="ODDZIAL" ToRole="DYZUR" />
           <NavigationProperty Name="PLACOWKA" Relationship="Self.fk_ODDZIAL_ID_PLACOWKA" FromRole="ODDZIAL" ToRole="PLACOWKA" />
           <NavigationProperty Name="ODDZIAL_PRACOWNIK" Relationship="Self.fk_ODDZIAL_PRACOWNIK_ID_ODDZIAL" FromRole="ODDZIAL" ToRole="ODDZIAL_PRACOWNIK" />
-          <NavigationProperty Name="WIZYTAs" Relationship="Self.fk_WIZYTA_ID_ODDZIAL" FromRole="ODDZIAL" ToRole="WIZYTA" />
+          <NavigationProperty Name="WIZYTY" Relationship="Self.fk_WIZYTA_ID_ODDZIAL" FromRole="ODDZIAL" ToRole="WIZYTA" />
         </EntityType>
         <EntityType Name="ODDZIAL_PRACOWNIK">
           <Key>
@@ -341,7 +341,7 @@
           <Property Name="PESEL" Type="Int64" />
           <Property Name="TELEFON_KONTAKTOWY" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL_KONTAKTOWY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="WIZYTAs" Relationship="Self.fk_WIZYTA_ID_PRACJENT" FromRole="PACJENT" ToRole="WIZYTA" />
+          <NavigationProperty Name="WIZYTY" Relationship="Self.fk_WIZYTA_ID_PRACJENT" FromRole="PACJENT" ToRole="WIZYTA" />
         </EntityType>
         <EntityType Name="PLACOWKA">
           <Key>
@@ -351,7 +351,7 @@
           <Property Name="NAZWA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MIEJSCOWOSC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ADRES" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ODDZIALs" Relationship="Self.fk_ODDZIAL_ID_PLACOWKA" FromRole="PLACOWKA" ToRole="ODDZIAL" />
+          <NavigationProperty Name="ODDZIALY" Relationship="Self.fk_ODDZIAL_ID_PLACOWKA" FromRole="PLACOWKA" ToRole="ODDZIAL" />
         </EntityType>
         <EntityType Name="PRACOWNIK">
           <Key>
@@ -363,10 +363,10 @@
           <Property Name="ADRES" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EMAIL_KONTAKTOWY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ID_SPECJALIZACJA" Type="Int32" />
-          <NavigationProperty Name="DYZURs" Relationship="Self.fk_DYZUR_ID_PRACOWNIK" FromRole="PRACOWNIK" ToRole="DYZUR" />
+          <NavigationProperty Name="DYZURY" Relationship="Self.fk_DYZUR_ID_PRACOWNIK" FromRole="PRACOWNIK" ToRole="DYZUR" />
           <NavigationProperty Name="ODDZIAL_PRACOWNIK" Relationship="Self.fk_ODDZIAL_PRACOWNIK_ID_PRACOWNIK" FromRole="PRACOWNIK" ToRole="ODDZIAL_PRACOWNIK" />
           <NavigationProperty Name="SPECJALIZACJA" Relationship="Self.fk_PRACOWNIK_ID_SPECJALIZACJA" FromRole="PRACOWNIK" ToRole="SPECJALIZACJA" />
-          <NavigationProperty Name="WIZYTAs" Relationship="Self.fk_WIZYTA_ID_PRACOWNIK" FromRole="PRACOWNIK" ToRole="WIZYTA" />
+          <NavigationProperty Name="WIZYTY" Relationship="Self.fk_WIZYTA_ID_PRACOWNIK" FromRole="PRACOWNIK" ToRole="WIZYTA" />
         </EntityType>
         <EntityType Name="RECEPTA">
           <Key>
@@ -376,7 +376,7 @@
           <Property Name="DATA_WYKORZYSTANIA" Type="DateTime" Precision="0" />
           <Property Name="NAZWA_LEKU" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UWAGI" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="WIZYTAs" Relationship="Self.fk_WIZYTA_ID_RECEPTA" FromRole="RECEPTA" ToRole="WIZYTA" />
+          <NavigationProperty Name="WIZYTY" Relationship="Self.fk_WIZYTA_ID_RECEPTA" FromRole="RECEPTA" ToRole="WIZYTA" />
         </EntityType>
         <EntityType Name="SALA">
           <Key>
@@ -384,7 +384,7 @@
           </Key>
           <Property Name="ID_SALA" Type="Int32" Nullable="false" />
           <Property Name="NUMER_SALI" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="WIZYTAs" Relationship="Self.fk_WIZYTA_ID_SALA" FromRole="SALA" ToRole="WIZYTA" />
+          <NavigationProperty Name="WIZYTY" Relationship="Self.fk_WIZYTA_ID_SALA" FromRole="SALA" ToRole="WIZYTA" />
         </EntityType>
         <EntityType Name="SPECJALIZACJA">
           <Key>
@@ -392,7 +392,7 @@
           </Key>
           <Property Name="ID_SPECJALIZACJA" Type="Int32" Nullable="false" />
           <Property Name="NAZWA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="PRACOWNIKs" Relationship="Self.fk_PRACOWNIK_ID_SPECJALIZACJA" FromRole="SPECJALIZACJA" ToRole="PRACOWNIK" />
+          <NavigationProperty Name="PRACOWNICY" Relationship="Self.fk_PRACOWNIK_ID_SPECJALIZACJA" FromRole="SPECJALIZACJA" ToRole="PRACOWNIK" />
         </EntityType>
         <EntityType Name="WIZYTA">
           <Key>

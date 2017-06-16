@@ -18,7 +18,7 @@ namespace Przychodnia
         // GET: Placowka
         public async Task<ActionResult> Index()
         {
-            return View(await db.PLACOWKAs.ToListAsync());
+            return View(await db.PLACOWKI.ToListAsync());
         }
 
         // GET: Placowka/Details/5
@@ -28,7 +28,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA pLACOWKA = await db.PLACOWKAs.FindAsync(id);
+            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
             if (pLACOWKA == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace Przychodnia
         {
             if (ModelState.IsValid)
             {
-                db.PLACOWKAs.Add(pLACOWKA);
+                db.PLACOWKI.Add(pLACOWKA);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA pLACOWKA = await db.PLACOWKAs.FindAsync(id);
+            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
             if (pLACOWKA == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA pLACOWKA = await db.PLACOWKAs.FindAsync(id);
+            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
             if (pLACOWKA == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            PLACOWKA pLACOWKA = await db.PLACOWKAs.FindAsync(id);
-            db.PLACOWKAs.Remove(pLACOWKA);
+            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
+            db.PLACOWKI.Remove(pLACOWKA);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

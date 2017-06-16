@@ -42,15 +42,15 @@ namespace Przychodnia.Repository
                 .HasForeignKey(bc => bc.ID_PRACOWNIK);
         }
     
-        public virtual DbSet<DYZUR> DYZURs { get; set; }
-        public virtual DbSet<ODDZIAL> ODDZIALs { get; set; }
+        public virtual DbSet<DYZUR> DYZURY { get; set; }
+        public virtual DbSet<ODDZIAL> ODDZIALY { get; set; }
         public virtual DbSet<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNIK { get; set; }
-        public virtual DbSet<PACJENT> PACJENTs { get; set; }
-        public virtual DbSet<PLACOWKA> PLACOWKAs { get; set; }
-        public virtual DbSet<PRACOWNIK> PRACOWNIKs { get; set; }
-        public virtual DbSet<RECEPTA> RECEPTAs { get; set; }
-        public virtual DbSet<SALA> SALAs { get; set; }
-        public virtual DbSet<SPECJALIZACJA> SPECJALIZACJAs { get; set; }
-        public virtual DbSet<WIZYTA> WIZYTAs { get; set; }
+        public virtual DbSet<PACJENT> PACJENCI { get; set; }
+        public virtual DbSet<PLACOWKA> PLACOWKI { get; set; }
+        public virtual DbSet<PRACOWNIK> PRACOWNICY { get; set; }
+        public virtual DbSet<RECEPTA> RECEPTY { get; set; }
+        public virtual DbSet<SALA> SALE { get; set; }
+        public virtual DbSet<SPECJALIZACJA> SPECJALIZACJE { get; set; }
+        public virtual DbSet<WIZYTA> WIZYTY { get; set; }
     }
 }

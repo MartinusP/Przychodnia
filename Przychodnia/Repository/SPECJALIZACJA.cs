@@ -17,13 +17,13 @@ namespace Przychodnia.Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SPECJALIZACJA()
         {
-            this.PRACOWNIKs = new HashSet<PRACOWNIK>();
+            this.PRACOWNICY = new HashSet<PRACOWNIK>();
         }
     
         public int ID_SPECJALIZACJA { get; set; }
         public string NAZWA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PRACOWNIK> PRACOWNIKs { get; set; }
+        public virtual ICollection<PRACOWNIK> PRACOWNICY { get; set; }
     }
 }

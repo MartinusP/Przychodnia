@@ -40,8 +40,8 @@ namespace Przychodnia
         // GET: OddzialPracownik/Create
         public ActionResult Create()
         {
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA");
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE");
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA");
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE");
             return View();
         }
 
@@ -59,8 +59,8 @@ namespace Przychodnia
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA", oDDZIAL_PRACOWNIK.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE", oDDZIAL_PRACOWNIK.ID_PRACOWNIK);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", oDDZIAL_PRACOWNIK.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", oDDZIAL_PRACOWNIK.ID_PRACOWNIK);
             return View(oDDZIAL_PRACOWNIK);
         }
 
@@ -76,8 +76,8 @@ namespace Przychodnia
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA", oDDZIAL_PRACOWNIK.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE", oDDZIAL_PRACOWNIK.ID_PRACOWNIK);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", oDDZIAL_PRACOWNIK.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", oDDZIAL_PRACOWNIK.ID_PRACOWNIK);
             return View(oDDZIAL_PRACOWNIK);
         }
 
@@ -94,8 +94,8 @@ namespace Przychodnia
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA", oDDZIAL_PRACOWNIK.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE", oDDZIAL_PRACOWNIK.ID_PRACOWNIK);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", oDDZIAL_PRACOWNIK.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", oDDZIAL_PRACOWNIK.ID_PRACOWNIK);
             return View(oDDZIAL_PRACOWNIK);
         }
 

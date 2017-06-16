@@ -18,7 +18,7 @@ namespace Przychodnia
         // GET: Dyzur
         public async Task<ActionResult> Index()
         {
-            var dYZURs = db.DYZURs.Include(d => d.ODDZIAL).Include(d => d.PRACOWNIK);
+            var dYZURs = db.DYZURY.Include(d => d.ODDZIAL).Include(d => d.PRACOWNIK);
             return View(await dYZURs.ToListAsync());
         }
 
@@ -29,7 +29,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DYZUR dYZUR = await db.DYZURs.FindAsync(id);
+            DYZUR dYZUR = await db.DYZURY.FindAsync(id);
             if (dYZUR == null)
             {
                 return HttpNotFound();
@@ -40,8 +40,8 @@ namespace Przychodnia
         // GET: Dyzur/Create
         public ActionResult Create()
         {
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA");
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE");
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA");
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE");
             return View();
         }
 
@@ -54,13 +54,13 @@ namespace Przychodnia
         {
             if (ModelState.IsValid)
             {
-                db.DYZURs.Add(dYZUR);
+                db.DYZURY.Add(dYZUR);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA", dYZUR.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE", dYZUR.ID_PRACOWNIK);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dYZUR.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dYZUR.ID_PRACOWNIK);
             return View(dYZUR);
         }
 
@@ -71,13 +71,13 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DYZUR dYZUR = await db.DYZURs.FindAsync(id);
+            DYZUR dYZUR = await db.DYZURY.FindAsync(id);
             if (dYZUR == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA", dYZUR.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE", dYZUR.ID_PRACOWNIK);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dYZUR.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dYZUR.ID_PRACOWNIK);
             return View(dYZUR);
         }
 
@@ -94,8 +94,8 @@ namespace Przychodnia
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA", dYZUR.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE", dYZUR.ID_PRACOWNIK);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dYZUR.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dYZUR.ID_PRACOWNIK);
             return View(dYZUR);
         }
 
@@ -106,7 +106,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DYZUR dYZUR = await db.DYZURs.FindAsync(id);
+            DYZUR dYZUR = await db.DYZURY.FindAsync(id);
             if (dYZUR == null)
             {
                 return HttpNotFound();
@@ -119,8 +119,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            DYZUR dYZUR = await db.DYZURs.FindAsync(id);
-            db.DYZURs.Remove(dYZUR);
+            DYZUR dYZUR = await db.DYZURY.FindAsync(id);
+            db.DYZURY.Remove(dYZUR);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

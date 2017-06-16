@@ -18,7 +18,7 @@ namespace Przychodnia
         // GET: Pacjent
         public async Task<ActionResult> Index()
         {
-            return View(await db.PACJENTs.ToListAsync());
+            return View(await db.PACJENCI.ToListAsync());
         }
 
         // GET: Pacjent/Details/5
@@ -28,7 +28,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PACJENT pACJENT = await db.PACJENTs.FindAsync(id);
+            PACJENT pACJENT = await db.PACJENCI.FindAsync(id);
             if (pACJENT == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace Przychodnia
         {
             if (ModelState.IsValid)
             {
-                db.PACJENTs.Add(pACJENT);
+                db.PACJENCI.Add(pACJENT);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PACJENT pACJENT = await db.PACJENTs.FindAsync(id);
+            PACJENT pACJENT = await db.PACJENCI.FindAsync(id);
             if (pACJENT == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PACJENT pACJENT = await db.PACJENTs.FindAsync(id);
+            PACJENT pACJENT = await db.PACJENCI.FindAsync(id);
             if (pACJENT == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            PACJENT pACJENT = await db.PACJENTs.FindAsync(id);
-            db.PACJENTs.Remove(pACJENT);
+            PACJENT pACJENT = await db.PACJENCI.FindAsync(id);
+            db.PACJENCI.Remove(pACJENT);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

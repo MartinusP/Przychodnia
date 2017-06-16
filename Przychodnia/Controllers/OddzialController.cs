@@ -18,7 +18,7 @@ namespace Przychodnia
         // GET: Oddzial
         public async Task<ActionResult> Index()
         {
-            var oDDZIALs = db.ODDZIALs.Include(o => o.PLACOWKA);
+            var oDDZIALs = db.ODDZIALY.Include(o => o.PLACOWKA);
             return View(await oDDZIALs.ToListAsync());
         }
 
@@ -29,7 +29,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = await db.ODDZIALs.FindAsync(id);
+            ODDZIAL oDDZIAL = await db.ODDZIALY.FindAsync(id);
             if (oDDZIAL == null)
             {
                 return HttpNotFound();
@@ -40,7 +40,7 @@ namespace Przychodnia
         // GET: Oddzial/Create
         public ActionResult Create()
         {
-            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKAs, "ID_PLACOWKA", "NAZWA");
+            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKI, "ID_PLACOWKA", "NAZWA");
             return View();
         }
 
@@ -53,12 +53,12 @@ namespace Przychodnia
         {
             if (ModelState.IsValid)
             {
-                db.ODDZIALs.Add(oDDZIAL);
+                db.ODDZIALY.Add(oDDZIAL);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKAs, "ID_PLACOWKA", "NAZWA", oDDZIAL.ID_PLACOWKA);
+            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKI, "ID_PLACOWKA", "NAZWA", oDDZIAL.ID_PLACOWKA);
             return View(oDDZIAL);
         }
 
@@ -69,12 +69,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = await db.ODDZIALs.FindAsync(id);
+            ODDZIAL oDDZIAL = await db.ODDZIALY.FindAsync(id);
             if (oDDZIAL == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKAs, "ID_PLACOWKA", "NAZWA", oDDZIAL.ID_PLACOWKA);
+            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKI, "ID_PLACOWKA", "NAZWA", oDDZIAL.ID_PLACOWKA);
             return View(oDDZIAL);
         }
 
@@ -91,7 +91,7 @@ namespace Przychodnia
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKAs, "ID_PLACOWKA", "NAZWA", oDDZIAL.ID_PLACOWKA);
+            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKI, "ID_PLACOWKA", "NAZWA", oDDZIAL.ID_PLACOWKA);
             return View(oDDZIAL);
         }
 
@@ -102,7 +102,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = await db.ODDZIALs.FindAsync(id);
+            ODDZIAL oDDZIAL = await db.ODDZIALY.FindAsync(id);
             if (oDDZIAL == null)
             {
                 return HttpNotFound();
@@ -115,8 +115,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ODDZIAL oDDZIAL = await db.ODDZIALs.FindAsync(id);
-            db.ODDZIALs.Remove(oDDZIAL);
+            ODDZIAL oDDZIAL = await db.ODDZIALY.FindAsync(id);
+            db.ODDZIALY.Remove(oDDZIAL);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

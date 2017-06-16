@@ -17,9 +17,9 @@ namespace Przychodnia.Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRACOWNIK()
         {
-            this.DYZURs = new HashSet<DYZUR>();
+            this.DYZURY = new HashSet<DYZUR>();
             this.ODDZIAL_PRACOWNIK = new HashSet<ODDZIAL_PRACOWNIK>();
-            this.WIZYTAs = new HashSet<WIZYTA>();
+            this.WIZYTY = new HashSet<WIZYTA>();
         }
     
         public int ID_PRACOWNIK { get; set; }
@@ -30,11 +30,11 @@ namespace Przychodnia.Repository
         public Nullable<int> ID_SPECJALIZACJA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DYZUR> DYZURs { get; set; }
+        public virtual ICollection<DYZUR> DYZURY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNIK { get; set; }
         public virtual SPECJALIZACJA SPECJALIZACJA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WIZYTA> WIZYTAs { get; set; }
+        public virtual ICollection<WIZYTA> WIZYTY { get; set; }
     }
 }

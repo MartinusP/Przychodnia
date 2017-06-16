@@ -18,7 +18,7 @@ namespace Przychodnia
         // GET: Sala
         public async Task<ActionResult> Index()
         {
-            return View(await db.SALAs.ToListAsync());
+            return View(await db.SALE.ToListAsync());
         }
 
         // GET: Sala/Details/5
@@ -28,7 +28,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALA sALA = await db.SALAs.FindAsync(id);
+            SALA sALA = await db.SALE.FindAsync(id);
             if (sALA == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace Przychodnia
         {
             if (ModelState.IsValid)
             {
-                db.SALAs.Add(sALA);
+                db.SALE.Add(sALA);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALA sALA = await db.SALAs.FindAsync(id);
+            SALA sALA = await db.SALE.FindAsync(id);
             if (sALA == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALA sALA = await db.SALAs.FindAsync(id);
+            SALA sALA = await db.SALE.FindAsync(id);
             if (sALA == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            SALA sALA = await db.SALAs.FindAsync(id);
-            db.SALAs.Remove(sALA);
+            SALA sALA = await db.SALE.FindAsync(id);
+            db.SALE.Remove(sALA);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

@@ -224,6 +224,8 @@
     <Compile Include="Controllers\PracownikController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ReceptaController.cs" />
+    <Compile Include="Controllers\SalaController.cs" />
+    <Compile Include="Controllers\SpecjalizacjaController.cs" />
     <Compile Include="Repository\DYZUR.cs">
       <DependentUpon>Przychodnia.tt</DependentUpon>
     </Compile>
@@ -269,8 +271,6 @@
     <Compile Include="Repository\WIZYTA.cs">
       <DependentUpon>Przychodnia.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\SalaController.cs" />
-    <Compile Include="Controllers\SpecjalizacjaController.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\WizytaController.cs" />
   </ItemGroup>

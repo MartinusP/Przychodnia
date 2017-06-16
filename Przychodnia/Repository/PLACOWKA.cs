@@ -17,7 +17,7 @@ namespace Przychodnia.Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PLACOWKA()
         {
-            this.ODDZIALs = new HashSet<ODDZIAL>();
+            this.ODDZIALY = new HashSet<ODDZIAL>();
         }
     
         public int ID_PLACOWKA { get; set; }
@@ -26,6 +26,6 @@ namespace Przychodnia.Repository
         public string ADRES { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ODDZIAL> ODDZIALs { get; set; }
+        public virtual ICollection<ODDZIAL> ODDZIALY { get; set; }
     }
 }
