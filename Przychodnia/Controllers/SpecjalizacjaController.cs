@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Przychodnia.Repository;
+using Przychodnia.Models;
+using Przychodnia.Context;
 
 namespace Przychodnia
 {
@@ -28,12 +29,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SPECJALIZACJA specjalizacja = await db.SPECJALIZACJE.FindAsync(id);
-            if (specjalizacja == null)
+            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJE.FindAsync(id);
+            if (sPECJALIZACJA == null)
             {
                 return HttpNotFound();
             }
-            return View(specjalizacja);
+            return View(sPECJALIZACJA);
         }
 
         // GET: Specjalizacja/Create
@@ -43,18 +44,20 @@ namespace Przychodnia
         }
 
         // POST: Specjalizacja/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID_SPECJALIZACJA,NAZWA")] SPECJALIZACJA specjalizacja)
+        public async Task<ActionResult> Create([Bind(Include = "NAZWA")] SPECJALIZACJA sPECJALIZACJA)
         {
             if (ModelState.IsValid)
             {
-                db.SPECJALIZACJE.Add(specjalizacja);
+                db.SPECJALIZACJE.Add(sPECJALIZACJA);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(specjalizacja);
+            return View(sPECJALIZACJA);
         }
 
         // GET: Specjalizacja/Edit/5
@@ -64,26 +67,28 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SPECJALIZACJA specjalizacja = await db.SPECJALIZACJE.FindAsync(id);
-            if (specjalizacja == null)
+            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJE.FindAsync(id);
+            if (sPECJALIZACJA == null)
             {
                 return HttpNotFound();
             }
-            return View(specjalizacja);
+            return View(sPECJALIZACJA);
         }
 
         // POST: Specjalizacja/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID_SPECJALIZACJA,NAZWA")] SPECJALIZACJA specjalizacja)
+        public async Task<ActionResult> Edit([Bind(Include = "NAZWA")] SPECJALIZACJA sPECJALIZACJA)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(specjalizacja).State = EntityState.Modified;
+                db.Entry(sPECJALIZACJA).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(specjalizacja);
+            return View(sPECJALIZACJA);
         }
 
         // GET: Specjalizacja/Delete/5
@@ -93,12 +98,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SPECJALIZACJA specjalizacja = await db.SPECJALIZACJE.FindAsync(id);
-            if (specjalizacja == null)
+            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJE.FindAsync(id);
+            if (sPECJALIZACJA == null)
             {
                 return HttpNotFound();
             }
-            return View(specjalizacja);
+            return View(sPECJALIZACJA);
         }
 
         // POST: Specjalizacja/Delete/5
@@ -106,8 +111,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            SPECJALIZACJA specjalizacja = await db.SPECJALIZACJE.FindAsync(id);
-            db.SPECJALIZACJE.Remove(specjalizacja);
+            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJE.FindAsync(id);
+            db.SPECJALIZACJE.Remove(sPECJALIZACJA);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

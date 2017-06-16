@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Przychodnia.Repository;
+using Przychodnia.Models;
+using Przychodnia.Context;
 
 namespace Przychodnia
 {
@@ -28,12 +29,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RECEPTA recepta = await db.RECEPTY.FindAsync(id);
-            if (recepta == null)
+            RECEPTA rECEPTA = await db.RECEPTY.FindAsync(id);
+            if (rECEPTA == null)
             {
                 return HttpNotFound();
             }
-            return View(recepta);
+            return View(rECEPTA);
         }
 
         // GET: Recepta/Create
@@ -43,18 +44,20 @@ namespace Przychodnia
         }
 
         // POST: Recepta/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID_RECEPTA,DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA recepta)
+        public async Task<ActionResult> Create([Bind(Include = "DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA rECEPTA)
         {
             if (ModelState.IsValid)
             {
-                db.RECEPTY.Add(recepta);
+                db.RECEPTY.Add(rECEPTA);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(recepta);
+            return View(rECEPTA);
         }
 
         // GET: Recepta/Edit/5
@@ -64,26 +67,28 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RECEPTA recepta = await db.RECEPTY.FindAsync(id);
-            if (recepta == null)
+            RECEPTA rECEPTA = await db.RECEPTY.FindAsync(id);
+            if (rECEPTA == null)
             {
                 return HttpNotFound();
             }
-            return View(recepta);
+            return View(rECEPTA);
         }
 
         // POST: Recepta/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID_RECEPTA,DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA recepta)
+        public async Task<ActionResult> Edit([Bind(Include = "DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA rECEPTA)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(recepta).State = EntityState.Modified;
+                db.Entry(rECEPTA).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(recepta);
+            return View(rECEPTA);
         }
 
         // GET: Recepta/Delete/5
@@ -93,12 +98,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RECEPTA recepta = await db.RECEPTY.FindAsync(id);
-            if (recepta == null)
+            RECEPTA rECEPTA = await db.RECEPTY.FindAsync(id);
+            if (rECEPTA == null)
             {
                 return HttpNotFound();
             }
-            return View(recepta);
+            return View(rECEPTA);
         }
 
         // POST: Recepta/Delete/5
@@ -106,8 +111,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            RECEPTA recepta = await db.RECEPTY.FindAsync(id);
-            db.RECEPTY.Remove(recepta);
+            RECEPTA rECEPTA = await db.RECEPTY.FindAsync(id);
+            db.RECEPTY.Remove(rECEPTA);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

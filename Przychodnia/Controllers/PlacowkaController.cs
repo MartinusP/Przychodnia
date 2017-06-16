@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Przychodnia.Repository;
+using Przychodnia.Models;
+using Przychodnia.Context;
 
 namespace Przychodnia
 {
@@ -18,8 +19,7 @@ namespace Przychodnia
         // GET: Placowka
         public async Task<ActionResult> Index()
         {
-            var placowki = db.PLACOWKI.Include(p => p.ODDZIAL);
-            return View(await placowki.ToListAsync());
+            return View(await db.PLACOWKI.ToListAsync());
         }
 
         // GET: Placowka/Details/5
@@ -29,35 +29,35 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA placowka = await db.PLACOWKI.FindAsync(id);
-            if (placowka == null)
+            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
+            if (pLACOWKA == null)
             {
                 return HttpNotFound();
             }
-            return View(placowka);
+            return View(pLACOWKA);
         }
 
         // GET: Placowka/Create
         public ActionResult Create()
         {
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA");
             return View();
         }
 
         // POST: Placowka/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID_PLACOWKA,NAZWA,MIEJSCOWOSC,ADRES,ID_ODDZIAL")] PLACOWKA placowka)
+        public async Task<ActionResult> Create([Bind(Include = "NAZWA,MIEJSCOWOSC,ADRES")] PLACOWKA pLACOWKA)
         {
             if (ModelState.IsValid)
             {
-                db.PLACOWKI.Add(placowka);
+                db.PLACOWKI.Add(pLACOWKA);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", placowka.ID_ODDZIAL);
-            return View(placowka);
+            return View(pLACOWKA);
         }
 
         // GET: Placowka/Edit/5
@@ -67,28 +67,28 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA placowka = await db.PLACOWKI.FindAsync(id);
-            if (placowka == null)
+            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
+            if (pLACOWKA == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", placowka.ID_ODDZIAL);
-            return View(placowka);
+            return View(pLACOWKA);
         }
 
         // POST: Placowka/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID_PLACOWKA,NAZWA,MIEJSCOWOSC,ADRES,ID_ODDZIAL")] PLACOWKA placowka)
+        public async Task<ActionResult> Edit([Bind(Include = "NAZWA,MIEJSCOWOSC,ADRES")] PLACOWKA pLACOWKA)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(placowka).State = EntityState.Modified;
+                db.Entry(pLACOWKA).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", placowka.ID_ODDZIAL);
-            return View(placowka);
+            return View(pLACOWKA);
         }
 
         // GET: Placowka/Delete/5
@@ -98,12 +98,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA placowka = await db.PLACOWKI.FindAsync(id);
-            if (placowka == null)
+            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
+            if (pLACOWKA == null)
             {
                 return HttpNotFound();
             }
-            return View(placowka);
+            return View(pLACOWKA);
         }
 
         // POST: Placowka/Delete/5
@@ -111,8 +111,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            PLACOWKA placowka = await db.PLACOWKI.FindAsync(id);
-            db.PLACOWKI.Remove(placowka);
+            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
+            db.PLACOWKI.Remove(pLACOWKA);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Przychodnia.Repository;
+using Przychodnia.Models;
+using Przychodnia.Context;
 
 namespace Przychodnia
 {
@@ -18,8 +19,8 @@ namespace Przychodnia
         // GET: OddzialPracownik
         public async Task<ActionResult> Index()
         {
-            var oddzial_pracownik = db.ODDZIAL_PRACOWNIK.Include(o => o.ODDZIAL).Include(o => o.PRACOWNIK);
-            return View(await oddzial_pracownik.ToListAsync());
+            var oDDZIAL_PRACOWNIK = db.ODDZIAL_PRACOWNIK.Include(o => o.ODDZIAL).Include(o => o.PRACOWNIK);
+            return View(await oDDZIAL_PRACOWNIK.ToListAsync());
         }
 
         // GET: OddzialPracownik/Details/5
@@ -29,12 +30,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL_PRACOWNIK oddzial_pracownik = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
-            if (oddzial_pracownik == null)
+            ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
+            if (oDDZIAL_PRACOWNIK == null)
             {
                 return HttpNotFound();
             }
-            return View(oddzial_pracownik);
+            return View(oDDZIAL_PRACOWNIK);
         }
 
         // GET: OddzialPracownik/Create
@@ -46,20 +47,22 @@ namespace Przychodnia
         }
 
         // POST: OddzialPracownik/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID_ODDZIAL_PRACOWNIK,ID_PRACOWNIK,ID_ODDZIAL")] ODDZIAL_PRACOWNIK oddzial_pracownik)
+        public async Task<ActionResult> Create([Bind(Include = "ID_ODDZIAL_PRACOWNIK,ID_PRACOWNIK,ID_ODDZIAL")] ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK)
         {
             if (ModelState.IsValid)
             {
-                db.ODDZIAL_PRACOWNIK.Add(oddzial_pracownik);
+                db.ODDZIAL_PRACOWNIK.Add(oDDZIAL_PRACOWNIK);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", oddzial_pracownik.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", oddzial_pracownik.ID_PRACOWNIK);
-            return View(oddzial_pracownik);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", oDDZIAL_PRACOWNIK.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", oDDZIAL_PRACOWNIK.ID_PRACOWNIK);
+            return View(oDDZIAL_PRACOWNIK);
         }
 
         // GET: OddzialPracownik/Edit/5
@@ -69,30 +72,32 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL_PRACOWNIK oddzial_pracownik = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
-            if (oddzial_pracownik == null)
+            ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
+            if (oDDZIAL_PRACOWNIK == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", oddzial_pracownik.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", oddzial_pracownik.ID_PRACOWNIK);
-            return View(oddzial_pracownik);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", oDDZIAL_PRACOWNIK.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", oDDZIAL_PRACOWNIK.ID_PRACOWNIK);
+            return View(oDDZIAL_PRACOWNIK);
         }
 
         // POST: OddzialPracownik/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID_ODDZIAL_PRACOWNIK,ID_PRACOWNIK,ID_ODDZIAL")] ODDZIAL_PRACOWNIK oddzial_pracownik)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_ODDZIAL_PRACOWNIK,ID_PRACOWNIK,ID_ODDZIAL")] ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(oddzial_pracownik).State = EntityState.Modified;
+                db.Entry(oDDZIAL_PRACOWNIK).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", oddzial_pracownik.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", oddzial_pracownik.ID_PRACOWNIK);
-            return View(oddzial_pracownik);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", oDDZIAL_PRACOWNIK.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", oDDZIAL_PRACOWNIK.ID_PRACOWNIK);
+            return View(oDDZIAL_PRACOWNIK);
         }
 
         // GET: OddzialPracownik/Delete/5
@@ -102,12 +107,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL_PRACOWNIK oddzial_pracownik = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
-            if (oddzial_pracownik == null)
+            ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
+            if (oDDZIAL_PRACOWNIK == null)
             {
                 return HttpNotFound();
             }
-            return View(oddzial_pracownik);
+            return View(oDDZIAL_PRACOWNIK);
         }
 
         // POST: OddzialPracownik/Delete/5
@@ -115,8 +120,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ODDZIAL_PRACOWNIK oddzial_pracownik = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
-            db.ODDZIAL_PRACOWNIK.Remove(oddzial_pracownik);
+            ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
+            db.ODDZIAL_PRACOWNIK.Remove(oDDZIAL_PRACOWNIK);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

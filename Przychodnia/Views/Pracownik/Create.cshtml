@@ -1,5 +1,5 @@
 ﻿@using Przychodnia.App_GlobalResources;
-@model Przychodnia.Repository.PRACOWNIK
+@model Przychodnia.Models.PRACOWNIK
 
 @{
     ViewBag.Title = "Create";
@@ -16,13 +16,6 @@
         <h4>PRACOWNIK</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ID_PRACOWNIK, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ID_PRACOWNIK, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ID_PRACOWNIK, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.IMIE, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -61,14 +54,6 @@
             <div class="col-md-10">
                 @Html.DropDownList("ID_SPECJALIZACJA", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ID_SPECJALIZACJA, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ID_ODDZIAL_PRACOWNIK, "ID_ODDZIAL_PRACOWNIK", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ID_ODDZIAL_PRACOWNIK", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ID_ODDZIAL_PRACOWNIK, "", new { @class = "text-danger" })
             </div>
         </div>
 

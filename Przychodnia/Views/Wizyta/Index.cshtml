@@ -1,5 +1,5 @@
 ﻿@using Przychodnia.App_GlobalResources;
-@model IEnumerable<Przychodnia.Repository.WIZYTA>
+@model IEnumerable<Przychodnia.Models.WIZYTA>
 
 @{
     ViewBag.Title = "Index";
@@ -22,10 +22,13 @@
             @Html.DisplayNameFor(model => model.ODDZIAL.NAZWA)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PACJENT.NazwiskoImie)
+            @Html.DisplayNameFor(model => model.PACJENT.IMIE)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PRACOWNIK.NazwiskoImie)
+            @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RECEPTA.NAZWA_LEKU)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.SALA.ID_SALA)
@@ -45,10 +48,13 @@
             @Html.DisplayFor(modelItem => item.ODDZIAL.NAZWA)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PACJENT.NazwiskoImie)
+            @Html.DisplayFor(modelItem => item.PACJENT.IMIE)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PRACOWNIK.NazwiskoImie)
+            @Html.DisplayFor(modelItem => item.PRACOWNIK.IMIE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RECEPTA.NAZWA_LEKU)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SALA.ID_SALA)

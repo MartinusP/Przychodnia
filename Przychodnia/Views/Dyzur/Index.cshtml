@@ -1,5 +1,5 @@
 ﻿@using Przychodnia.App_GlobalResources;
-@model IEnumerable<Przychodnia.Repository.DYZUR>
+@model IEnumerable<Przychodnia.Models.DYZUR>
 
 @{
     ViewBag.Title = "Index";
@@ -25,7 +25,7 @@
             @Html.DisplayNameFor(model => model.ODDZIAL.NAZWA)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PRACOWNIK.NazwiskoImie)
+            @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
         </th>
         <th></th>
     </tr>
@@ -45,12 +45,12 @@
             @Html.DisplayFor(modelItem => item.ODDZIAL.NAZWA)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PRACOWNIK.NazwiskoImie)
+            @Html.DisplayFor(modelItem => item.PRACOWNIK.IMIE)
         </td>
         <td>
-            @Html.ActionLink(MultiLanguage.Edit, "Edit", new { id=item.ID_PRACOWNIK }) |
-            @Html.ActionLink(MultiLanguage.Details, "Details", new { id=item.ID_PRACOWNIK }) |
-            @Html.ActionLink(MultiLanguage.Delete, "Delete", new { id=item.ID_PRACOWNIK })
+            @Html.ActionLink(MultiLanguage.Edit, "Edit", new { id=item.ID_DYZUR }) |
+            @Html.ActionLink(MultiLanguage.Details, "Details", new { id=item.ID_DYZUR }) |
+            @Html.ActionLink(MultiLanguage.Delete, "Delete", new { id=item.ID_DYZUR })
         </td>
     </tr>
 }

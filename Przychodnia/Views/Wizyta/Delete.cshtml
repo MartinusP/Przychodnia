@@ -1,8 +1,8 @@
 ﻿@using Przychodnia.App_GlobalResources;
-@model Przychodnia.Repository.WIZYTA
+@model Przychodnia.Models.WIZYTA
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "@Resources.MultiLanguage.Delete";
 }
 
 <h2>Delete</h2>
@@ -50,6 +50,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.PRACOWNIK.IMIE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RECEPTA.NAZWA_LEKU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RECEPTA.NAZWA_LEKU)
         </dd>
 
         <dt>

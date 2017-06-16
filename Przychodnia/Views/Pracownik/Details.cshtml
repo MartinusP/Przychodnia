@@ -1,5 +1,5 @@
 ﻿@using Przychodnia.App_GlobalResources;
-@model Przychodnia.Repository.PRACOWNIK
+@model Przychodnia.Models.PRACOWNIK
 
 @{
     ViewBag.Title = "Details";
@@ -41,22 +41,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.EMAIL_KONTAKTOWY)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ODDZIAL_PRACOWNIK1.ID_ODDZIAL_PRACOWNIK)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ODDZIAL_PRACOWNIK1.ID_ODDZIAL_PRACOWNIK)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DYZUR.ID_PRACOWNIK)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DYZUR.ID_PRACOWNIK)
         </dd>
 
         <dt>

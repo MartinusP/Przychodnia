@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Przychodnia.Repository
+namespace Przychodnia.Models
 {
     using System;
     using System.Data.Entity;
@@ -16,7 +16,7 @@ namespace Przychodnia.Repository
     public partial class PRZYCHODNIAEntities : DbContext
     {
         public PRZYCHODNIAEntities()
-            : base("name=PRZYCHODNIAEntities")
+            : base("name=PRZYCHODNIAEntities2")
         {
         }
     
@@ -42,6 +42,7 @@ namespace Przychodnia.Repository
                 .HasForeignKey(bc => bc.ID_PRACOWNIK);
         }
     
+        public virtual DbSet<DYZUR> DYZURY { get; set; }
         public virtual DbSet<ODDZIAL> ODDZIALY { get; set; }
         public virtual DbSet<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNIK { get; set; }
         public virtual DbSet<PACJENT> PACJENCI { get; set; }
@@ -51,6 +52,6 @@ namespace Przychodnia.Repository
         public virtual DbSet<SALA> SALE { get; set; }
         public virtual DbSet<SPECJALIZACJA> SPECJALIZACJE { get; set; }
         public virtual DbSet<WIZYTA> WIZYTY { get; set; }
-        public virtual DbSet<DYZUR> DYZURY { get; set; }
+        
     }
 }

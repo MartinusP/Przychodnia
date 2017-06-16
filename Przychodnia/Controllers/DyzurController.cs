@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Przychodnia.Repository;
+using Przychodnia.Models;
+using Przychodnia.Context;
 
 namespace Przychodnia
 {
@@ -18,8 +19,8 @@ namespace Przychodnia
         // GET: Dyzur
         public async Task<ActionResult> Index()
         {
-            var dyzury = db.DYZURY.Include(d => d.ODDZIAL).Include(d => d.PRACOWNIK);
-            return View(await dyzury.ToListAsync());
+            var dYZURs = db.DYZURY.Include(d => d.ODDZIAL).Include(d => d.PRACOWNIK);
+            return View(await dYZURs.ToListAsync());
         }
 
         // GET: Dyzur/Details/5
@@ -29,12 +30,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DYZUR dyzur = await db.DYZURY.FindAsync(id);
-            if (dyzur == null)
+            DYZUR dYZUR = await db.DYZURY.FindAsync(id);
+            if (dYZUR == null)
             {
                 return HttpNotFound();
             }
-            return View(dyzur);
+            return View(dYZUR);
         }
 
         // GET: Dyzur/Create
@@ -46,20 +47,22 @@ namespace Przychodnia
         }
 
         // POST: Dyzur/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID_PRACOWNIK,DZIEN_DYZURU,OD,DO,ID_ODDZIAL")] DYZUR dyzur)
+        public async Task<ActionResult> Create([Bind(Include = "DZIEN_DYZURU,OD,DO,ID_PRACOWNIK,ID_ODDZIAL")] DYZUR dYZUR)
         {
             if (ModelState.IsValid)
             {
-                db.DYZURY.Add(dyzur);
+                db.DYZURY.Add(dYZUR);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dyzur.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dyzur.ID_PRACOWNIK);
-            return View(dyzur);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dYZUR.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dYZUR.ID_PRACOWNIK);
+            return View(dYZUR);
         }
 
         // GET: Dyzur/Edit/5
@@ -69,30 +72,32 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DYZUR dyzur = await db.DYZURY.FindAsync(id);
-            if (dyzur == null)
+            DYZUR dYZUR = await db.DYZURY.FindAsync(id);
+            if (dYZUR == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dyzur.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dyzur.ID_PRACOWNIK);
-            return View(dyzur);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dYZUR.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dYZUR.ID_PRACOWNIK);
+            return View(dYZUR);
         }
 
         // POST: Dyzur/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID_PRACOWNIK,DZIEN_DYZURU,OD,DO,ID_ODDZIAL")] DYZUR dyzur)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_DYZUR,DZIEN_DYZURU,OD,DO,ID_PRACOWNIK,ID_ODDZIAL")] DYZUR dYZUR)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(dyzur).State = EntityState.Modified;
+                db.Entry(dYZUR).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dyzur.ID_ODDZIAL);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dyzur.ID_PRACOWNIK);
-            return View(dyzur);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", dYZUR.ID_ODDZIAL);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", dYZUR.ID_PRACOWNIK);
+            return View(dYZUR);
         }
 
         // GET: Dyzur/Delete/5
@@ -102,12 +107,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DYZUR dyzur = await db.DYZURY.FindAsync(id);
-            if (dyzur == null)
+            DYZUR dYZUR = await db.DYZURY.FindAsync(id);
+            if (dYZUR == null)
             {
                 return HttpNotFound();
             }
-            return View(dyzur);
+            return View(dYZUR);
         }
 
         // POST: Dyzur/Delete/5
@@ -115,8 +120,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            DYZUR dyzur = await db.DYZURY.FindAsync(id);
-            db.DYZURY.Remove(dyzur);
+            DYZUR dYZUR = await db.DYZURY.FindAsync(id);
+            db.DYZURY.Remove(dYZUR);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

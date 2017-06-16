@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -10,9 +11,9 @@ namespace Przychodnia.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PACJENT()
         {
-            this.WIZYTAs = new HashSet<WIZYTA>();
+            this.WIZYTY = new HashSet<WIZYTA>();
         }
-
+        [Key]
         public int ID_PACJENT { get; set; }
         public string IMIE { get; set; }
         public string NAZWISKO { get; set; }
@@ -22,6 +23,6 @@ namespace Przychodnia.Models
         public string EMAIL_KONTAKTOWY { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WIZYTA> WIZYTAs { get; set; }
+        public virtual ICollection<WIZYTA> WIZYTY { get; set; }
     }
 }
