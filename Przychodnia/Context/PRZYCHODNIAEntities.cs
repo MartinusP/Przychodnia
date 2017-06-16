@@ -22,16 +22,16 @@ namespace Przychodnia.Context
                 //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
 
-            public virtual DbSet<DYZUR> DYZURY { get; set; }
-            public virtual DbSet<ODDZIAL> ODDZIALY { get; set; }
-            public virtual DbSet<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNIK { get; set; }
-            public virtual DbSet<PACJENT> PACJENCI { get; set; }
-            public virtual DbSet<PLACOWKA> PLACOWKI { get; set; }
-            public virtual DbSet<PRACOWNIK> PRACOWNICY { get; set; }
-            public virtual DbSet<RECEPTA> RECEPTY { get; set; }
-            public virtual DbSet<SALA> SALE { get; set; }
-            public virtual DbSet<SPECJALIZACJA> SPECJALIZACJE { get; set; }
-            public virtual DbSet<WIZYTA> WIZYTY { get; set; }
+            public DbSet<DYZUR> DYZURY { get; set; }
+            public DbSet<ODDZIAL> ODDZIALY { get; set; }
+            public DbSet<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNIK { get; set; }
+            public DbSet<PACJENT> PACJENCI { get; set; }
+            public DbSet<PLACOWKA> PLACOWKI { get; set; }
+            public DbSet<PRACOWNIK> PRACOWNICY { get; set; }
+            public DbSet<RECEPTA> RECEPTY { get; set; }
+            public DbSet<SALA> SALE { get; set; }
+            public DbSet<SPECJALIZACJA> SPECJALIZACJE { get; set; }
+            public DbSet<Przychodnia.Models.WIZYTA> WIZYTY { get; set; }
 
         }
 }

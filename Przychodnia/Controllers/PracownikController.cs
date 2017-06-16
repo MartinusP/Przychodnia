@@ -64,13 +64,13 @@ namespace Przychodnia
         }
 
         // GET: Pracownik/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+            public  ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = await db.PRACOWNICY.FindAsync(id);
+            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
             if (pRACOWNIK == null)
             {
                 return HttpNotFound();
@@ -86,11 +86,11 @@ namespace Przychodnia
                                          select ab).Count() > 0)
                          };
 
-            var MyViewModel = new Przychodnia.Models.PracownikOddzialViewModel();
+            var MyViewModel = new PracownikOddzialViewModel();
             MyViewModel.ID_PRACOWNIK = id.Value;
-            //MyViewModel.Nazwisko = pRACOWNIK.NAZWISKO;
-
-            var MyCheckBoxList = new List<Przychodnia.Models.CheckBoxViewModel>();
+            MyViewModel.Nazwisko = pRACOWNIK.NAZWISKO;
+     
+            var MyCheckBoxList = new List<CheckBoxViewModel>();
 
             foreach (var item in result)
             {
