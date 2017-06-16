@@ -1,0 +1,58 @@
+﻿@model Przychodnia.Repository.DYZUR
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DYZUR</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DZIEN_DYZURU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DZIEN_DYZURU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ODDZIAL.NAZWA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ODDZIAL.NAZWA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRACOWNIK.IMIE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_PRACOWNIK }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

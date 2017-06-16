@@ -1,0 +1,50 @@
+﻿@model Przychodnia.Repository.PLACOWKA
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PLACOWKA</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NAZWA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NAZWA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MIEJSCOWOSC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MIEJSCOWOSC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADRES)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADRES)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ODDZIAL.NAZWA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ODDZIAL.NAZWA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_PLACOWKA }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
