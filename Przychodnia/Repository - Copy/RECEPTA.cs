@@ -7,25 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Przychodnia.Repository
+namespace Przychodnia.Repository___Copy
 {
     using System;
     using System.Collections.Generic;
     
     public partial class RECEPTA
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RECEPTA()
-        {
-            this.WIZYTAs = new HashSet<WIZYTA>();
-        }
-    
         public int ID_RECEPTA { get; set; }
         public Nullable<System.DateTime> DATA_WYKORZYSTANIA { get; set; }
         public string NAZWA_LEKU { get; set; }
         public string UWAGI { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WIZYTA> WIZYTAs { get; set; }
     }
 }

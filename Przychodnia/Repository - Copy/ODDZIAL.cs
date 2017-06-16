@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Przychodnia.Repository
+namespace Przychodnia.Repository___Copy
 {
     using System;
     using System.Collections.Generic;
@@ -17,22 +17,23 @@ namespace Przychodnia.Repository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ODDZIAL()
         {
-            this.DYZURs = new HashSet<DYZUR>();
+            this.DYZURY = new HashSet<DYZUR>();
             this.ODDZIAL_PRACOWNIK = new HashSet<ODDZIAL_PRACOWNIK>();
-            this.WIZYTAs = new HashSet<WIZYTA>();
+            this.PLACOWKI = new HashSet<PLACOWKA>();
+            this.WIZYTY = new HashSet<WIZYTA>();
         }
     
         public int ID_ODDZIAL { get; set; }
         public string NAZWA { get; set; }
         public string MIEJSCOWOSC { get; set; }
-        public int ID_PLACOWKA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DYZUR> DYZURs { get; set; }
-        public virtual PLACOWKA PLACOWKA { get; set; }
+        public virtual ICollection<DYZUR> DYZURY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNIK { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WIZYTA> WIZYTAs { get; set; }
+        public virtual ICollection<PLACOWKA> PLACOWKI { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WIZYTA> WIZYTY { get; set; }
     }
 }

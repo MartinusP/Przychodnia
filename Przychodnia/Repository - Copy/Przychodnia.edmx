@@ -5,15 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="PRZYCHODNIAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PRZYCHODNIA.dbo.DYZUR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DYZUR">
           <Key>
-            <PropertyRef Name="ID_DYZUR" />
+            <PropertyRef Name="ID_PRACOWNIK" />
           </Key>
-          <Property Name="ID_DYZUR" Type="int" Nullable="false" />
+          <Property Name="ID_PRACOWNIK" Type="int" Nullable="false" />
           <Property Name="DZIEN_DYZURU" Type="date" />
           <Property Name="OD" Type="date" />
           <Property Name="DO" Type="date" />
-          <Property Name="ID_PRACOWNIK" Type="int" Nullable="false" />
           <Property Name="ID_ODDZIAL" Type="int" />
         </EntityType>
         <EntityType Name="ODDZIAL">
@@ -23,7 +24,6 @@
           <Property Name="ID_ODDZIAL" Type="int" Nullable="false" />
           <Property Name="NAZWA" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="MIEJSCOWOSC" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="ID_PLACOWKA" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ODDZIAL_PRACOWNIK">
           <Key>
@@ -53,6 +53,7 @@
           <Property Name="NAZWA" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="MIEJSCOWOSC" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="ADRES" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ID_ODDZIAL" Type="int" />
         </EntityType>
         <EntityType Name="PRACOWNIK">
           <Key>
@@ -64,6 +65,7 @@
           <Property Name="ADRES" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="EMAIL_KONTAKTOWY" Type="varchar" MaxLength="50" />
           <Property Name="ID_SPECJALIZACJA" Type="int" />
+          <Property Name="ID_ODDZIAL_PRACOWNIK" Type="int" />
         </EntityType>
         <EntityType Name="RECEPTA">
           <Key>
@@ -98,7 +100,6 @@
           <Property Name="ID_PRACOWNIK" Type="int" />
           <Property Name="ID_ODDZIAL" Type="int" />
           <Property Name="ID_PACJENT" Type="int" />
-          <Property Name="ID_RECEPTA" Type="int" />
           <Property Name="UWAGI" Type="varchar" MaxLength="255" />
         </EntityType>
         <Association Name="fk_DYZUR_ID_ODDZIAL">
@@ -115,25 +116,13 @@
         </Association>
         <Association Name="fk_DYZUR_ID_PRACOWNIK">
           <End Role="PRACOWNIK" Type="Self.PRACOWNIK" Multiplicity="1" />
-          <End Role="DYZUR" Type="Self.DYZUR" Multiplicity="*" />
+          <End Role="DYZUR" Type="Self.DYZUR" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="PRACOWNIK">
               <PropertyRef Name="ID_PRACOWNIK" />
             </Principal>
             <Dependent Role="DYZUR">
               <PropertyRef Name="ID_PRACOWNIK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_ODDZIAL_ID_PLACOWKA">
-          <End Role="PLACOWKA" Type="Self.PLACOWKA" Multiplicity="1" />
-          <End Role="ODDZIAL" Type="Self.ODDZIAL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PLACOWKA">
-              <PropertyRef Name="ID_PLACOWKA" />
-            </Principal>
-            <Dependent Role="ODDZIAL">
-              <PropertyRef Name="ID_PLACOWKA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -158,6 +147,30 @@
             </Principal>
             <Dependent Role="ODDZIAL_PRACOWNIK">
               <PropertyRef Name="ID_PRACOWNIK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PLACOWKA_ID_ODDZIAL">
+          <End Role="ODDZIAL" Type="Self.ODDZIAL" Multiplicity="0..1" />
+          <End Role="PLACOWKA" Type="Self.PLACOWKA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ODDZIAL">
+              <PropertyRef Name="ID_ODDZIAL" />
+            </Principal>
+            <Dependent Role="PLACOWKA">
+              <PropertyRef Name="ID_ODDZIAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PRACOWNIK_ID_ODDZIAL_PRACOWNIK">
+          <End Role="ODDZIAL_PRACOWNIK" Type="Self.ODDZIAL_PRACOWNIK" Multiplicity="0..1" />
+          <End Role="PRACOWNIK" Type="Self.PRACOWNIK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ODDZIAL_PRACOWNIK">
+              <PropertyRef Name="ID_ODDZIAL_PRACOWNIK" />
+            </Principal>
+            <Dependent Role="PRACOWNIK">
+              <PropertyRef Name="ID_ODDZIAL_PRACOWNIK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -209,18 +222,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_WIZYTA_ID_RECEPTA">
-          <End Role="RECEPTA" Type="Self.RECEPTA" Multiplicity="0..1" />
-          <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RECEPTA">
-              <PropertyRef Name="ID_RECEPTA" />
-            </Principal>
-            <Dependent Role="WIZYTA">
-              <PropertyRef Name="ID_RECEPTA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_WIZYTA_ID_SALA">
           <End Role="SALA" Type="Self.SALA" Multiplicity="0..1" />
           <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="*" />
@@ -234,7 +235,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PRZYCHODNIAModelStoreContainer">
-          <EntitySet Name="DYZUR" EntityType="Self.DYZUR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ODDZIAL" EntityType="Self.ODDZIAL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ODDZIAL_PRACOWNIK" EntityType="Self.ODDZIAL_PRACOWNIK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PACJENT" EntityType="Self.PACJENT" Schema="dbo" store:Type="Tables" />
@@ -244,6 +244,15 @@
           <EntitySet Name="SALA" EntityType="Self.SALA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SPECJALIZACJA" EntityType="Self.SPECJALIZACJA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WIZYTA" EntityType="Self.WIZYTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DYZUR" EntityType="Self.DYZUR" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DYZUR].[ID_PRACOWNIK] AS [ID_PRACOWNIK], 
+    [DYZUR].[DZIEN_DYZURU] AS [DZIEN_DYZURU], 
+    [DYZUR].[OD] AS [OD], 
+    [DYZUR].[DO] AS [DO], 
+    [DYZUR].[ID_ODDZIAL] AS [ID_ODDZIAL]
+    FROM [dbo].[DYZUR] AS [DYZUR]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="fk_DYZUR_ID_ODDZIAL" Association="Self.fk_DYZUR_ID_ODDZIAL">
             <End Role="ODDZIAL" EntitySet="ODDZIAL" />
             <End Role="DYZUR" EntitySet="DYZUR" />
@@ -252,10 +261,6 @@
             <End Role="PRACOWNIK" EntitySet="PRACOWNIK" />
             <End Role="DYZUR" EntitySet="DYZUR" />
           </AssociationSet>
-          <AssociationSet Name="fk_ODDZIAL_ID_PLACOWKA" Association="Self.fk_ODDZIAL_ID_PLACOWKA">
-            <End Role="PLACOWKA" EntitySet="PLACOWKA" />
-            <End Role="ODDZIAL" EntitySet="ODDZIAL" />
-          </AssociationSet>
           <AssociationSet Name="fk_ODDZIAL_PRACOWNIK_ID_ODDZIAL" Association="Self.fk_ODDZIAL_PRACOWNIK_ID_ODDZIAL">
             <End Role="ODDZIAL" EntitySet="ODDZIAL" />
             <End Role="ODDZIAL_PRACOWNIK" EntitySet="ODDZIAL_PRACOWNIK" />
@@ -263,6 +268,14 @@
           <AssociationSet Name="fk_ODDZIAL_PRACOWNIK_ID_PRACOWNIK" Association="Self.fk_ODDZIAL_PRACOWNIK_ID_PRACOWNIK">
             <End Role="PRACOWNIK" EntitySet="PRACOWNIK" />
             <End Role="ODDZIAL_PRACOWNIK" EntitySet="ODDZIAL_PRACOWNIK" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PLACOWKA_ID_ODDZIAL" Association="Self.fk_PLACOWKA_ID_ODDZIAL">
+            <End Role="ODDZIAL" EntitySet="ODDZIAL" />
+            <End Role="PLACOWKA" EntitySet="PLACOWKA" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PRACOWNIK_ID_ODDZIAL_PRACOWNIK" Association="Self.fk_PRACOWNIK_ID_ODDZIAL_PRACOWNIK">
+            <End Role="ODDZIAL_PRACOWNIK" EntitySet="ODDZIAL_PRACOWNIK" />
+            <End Role="PRACOWNIK" EntitySet="PRACOWNIK" />
           </AssociationSet>
           <AssociationSet Name="fk_PRACOWNIK_ID_SPECJALIZACJA" Association="Self.fk_PRACOWNIK_ID_SPECJALIZACJA">
             <End Role="SPECJALIZACJA" EntitySet="SPECJALIZACJA" />
@@ -280,10 +293,6 @@
             <End Role="PRACOWNIK" EntitySet="PRACOWNIK" />
             <End Role="WIZYTA" EntitySet="WIZYTA" />
           </AssociationSet>
-          <AssociationSet Name="fk_WIZYTA_ID_RECEPTA" Association="Self.fk_WIZYTA_ID_RECEPTA">
-            <End Role="RECEPTA" EntitySet="RECEPTA" />
-            <End Role="WIZYTA" EntitySet="WIZYTA" />
-          </AssociationSet>
           <AssociationSet Name="fk_WIZYTA_ID_SALA" Association="Self.fk_WIZYTA_ID_SALA">
             <End Role="SALA" EntitySet="SALA" />
             <End Role="WIZYTA" EntitySet="WIZYTA" />
@@ -294,19 +303,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PRZYCHODNIAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="DYZUR">
-          <Key>
-            <PropertyRef Name="ID_DYZUR" />
-          </Key>
-          <Property Name="ID_DYZUR" Type="Int32" Nullable="false" />
-          <Property Name="DZIEN_DYZURU" Type="DateTime" Precision="0" />
-          <Property Name="OD" Type="DateTime" Precision="0" />
-          <Property Name="DO" Type="DateTime" Precision="0" />
-          <Property Name="ID_PRACOWNIK" Type="Int32" Nullable="false" />
-          <Property Name="ID_ODDZIAL" Type="Int32" />
-          <NavigationProperty Name="ODDZIAL" Relationship="Self.fk_DYZUR_ID_ODDZIAL" FromRole="DYZUR" ToRole="ODDZIAL" />
-          <NavigationProperty Name="PRACOWNIK" Relationship="Self.fk_DYZUR_ID_PRACOWNIK" FromRole="DYZUR" ToRole="PRACOWNIK" />
-        </EntityType>
         <EntityType Name="ODDZIAL">
           <Key>
             <PropertyRef Name="ID_ODDZIAL" />
@@ -314,11 +310,10 @@
           <Property Name="ID_ODDZIAL" Type="Int32" Nullable="false" />
           <Property Name="NAZWA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MIEJSCOWOSC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ID_PLACOWKA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DYZURs" Relationship="Self.fk_DYZUR_ID_ODDZIAL" FromRole="ODDZIAL" ToRole="DYZUR" />
-          <NavigationProperty Name="PLACOWKA" Relationship="Self.fk_ODDZIAL_ID_PLACOWKA" FromRole="ODDZIAL" ToRole="PLACOWKA" />
+          <NavigationProperty Name="DYZURY" Relationship="Self.fk_DYZUR_ID_ODDZIAL" FromRole="ODDZIAL" ToRole="DYZUR" />
           <NavigationProperty Name="ODDZIAL_PRACOWNIK" Relationship="Self.fk_ODDZIAL_PRACOWNIK_ID_ODDZIAL" FromRole="ODDZIAL" ToRole="ODDZIAL_PRACOWNIK" />
-          <NavigationProperty Name="WIZYTAs" Relationship="Self.fk_WIZYTA_ID_ODDZIAL" FromRole="ODDZIAL" ToRole="WIZYTA" />
+          <NavigationProperty Name="PLACOWKI" Relationship="Self.fk_PLACOWKA_ID_ODDZIAL" FromRole="ODDZIAL" ToRole="PLACOWKA" />
+          <NavigationProperty Name="WIZYTY" Relationship="Self.fk_WIZYTA_ID_ODDZIAL" FromRole="ODDZIAL" ToRole="WIZYTA" />
         </EntityType>
         <EntityType Name="ODDZIAL_PRACOWNIK">
           <Key>
@@ -329,6 +324,7 @@
           <Property Name="ID_ODDZIAL" Type="Int32" />
           <NavigationProperty Name="ODDZIAL" Relationship="Self.fk_ODDZIAL_PRACOWNIK_ID_ODDZIAL" FromRole="ODDZIAL_PRACOWNIK" ToRole="ODDZIAL" />
           <NavigationProperty Name="PRACOWNIK" Relationship="Self.fk_ODDZIAL_PRACOWNIK_ID_PRACOWNIK" FromRole="ODDZIAL_PRACOWNIK" ToRole="PRACOWNIK" />
+          <NavigationProperty Name="PRACOWNICY" Relationship="Self.fk_PRACOWNIK_ID_ODDZIAL_PRACOWNIK" FromRole="ODDZIAL_PRACOWNIK" ToRole="PRACOWNIK" />
         </EntityType>
         <EntityType Name="PACJENT">
           <Key>
@@ -341,7 +337,7 @@
           <Property Name="PESEL" Type="Int64" />
           <Property Name="TELEFON_KONTAKTOWY" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL_KONTAKTOWY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="WIZYTAs" Relationship="Self.fk_WIZYTA_ID_PRACJENT" FromRole="PACJENT" ToRole="WIZYTA" />
+          <NavigationProperty Name="WIZYTY" Relationship="Self.fk_WIZYTA_ID_PRACJENT" FromRole="PACJENT" ToRole="WIZYTA" />
         </EntityType>
         <EntityType Name="PLACOWKA">
           <Key>
@@ -351,7 +347,8 @@
           <Property Name="NAZWA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MIEJSCOWOSC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ADRES" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ODDZIALs" Relationship="Self.fk_ODDZIAL_ID_PLACOWKA" FromRole="PLACOWKA" ToRole="ODDZIAL" />
+          <Property Name="ID_ODDZIAL" Type="Int32" />
+          <NavigationProperty Name="ODDZIAL" Relationship="Self.fk_PLACOWKA_ID_ODDZIAL" FromRole="PLACOWKA" ToRole="ODDZIAL" />
         </EntityType>
         <EntityType Name="PRACOWNIK">
           <Key>
@@ -363,10 +360,12 @@
           <Property Name="ADRES" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EMAIL_KONTAKTOWY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ID_SPECJALIZACJA" Type="Int32" />
-          <NavigationProperty Name="DYZURs" Relationship="Self.fk_DYZUR_ID_PRACOWNIK" FromRole="PRACOWNIK" ToRole="DYZUR" />
+          <Property Name="ID_ODDZIAL_PRACOWNIK" Type="Int32" />
           <NavigationProperty Name="ODDZIAL_PRACOWNIK" Relationship="Self.fk_ODDZIAL_PRACOWNIK_ID_PRACOWNIK" FromRole="PRACOWNIK" ToRole="ODDZIAL_PRACOWNIK" />
+          <NavigationProperty Name="ODDZIAL_PRACOWNIK1" Relationship="Self.fk_PRACOWNIK_ID_ODDZIAL_PRACOWNIK" FromRole="PRACOWNIK" ToRole="ODDZIAL_PRACOWNIK" />
+          <NavigationProperty Name="DYZUR" Relationship="Self.fk_DYZUR_ID_PRACOWNIK" FromRole="PRACOWNIK" ToRole="DYZUR" />
           <NavigationProperty Name="SPECJALIZACJA" Relationship="Self.fk_PRACOWNIK_ID_SPECJALIZACJA" FromRole="PRACOWNIK" ToRole="SPECJALIZACJA" />
-          <NavigationProperty Name="WIZYTAs" Relationship="Self.fk_WIZYTA_ID_PRACOWNIK" FromRole="PRACOWNIK" ToRole="WIZYTA" />
+          <NavigationProperty Name="WIZYTY" Relationship="Self.fk_WIZYTA_ID_PRACOWNIK" FromRole="PRACOWNIK" ToRole="WIZYTA" />
         </EntityType>
         <EntityType Name="RECEPTA">
           <Key>
@@ -376,7 +375,6 @@
           <Property Name="DATA_WYKORZYSTANIA" Type="DateTime" Precision="0" />
           <Property Name="NAZWA_LEKU" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UWAGI" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="WIZYTAs" Relationship="Self.fk_WIZYTA_ID_RECEPTA" FromRole="RECEPTA" ToRole="WIZYTA" />
         </EntityType>
         <EntityType Name="SALA">
           <Key>
@@ -384,7 +382,7 @@
           </Key>
           <Property Name="ID_SALA" Type="Int32" Nullable="false" />
           <Property Name="NUMER_SALI" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="WIZYTAs" Relationship="Self.fk_WIZYTA_ID_SALA" FromRole="SALA" ToRole="WIZYTA" />
+          <NavigationProperty Name="WIZYTY" Relationship="Self.fk_WIZYTA_ID_SALA" FromRole="SALA" ToRole="WIZYTA" />
         </EntityType>
         <EntityType Name="SPECJALIZACJA">
           <Key>
@@ -392,7 +390,7 @@
           </Key>
           <Property Name="ID_SPECJALIZACJA" Type="Int32" Nullable="false" />
           <Property Name="NAZWA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="PRACOWNIKs" Relationship="Self.fk_PRACOWNIK_ID_SPECJALIZACJA" FromRole="SPECJALIZACJA" ToRole="PRACOWNIK" />
+          <NavigationProperty Name="PRACOWNICY" Relationship="Self.fk_PRACOWNIK_ID_SPECJALIZACJA" FromRole="SPECJALIZACJA" ToRole="PRACOWNIK" />
         </EntityType>
         <EntityType Name="WIZYTA">
           <Key>
@@ -404,13 +402,23 @@
           <Property Name="ID_PRACOWNIK" Type="Int32" />
           <Property Name="ID_ODDZIAL" Type="Int32" />
           <Property Name="ID_PACJENT" Type="Int32" />
-          <Property Name="ID_RECEPTA" Type="Int32" />
           <Property Name="UWAGI" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ODDZIAL" Relationship="Self.fk_WIZYTA_ID_ODDZIAL" FromRole="WIZYTA" ToRole="ODDZIAL" />
           <NavigationProperty Name="PACJENT" Relationship="Self.fk_WIZYTA_ID_PRACJENT" FromRole="WIZYTA" ToRole="PACJENT" />
           <NavigationProperty Name="PRACOWNIK" Relationship="Self.fk_WIZYTA_ID_PRACOWNIK" FromRole="WIZYTA" ToRole="PRACOWNIK" />
-          <NavigationProperty Name="RECEPTA" Relationship="Self.fk_WIZYTA_ID_RECEPTA" FromRole="WIZYTA" ToRole="RECEPTA" />
           <NavigationProperty Name="SALA" Relationship="Self.fk_WIZYTA_ID_SALA" FromRole="WIZYTA" ToRole="SALA" />
+        </EntityType>
+        <EntityType Name="DYZUR">
+          <Key>
+            <PropertyRef Name="ID_PRACOWNIK" />
+          </Key>
+          <Property Name="ID_PRACOWNIK" Type="Int32" Nullable="false" />
+          <Property Name="DZIEN_DYZURU" Type="DateTime" Precision="0" />
+          <Property Name="OD" Type="DateTime" Precision="0" />
+          <Property Name="DO" Type="DateTime" Precision="0" />
+          <Property Name="ID_ODDZIAL" Type="Int32" />
+          <NavigationProperty Name="ODDZIAL" Relationship="Self.fk_DYZUR_ID_ODDZIAL" FromRole="DYZUR" ToRole="ODDZIAL" />
+          <NavigationProperty Name="PRACOWNIK" Relationship="Self.fk_DYZUR_ID_PRACOWNIK" FromRole="DYZUR" ToRole="PRACOWNIK" />
         </EntityType>
         <Association Name="fk_DYZUR_ID_ODDZIAL">
           <End Role="ODDZIAL" Type="Self.ODDZIAL" Multiplicity="0..1" />
@@ -424,30 +432,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_DYZUR_ID_PRACOWNIK">
-          <End Role="PRACOWNIK" Type="Self.PRACOWNIK" Multiplicity="1" />
-          <End Role="DYZUR" Type="Self.DYZUR" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRACOWNIK">
-              <PropertyRef Name="ID_PRACOWNIK" />
-            </Principal>
-            <Dependent Role="DYZUR">
-              <PropertyRef Name="ID_PRACOWNIK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_ODDZIAL_ID_PLACOWKA">
-          <End Role="PLACOWKA" Type="Self.PLACOWKA" Multiplicity="1" />
-          <End Role="ODDZIAL" Type="Self.ODDZIAL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PLACOWKA">
-              <PropertyRef Name="ID_PLACOWKA" />
-            </Principal>
-            <Dependent Role="ODDZIAL">
-              <PropertyRef Name="ID_PLACOWKA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_ODDZIAL_PRACOWNIK_ID_ODDZIAL">
           <End Role="ODDZIAL" Type="Self.ODDZIAL" Multiplicity="0..1" />
           <End Role="ODDZIAL_PRACOWNIK" Type="Self.ODDZIAL_PRACOWNIK" Multiplicity="*" />
@@ -456,6 +440,18 @@
               <PropertyRef Name="ID_ODDZIAL" />
             </Principal>
             <Dependent Role="ODDZIAL_PRACOWNIK">
+              <PropertyRef Name="ID_ODDZIAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PLACOWKA_ID_ODDZIAL">
+          <End Role="ODDZIAL" Type="Self.ODDZIAL" Multiplicity="0..1" />
+          <End Role="PLACOWKA" Type="Self.PLACOWKA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ODDZIAL">
+              <PropertyRef Name="ID_ODDZIAL" />
+            </Principal>
+            <Dependent Role="PLACOWKA">
               <PropertyRef Name="ID_ODDZIAL" />
             </Dependent>
           </ReferentialConstraint>
@@ -484,6 +480,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_PRACOWNIK_ID_ODDZIAL_PRACOWNIK">
+          <End Role="ODDZIAL_PRACOWNIK" Type="Self.ODDZIAL_PRACOWNIK" Multiplicity="0..1" />
+          <End Role="PRACOWNIK" Type="Self.PRACOWNIK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ODDZIAL_PRACOWNIK">
+              <PropertyRef Name="ID_ODDZIAL_PRACOWNIK" />
+            </Principal>
+            <Dependent Role="PRACOWNIK">
+              <PropertyRef Name="ID_ODDZIAL_PRACOWNIK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_WIZYTA_ID_PRACJENT">
           <End Role="PACJENT" Type="Self.PACJENT" Multiplicity="0..1" />
           <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="*" />
@@ -493,6 +501,18 @@
             </Principal>
             <Dependent Role="WIZYTA">
               <PropertyRef Name="ID_PACJENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DYZUR_ID_PRACOWNIK">
+          <End Role="PRACOWNIK" Type="Self.PRACOWNIK" Multiplicity="1" />
+          <End Role="DYZUR" Type="Self.DYZUR" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRACOWNIK">
+              <PropertyRef Name="ID_PRACOWNIK" />
+            </Principal>
+            <Dependent Role="DYZUR">
+              <PropertyRef Name="ID_PRACOWNIK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -520,18 +540,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_WIZYTA_ID_RECEPTA">
-          <End Role="RECEPTA" Type="Self.RECEPTA" Multiplicity="0..1" />
-          <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RECEPTA">
-              <PropertyRef Name="ID_RECEPTA" />
-            </Principal>
-            <Dependent Role="WIZYTA">
-              <PropertyRef Name="ID_RECEPTA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_WIZYTA_ID_SALA">
           <End Role="SALA" Type="Self.SALA" Multiplicity="0..1" />
           <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="*" />
@@ -545,59 +553,59 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PRZYCHODNIAEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="DYZURs" EntityType="Self.DYZUR" />
-          <EntitySet Name="ODDZIALs" EntityType="Self.ODDZIAL" />
+          <EntitySet Name="ODDZIALY" EntityType="Self.ODDZIAL" />
           <EntitySet Name="ODDZIAL_PRACOWNIK" EntityType="Self.ODDZIAL_PRACOWNIK" />
-          <EntitySet Name="PACJENTs" EntityType="Self.PACJENT" />
-          <EntitySet Name="PLACOWKAs" EntityType="Self.PLACOWKA" />
-          <EntitySet Name="PRACOWNIKs" EntityType="Self.PRACOWNIK" />
-          <EntitySet Name="RECEPTAs" EntityType="Self.RECEPTA" />
-          <EntitySet Name="SALAs" EntityType="Self.SALA" />
-          <EntitySet Name="SPECJALIZACJAs" EntityType="Self.SPECJALIZACJA" />
-          <EntitySet Name="WIZYTAs" EntityType="Self.WIZYTA" />
+          <EntitySet Name="PACJENCI" EntityType="Self.PACJENT" />
+          <EntitySet Name="PLACOWKI" EntityType="Self.PLACOWKA" />
+          <EntitySet Name="PRACOWNICY" EntityType="Self.PRACOWNIK" />
+          <EntitySet Name="RECEPTY" EntityType="Self.RECEPTA" />
+          <EntitySet Name="SALE" EntityType="Self.SALA" />
+          <EntitySet Name="SPECJALIZACJE" EntityType="Self.SPECJALIZACJA" />
+          <EntitySet Name="WIZYTY" EntityType="Self.WIZYTA" />
+          <EntitySet Name="DYZURY" EntityType="Self.DYZUR" />
           <AssociationSet Name="fk_DYZUR_ID_ODDZIAL" Association="Self.fk_DYZUR_ID_ODDZIAL">
-            <End Role="ODDZIAL" EntitySet="ODDZIALs" />
-            <End Role="DYZUR" EntitySet="DYZURs" />
-          </AssociationSet>
-          <AssociationSet Name="fk_DYZUR_ID_PRACOWNIK" Association="Self.fk_DYZUR_ID_PRACOWNIK">
-            <End Role="PRACOWNIK" EntitySet="PRACOWNIKs" />
-            <End Role="DYZUR" EntitySet="DYZURs" />
-          </AssociationSet>
-          <AssociationSet Name="fk_ODDZIAL_ID_PLACOWKA" Association="Self.fk_ODDZIAL_ID_PLACOWKA">
-            <End Role="PLACOWKA" EntitySet="PLACOWKAs" />
-            <End Role="ODDZIAL" EntitySet="ODDZIALs" />
+            <End Role="ODDZIAL" EntitySet="ODDZIALY" />
+            <End Role="DYZUR" EntitySet="DYZURY" />
           </AssociationSet>
           <AssociationSet Name="fk_ODDZIAL_PRACOWNIK_ID_ODDZIAL" Association="Self.fk_ODDZIAL_PRACOWNIK_ID_ODDZIAL">
-            <End Role="ODDZIAL" EntitySet="ODDZIALs" />
+            <End Role="ODDZIAL" EntitySet="ODDZIALY" />
             <End Role="ODDZIAL_PRACOWNIK" EntitySet="ODDZIAL_PRACOWNIK" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PLACOWKA_ID_ODDZIAL" Association="Self.fk_PLACOWKA_ID_ODDZIAL">
+            <End Role="ODDZIAL" EntitySet="ODDZIALY" />
+            <End Role="PLACOWKA" EntitySet="PLACOWKI" />
           </AssociationSet>
           <AssociationSet Name="fk_WIZYTA_ID_ODDZIAL" Association="Self.fk_WIZYTA_ID_ODDZIAL">
-            <End Role="ODDZIAL" EntitySet="ODDZIALs" />
-            <End Role="WIZYTA" EntitySet="WIZYTAs" />
+            <End Role="ODDZIAL" EntitySet="ODDZIALY" />
+            <End Role="WIZYTA" EntitySet="WIZYTY" />
           </AssociationSet>
           <AssociationSet Name="fk_ODDZIAL_PRACOWNIK_ID_PRACOWNIK" Association="Self.fk_ODDZIAL_PRACOWNIK_ID_PRACOWNIK">
-            <End Role="PRACOWNIK" EntitySet="PRACOWNIKs" />
+            <End Role="PRACOWNIK" EntitySet="PRACOWNICY" />
             <End Role="ODDZIAL_PRACOWNIK" EntitySet="ODDZIAL_PRACOWNIK" />
           </AssociationSet>
+          <AssociationSet Name="fk_PRACOWNIK_ID_ODDZIAL_PRACOWNIK" Association="Self.fk_PRACOWNIK_ID_ODDZIAL_PRACOWNIK">
+            <End Role="ODDZIAL_PRACOWNIK" EntitySet="ODDZIAL_PRACOWNIK" />
+            <End Role="PRACOWNIK" EntitySet="PRACOWNICY" />
+          </AssociationSet>
           <AssociationSet Name="fk_WIZYTA_ID_PRACJENT" Association="Self.fk_WIZYTA_ID_PRACJENT">
-            <End Role="PACJENT" EntitySet="PACJENTs" />
-            <End Role="WIZYTA" EntitySet="WIZYTAs" />
+            <End Role="PACJENT" EntitySet="PACJENCI" />
+            <End Role="WIZYTA" EntitySet="WIZYTY" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DYZUR_ID_PRACOWNIK" Association="Self.fk_DYZUR_ID_PRACOWNIK">
+            <End Role="PRACOWNIK" EntitySet="PRACOWNICY" />
+            <End Role="DYZUR" EntitySet="DYZURY" />
           </AssociationSet>
           <AssociationSet Name="fk_PRACOWNIK_ID_SPECJALIZACJA" Association="Self.fk_PRACOWNIK_ID_SPECJALIZACJA">
-            <End Role="SPECJALIZACJA" EntitySet="SPECJALIZACJAs" />
-            <End Role="PRACOWNIK" EntitySet="PRACOWNIKs" />
+            <End Role="SPECJALIZACJA" EntitySet="SPECJALIZACJE" />
+            <End Role="PRACOWNIK" EntitySet="PRACOWNICY" />
           </AssociationSet>
           <AssociationSet Name="fk_WIZYTA_ID_PRACOWNIK" Association="Self.fk_WIZYTA_ID_PRACOWNIK">
-            <End Role="PRACOWNIK" EntitySet="PRACOWNIKs" />
-            <End Role="WIZYTA" EntitySet="WIZYTAs" />
-          </AssociationSet>
-          <AssociationSet Name="fk_WIZYTA_ID_RECEPTA" Association="Self.fk_WIZYTA_ID_RECEPTA">
-            <End Role="RECEPTA" EntitySet="RECEPTAs" />
-            <End Role="WIZYTA" EntitySet="WIZYTAs" />
+            <End Role="PRACOWNIK" EntitySet="PRACOWNICY" />
+            <End Role="WIZYTA" EntitySet="WIZYTY" />
           </AssociationSet>
           <AssociationSet Name="fk_WIZYTA_ID_SALA" Association="Self.fk_WIZYTA_ID_SALA">
-            <End Role="SALA" EntitySet="SALAs" />
-            <End Role="WIZYTA" EntitySet="WIZYTAs" />
+            <End Role="SALA" EntitySet="SALE" />
+            <End Role="WIZYTA" EntitySet="WIZYTY" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -606,25 +614,12 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PRZYCHODNIAModelStoreContainer" CdmEntityContainer="PRZYCHODNIAEntities">
-          <EntitySetMapping Name="DYZURs">
-            <EntityTypeMapping TypeName="PRZYCHODNIAModel.DYZUR">
-              <MappingFragment StoreEntitySet="DYZUR">
-                <ScalarProperty Name="ID_DYZUR" ColumnName="ID_DYZUR" />
-                <ScalarProperty Name="DZIEN_DYZURU" ColumnName="DZIEN_DYZURU" />
-                <ScalarProperty Name="OD" ColumnName="OD" />
-                <ScalarProperty Name="DO" ColumnName="DO" />
-                <ScalarProperty Name="ID_PRACOWNIK" ColumnName="ID_PRACOWNIK" />
-                <ScalarProperty Name="ID_ODDZIAL" ColumnName="ID_ODDZIAL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ODDZIALs">
+          <EntitySetMapping Name="ODDZIALY">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.ODDZIAL">
               <MappingFragment StoreEntitySet="ODDZIAL">
                 <ScalarProperty Name="ID_ODDZIAL" ColumnName="ID_ODDZIAL" />
                 <ScalarProperty Name="NAZWA" ColumnName="NAZWA" />
                 <ScalarProperty Name="MIEJSCOWOSC" ColumnName="MIEJSCOWOSC" />
-                <ScalarProperty Name="ID_PLACOWKA" ColumnName="ID_PLACOWKA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -637,7 +632,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PACJENTs">
+          <EntitySetMapping Name="PACJENCI">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.PACJENT">
               <MappingFragment StoreEntitySet="PACJENT">
                 <ScalarProperty Name="ID_PACJENT" ColumnName="ID_PACJENT" />
@@ -650,17 +645,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PLACOWKAs">
+          <EntitySetMapping Name="PLACOWKI">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.PLACOWKA">
               <MappingFragment StoreEntitySet="PLACOWKA">
                 <ScalarProperty Name="ID_PLACOWKA" ColumnName="ID_PLACOWKA" />
                 <ScalarProperty Name="NAZWA" ColumnName="NAZWA" />
                 <ScalarProperty Name="MIEJSCOWOSC" ColumnName="MIEJSCOWOSC" />
                 <ScalarProperty Name="ADRES" ColumnName="ADRES" />
+                <ScalarProperty Name="ID_ODDZIAL" ColumnName="ID_ODDZIAL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PRACOWNIKs">
+          <EntitySetMapping Name="PRACOWNICY">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.PRACOWNIK">
               <MappingFragment StoreEntitySet="PRACOWNIK">
                 <ScalarProperty Name="ID_PRACOWNIK" ColumnName="ID_PRACOWNIK" />
@@ -669,10 +665,11 @@
                 <ScalarProperty Name="ADRES" ColumnName="ADRES" />
                 <ScalarProperty Name="EMAIL_KONTAKTOWY" ColumnName="EMAIL_KONTAKTOWY" />
                 <ScalarProperty Name="ID_SPECJALIZACJA" ColumnName="ID_SPECJALIZACJA" />
+                <ScalarProperty Name="ID_ODDZIAL_PRACOWNIK" ColumnName="ID_ODDZIAL_PRACOWNIK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RECEPTAs">
+          <EntitySetMapping Name="RECEPTY">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.RECEPTA">
               <MappingFragment StoreEntitySet="RECEPTA">
                 <ScalarProperty Name="ID_RECEPTA" ColumnName="ID_RECEPTA" />
@@ -682,7 +679,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SALAs">
+          <EntitySetMapping Name="SALE">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.SALA">
               <MappingFragment StoreEntitySet="SALA">
                 <ScalarProperty Name="ID_SALA" ColumnName="ID_SALA" />
@@ -690,7 +687,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SPECJALIZACJAs">
+          <EntitySetMapping Name="SPECJALIZACJE">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.SPECJALIZACJA">
               <MappingFragment StoreEntitySet="SPECJALIZACJA">
                 <ScalarProperty Name="ID_SPECJALIZACJA" ColumnName="ID_SPECJALIZACJA" />
@@ -698,7 +695,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WIZYTAs">
+          <EntitySetMapping Name="WIZYTY">
             <EntityTypeMapping TypeName="PRZYCHODNIAModel.WIZYTA">
               <MappingFragment StoreEntitySet="WIZYTA">
                 <ScalarProperty Name="ID_WIZYTA" ColumnName="ID_WIZYTA" />
@@ -707,8 +704,18 @@
                 <ScalarProperty Name="ID_PRACOWNIK" ColumnName="ID_PRACOWNIK" />
                 <ScalarProperty Name="ID_ODDZIAL" ColumnName="ID_ODDZIAL" />
                 <ScalarProperty Name="ID_PACJENT" ColumnName="ID_PACJENT" />
-                <ScalarProperty Name="ID_RECEPTA" ColumnName="ID_RECEPTA" />
                 <ScalarProperty Name="UWAGI" ColumnName="UWAGI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DYZURY">
+            <EntityTypeMapping TypeName="PRZYCHODNIAModel.DYZUR">
+              <MappingFragment StoreEntitySet="DYZUR">
+                <ScalarProperty Name="ID_PRACOWNIK" ColumnName="ID_PRACOWNIK" />
+                <ScalarProperty Name="DZIEN_DYZURU" ColumnName="DZIEN_DYZURU" />
+                <ScalarProperty Name="OD" ColumnName="OD" />
+                <ScalarProperty Name="DO" ColumnName="DO" />
+                <ScalarProperty Name="ID_ODDZIAL" ColumnName="ID_ODDZIAL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

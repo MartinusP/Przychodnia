@@ -7,15 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Przychodnia.Repository
+namespace Przychodnia.Repository___Copy
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ODDZIAL_PRACOWNIK
+    public partial class DYZUR
     {
-        public int ID_ODDZIAL_PRACOWNIK { get; set; }
-        public Nullable<int> ID_PRACOWNIK { get; set; }
+        public int ID_PRACOWNIK { get; set; }
+        public Nullable<System.DateTime> DZIEN_DYZURU { get; set; }
+        public Nullable<System.DateTime> OD { get; set; }
+        public Nullable<System.DateTime> DO { get; set; }
         public Nullable<int> ID_ODDZIAL { get; set; }
     
         public virtual ODDZIAL ODDZIAL { get; set; }

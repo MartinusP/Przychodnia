@@ -7,41 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Przychodnia.Repository
+namespace Przychodnia.Repository___Copy
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class PRZYCHODNIAEntities : DbContext
     {
         public PRZYCHODNIAEntities()
             : base("name=PRZYCHODNIAEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ODDZIAL>()
-                .HasKey(bc => new { bc.ID_ODDZIAL });
-
-            modelBuilder.Entity<PRACOWNIK>()
-                .HasKey(bc => new { bc.ID_PRACOWNIK });
-
-            modelBuilder.Entity<ODDZIAL_PRACOWNIK>()
-                .HasKey(bc => new { bc.ID_ODDZIAL, bc.ID_PRACOWNIK });
-
-            modelBuilder.Entity<ODDZIAL_PRACOWNIK>()
-                .HasRequired(bc => bc.ODDZIAL)
-                .WithMany(b => b.ODDZIAL_PRACOWNIK)
-                .HasForeignKey(bc => bc.ID_ODDZIAL);
-
-            modelBuilder.Entity<ODDZIAL_PRACOWNIK>()
-                .HasRequired(bc => bc.PRACOWNIK)
-                .WithMany(c => c.ODDZIAL_PRACOWNIK)
-                .HasForeignKey(bc => bc.ID_PRACOWNIK);
+            throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<ODDZIAL> ODDZIALY { get; set; }
         public virtual DbSet<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNIK { get; set; }
         public virtual DbSet<PACJENT> PACJENCI { get; set; }

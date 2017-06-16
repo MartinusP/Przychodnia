@@ -7,25 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Przychodnia.Repository
+namespace Przychodnia.Repository___Copy
 {
     using System;
     using System.Collections.Generic;
     
     public partial class PLACOWKA
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PLACOWKA()
-        {
-            this.ODDZIALs = new HashSet<ODDZIAL>();
-        }
-    
         public int ID_PLACOWKA { get; set; }
         public string NAZWA { get; set; }
         public string MIEJSCOWOSC { get; set; }
         public string ADRES { get; set; }
+        public Nullable<int> ID_ODDZIAL { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ODDZIAL> ODDZIALs { get; set; }
+        public virtual ODDZIAL ODDZIAL { get; set; }
     }
 }
