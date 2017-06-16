@@ -19,7 +19,7 @@ namespace Przychodnia
         // GET: OddzialPracownik
         public async Task<ActionResult> Index()
         {
-            var oDDZIAL_PRACOWNIK = db.ODDZIAL_PRACOWNIK.Include(o => o.ODDZIAL).Include(o => o.PRACOWNIK);
+            var oDDZIAL_PRACOWNIK = db.ODDZIAL_PRACOWNICY.Include(o => o.ODDZIAL).Include(o => o.PRACOWNIK);
             return View(await oDDZIAL_PRACOWNIK.ToListAsync());
         }
 
@@ -30,7 +30,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
+            ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK = await db.ODDZIAL_PRACOWNICY.FindAsync(id);
             if (oDDZIAL_PRACOWNIK == null)
             {
                 return HttpNotFound();
@@ -55,7 +55,7 @@ namespace Przychodnia
         {
             if (ModelState.IsValid)
             {
-                db.ODDZIAL_PRACOWNIK.Add(oDDZIAL_PRACOWNIK);
+                db.ODDZIAL_PRACOWNICY.Add(oDDZIAL_PRACOWNIK);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -72,7 +72,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
+            ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK = await db.ODDZIAL_PRACOWNICY.FindAsync(id);
             if (oDDZIAL_PRACOWNIK == null)
             {
                 return HttpNotFound();
@@ -107,7 +107,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
+            ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK = await db.ODDZIAL_PRACOWNICY.FindAsync(id);
             if (oDDZIAL_PRACOWNIK == null)
             {
                 return HttpNotFound();
@@ -120,8 +120,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK = await db.ODDZIAL_PRACOWNIK.FindAsync(id);
-            db.ODDZIAL_PRACOWNIK.Remove(oDDZIAL_PRACOWNIK);
+            ODDZIAL_PRACOWNIK oDDZIAL_PRACOWNIK = await db.ODDZIAL_PRACOWNICY.FindAsync(id);
+            db.ODDZIAL_PRACOWNICY.Remove(oDDZIAL_PRACOWNIK);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

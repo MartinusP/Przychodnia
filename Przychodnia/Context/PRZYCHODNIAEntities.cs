@@ -24,7 +24,7 @@ namespace Przychodnia.Context
 
             public DbSet<DYZUR> DYZURY { get; set; }
             public DbSet<ODDZIAL> ODDZIALY { get; set; }
-            public DbSet<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNIK { get; set; }
+            public DbSet<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNICY { get; set; }
             public DbSet<PACJENT> PACJENCI { get; set; }
             public DbSet<PLACOWKA> PLACOWKI { get; set; }
             public DbSet<PRACOWNIK> PRACOWNICY { get; set; }

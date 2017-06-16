@@ -81,15 +81,17 @@ namespace Przychodnia
                          {
                              x.ID_ODDZIAL,
                              x.NAZWA,
-                             Checked = ((from ab in db.ODDZIAL_PRACOWNIK
+                             Checked = ((from ab in db.ODDZIAL_PRACOWNICY
                                          where (ab.ID_PRACOWNIK == id) & (ab.ID_ODDZIAL == x.ID_ODDZIAL)
                                          select ab).Count() > 0)
                          };
 
             var MyViewModel = new PracownikOddzialViewModel();
             MyViewModel.ID_PRACOWNIK = id.Value;
-            MyViewModel.Nazwisko = pRACOWNIK.NAZWISKO;
-     
+            MyViewModel.NAZWISKO = pRACOWNIK.NAZWISKO;
+            MyViewModel.ADRES = pRACOWNIK.ADRES;
+            MyViewModel.EMAIL_KONTAKTOWY = pRACOWNIK.EMAIL_KONTAKTOWY;
+
             var MyCheckBoxList = new List<CheckBoxViewModel>();
 
             foreach (var item in result)
@@ -113,14 +115,16 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(PracownikOddzialViewModel pRACOWNIK)
+        public ActionResult Edit(PracownikOddzialViewModel pRACOWNIK)
         {
             if (ModelState.IsValid)
             {
                 var Pracownik = db.PRACOWNICY.Find(pRACOWNIK.ID_PRACOWNIK);
-                //Pracownik.NAZWISKO = pRACOWNIK.Nazwisko;
+                //Pracownik.NAZWISKO = pRACOWNIK.NAZWISKO;
+                //Pracownik.ADRES = pRACOWNIK.ADRES;
+                //Pracownik.EMAIL_KONTAKTOWY = pRACOWNIK.EMAIL_KONTAKTOWY;
                 
-                foreach (var item in db.ODDZIAL_PRACOWNIK)
+                foreach (var item in db.ODDZIAL_PRACOWNICY)
                 {
                     if(item.ID_PRACOWNIK == pRACOWNIK.ID_PRACOWNIK)
                     {
@@ -132,7 +136,7 @@ namespace Przychodnia
                 {
                     if (item.Zaznaczenie)
                     {
-                        db.ODDZIAL_PRACOWNIK.Add(new ODDZIAL_PRACOWNIK()
+                        db.ODDZIAL_PRACOWNICY.Add(new ODDZIAL_PRACOWNIK()
                         {
                             ID_PRACOWNIK = pRACOWNIK.ID_PRACOWNIK,
                             ID_ODDZIAL = item.ID_CheckBoxViewModel
@@ -140,7 +144,7 @@ namespace Przychodnia
                     }
                 }
                 //db.Entry(pRACOWNIK).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             //ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
@@ -165,11 +169,11 @@ namespace Przychodnia
         // POST: Pracownik/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            PRACOWNIK pRACOWNIK = await db.PRACOWNICY.FindAsync(id);
+            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
             db.PRACOWNICY.Remove(pRACOWNIK);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
