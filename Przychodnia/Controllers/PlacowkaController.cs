@@ -18,8 +18,7 @@ namespace Przychodnia
         // GET: Placowka
         public async Task<ActionResult> Index()
         {
-            var pLACOWKI = db.PLACOWKI.Include(p => p.ODDZIAL);
-            return View(await pLACOWKI.ToListAsync());
+            return View(await db.PLACOWKAs.ToListAsync());
         }
 
         // GET: Placowka/Details/5
@@ -29,7 +28,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
+            PLACOWKA pLACOWKA = await db.PLACOWKAs.FindAsync(id);
             if (pLACOWKA == null)
             {
                 return HttpNotFound();
@@ -40,7 +39,6 @@ namespace Przychodnia
         // GET: Placowka/Create
         public ActionResult Create()
         {
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA");
             return View();
         }
 
@@ -49,16 +47,15 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID_PLACOWKA,NAZWA,MIEJSCOWOSC,ADRES,ID_ODDZIAL")] PLACOWKA pLACOWKA)
+        public async Task<ActionResult> Create([Bind(Include = "ID_PLACOWKA,NAZWA,MIEJSCOWOSC,ADRES")] PLACOWKA pLACOWKA)
         {
             if (ModelState.IsValid)
             {
-                db.PLACOWKI.Add(pLACOWKA);
+                db.PLACOWKAs.Add(pLACOWKA);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", pLACOWKA.ID_ODDZIAL);
             return View(pLACOWKA);
         }
 
@@ -69,12 +66,11 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
+            PLACOWKA pLACOWKA = await db.PLACOWKAs.FindAsync(id);
             if (pLACOWKA == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", pLACOWKA.ID_ODDZIAL);
             return View(pLACOWKA);
         }
 
@@ -83,7 +79,7 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID_PLACOWKA,NAZWA,MIEJSCOWOSC,ADRES,ID_ODDZIAL")] PLACOWKA pLACOWKA)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_PLACOWKA,NAZWA,MIEJSCOWOSC,ADRES")] PLACOWKA pLACOWKA)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +87,6 @@ namespace Przychodnia
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", pLACOWKA.ID_ODDZIAL);
             return View(pLACOWKA);
         }
 
@@ -102,7 +97,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
+            PLACOWKA pLACOWKA = await db.PLACOWKAs.FindAsync(id);
             if (pLACOWKA == null)
             {
                 return HttpNotFound();
@@ -115,8 +110,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
-            db.PLACOWKI.Remove(pLACOWKA);
+            PLACOWKA pLACOWKA = await db.PLACOWKAs.FindAsync(id);
+            db.PLACOWKAs.Remove(pLACOWKA);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

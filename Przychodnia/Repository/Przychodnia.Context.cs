@@ -22,7 +22,24 @@ namespace Przychodnia.Repository
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            modelBuilder.Entity<ODDZIAL>()
+                .HasKey(bc => new { bc.ID_ODDZIAL });
+
+            modelBuilder.Entity<PRACOWNIK>()
+                .HasKey(bc => new { bc.ID_PRACOWNIK });
+
+            modelBuilder.Entity<ODDZIAL_PRACOWNIK>()
+                .HasKey(bc => new { bc.ID_ODDZIAL, bc.ID_PRACOWNIK });
+
+            modelBuilder.Entity<ODDZIAL_PRACOWNIK>()
+                .HasRequired(bc => bc.ODDZIAL)
+                .WithMany(b => b.ODDZIAL_PRACOWNIK)
+                .HasForeignKey(bc => bc.ID_ODDZIAL);
+
+            modelBuilder.Entity<ODDZIAL_PRACOWNIK>()
+                .HasRequired(bc => bc.PRACOWNIK)
+                .WithMany(c => c.ODDZIAL_PRACOWNIK)
+                .HasForeignKey(bc => bc.ID_PRACOWNIK);
         }
     
         public virtual DbSet<DYZUR> DYZURs { get; set; }

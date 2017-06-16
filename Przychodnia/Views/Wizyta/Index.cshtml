@@ -27,6 +27,9 @@
             @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.RECEPTA.NAZWA_LEKU)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.SALA.ID_SALA)
         </th>
         <th></th>
@@ -48,6 +51,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PRACOWNIK.IMIE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RECEPTA.NAZWA_LEKU)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SALA.ID_SALA)

@@ -18,8 +18,8 @@ namespace Przychodnia
         // GET: Wizyta
         public async Task<ActionResult> Index()
         {
-            var wIZYTY = db.WIZYTY.Include(w => w.ODDZIAL).Include(w => w.PACJENT).Include(w => w.PRACOWNIK).Include(w => w.SALA);
-            return View(await wIZYTY.ToListAsync());
+            var wIZYTAs = db.WIZYTAs.Include(w => w.ODDZIAL).Include(w => w.PACJENT).Include(w => w.PRACOWNIK).Include(w => w.RECEPTA).Include(w => w.SALA);
+            return View(await wIZYTAs.ToListAsync());
         }
 
         // GET: Wizyta/Details/5
@@ -29,7 +29,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WIZYTA wIZYTA = await db.WIZYTY.FindAsync(id);
+            WIZYTA wIZYTA = await db.WIZYTAs.FindAsync(id);
             if (wIZYTA == null)
             {
                 return HttpNotFound();
@@ -40,10 +40,11 @@ namespace Przychodnia
         // GET: Wizyta/Create
         public ActionResult Create()
         {
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA");
-            ViewBag.ID_PACJENT = new SelectList(db.PACJENCI, "ID_PACJENT", "IMIE");
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE");
-            ViewBag.ID_SALA = new SelectList(db.SALE, "ID_SALA", "ID_SALA");
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA");
+            ViewBag.ID_PACJENT = new SelectList(db.PACJENTs, "ID_PACJENT", "IMIE");
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE");
+            ViewBag.ID_RECEPTA = new SelectList(db.RECEPTAs, "ID_RECEPTA", "NAZWA_LEKU");
+            ViewBag.ID_SALA = new SelectList(db.SALAs, "ID_SALA", "ID_SALA");
             return View();
         }
 
@@ -52,19 +53,20 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID_WIZYTA,DATA_WIZYTY,ID_SALA,ID_PRACOWNIK,ID_ODDZIAL,ID_PACJENT,UWAGI")] WIZYTA wIZYTA)
+        public async Task<ActionResult> Create([Bind(Include = "ID_WIZYTA,DATA_WIZYTY,ID_SALA,ID_PRACOWNIK,ID_ODDZIAL,ID_PACJENT,ID_RECEPTA,UWAGI")] WIZYTA wIZYTA)
         {
             if (ModelState.IsValid)
             {
-                db.WIZYTY.Add(wIZYTA);
+                db.WIZYTAs.Add(wIZYTA);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", wIZYTA.ID_ODDZIAL);
-            ViewBag.ID_PACJENT = new SelectList(db.PACJENCI, "ID_PACJENT", "IMIE", wIZYTA.ID_PACJENT);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", wIZYTA.ID_PRACOWNIK);
-            ViewBag.ID_SALA = new SelectList(db.SALE, "ID_SALA", "ID_SALA", wIZYTA.ID_SALA);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA", wIZYTA.ID_ODDZIAL);
+            ViewBag.ID_PACJENT = new SelectList(db.PACJENTs, "ID_PACJENT", "IMIE", wIZYTA.ID_PACJENT);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE", wIZYTA.ID_PRACOWNIK);
+            ViewBag.ID_RECEPTA = new SelectList(db.RECEPTAs, "ID_RECEPTA", "NAZWA_LEKU", wIZYTA.ID_RECEPTA);
+            ViewBag.ID_SALA = new SelectList(db.SALAs, "ID_SALA", "ID_SALA", wIZYTA.ID_SALA);
             return View(wIZYTA);
         }
 
@@ -75,15 +77,16 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WIZYTA wIZYTA = await db.WIZYTY.FindAsync(id);
+            WIZYTA wIZYTA = await db.WIZYTAs.FindAsync(id);
             if (wIZYTA == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", wIZYTA.ID_ODDZIAL);
-            ViewBag.ID_PACJENT = new SelectList(db.PACJENCI, "ID_PACJENT", "IMIE", wIZYTA.ID_PACJENT);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", wIZYTA.ID_PRACOWNIK);
-            ViewBag.ID_SALA = new SelectList(db.SALE, "ID_SALA", "ID_SALA", wIZYTA.ID_SALA);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA", wIZYTA.ID_ODDZIAL);
+            ViewBag.ID_PACJENT = new SelectList(db.PACJENTs, "ID_PACJENT", "IMIE", wIZYTA.ID_PACJENT);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE", wIZYTA.ID_PRACOWNIK);
+            ViewBag.ID_RECEPTA = new SelectList(db.RECEPTAs, "ID_RECEPTA", "NAZWA_LEKU", wIZYTA.ID_RECEPTA);
+            ViewBag.ID_SALA = new SelectList(db.SALAs, "ID_SALA", "ID_SALA", wIZYTA.ID_SALA);
             return View(wIZYTA);
         }
 
@@ -92,7 +95,7 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID_WIZYTA,DATA_WIZYTY,ID_SALA,ID_PRACOWNIK,ID_ODDZIAL,ID_PACJENT,UWAGI")] WIZYTA wIZYTA)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_WIZYTA,DATA_WIZYTY,ID_SALA,ID_PRACOWNIK,ID_ODDZIAL,ID_PACJENT,ID_RECEPTA,UWAGI")] WIZYTA wIZYTA)
         {
             if (ModelState.IsValid)
             {
@@ -100,10 +103,11 @@ namespace Przychodnia
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALY, "ID_ODDZIAL", "NAZWA", wIZYTA.ID_ODDZIAL);
-            ViewBag.ID_PACJENT = new SelectList(db.PACJENCI, "ID_PACJENT", "IMIE", wIZYTA.ID_PACJENT);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNICY, "ID_PRACOWNIK", "IMIE", wIZYTA.ID_PRACOWNIK);
-            ViewBag.ID_SALA = new SelectList(db.SALE, "ID_SALA", "ID_SALA", wIZYTA.ID_SALA);
+            ViewBag.ID_ODDZIAL = new SelectList(db.ODDZIALs, "ID_ODDZIAL", "NAZWA", wIZYTA.ID_ODDZIAL);
+            ViewBag.ID_PACJENT = new SelectList(db.PACJENTs, "ID_PACJENT", "IMIE", wIZYTA.ID_PACJENT);
+            ViewBag.ID_PRACOWNIK = new SelectList(db.PRACOWNIKs, "ID_PRACOWNIK", "IMIE", wIZYTA.ID_PRACOWNIK);
+            ViewBag.ID_RECEPTA = new SelectList(db.RECEPTAs, "ID_RECEPTA", "NAZWA_LEKU", wIZYTA.ID_RECEPTA);
+            ViewBag.ID_SALA = new SelectList(db.SALAs, "ID_SALA", "ID_SALA", wIZYTA.ID_SALA);
             return View(wIZYTA);
         }
 
@@ -114,7 +118,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WIZYTA wIZYTA = await db.WIZYTY.FindAsync(id);
+            WIZYTA wIZYTA = await db.WIZYTAs.FindAsync(id);
             if (wIZYTA == null)
             {
                 return HttpNotFound();
@@ -127,8 +131,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            WIZYTA wIZYTA = await db.WIZYTY.FindAsync(id);
-            db.WIZYTY.Remove(wIZYTA);
+            WIZYTA wIZYTA = await db.WIZYTAs.FindAsync(id);
+            db.WIZYTAs.Remove(wIZYTA);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

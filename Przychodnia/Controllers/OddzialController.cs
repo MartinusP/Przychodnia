@@ -18,7 +18,8 @@ namespace Przychodnia
         // GET: Oddzial
         public async Task<ActionResult> Index()
         {
-            return View(await db.ODDZIALY.ToListAsync());
+            var oDDZIALs = db.ODDZIALs.Include(o => o.PLACOWKA);
+            return View(await oDDZIALs.ToListAsync());
         }
 
         // GET: Oddzial/Details/5
@@ -28,7 +29,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = await db.ODDZIALY.FindAsync(id);
+            ODDZIAL oDDZIAL = await db.ODDZIALs.FindAsync(id);
             if (oDDZIAL == null)
             {
                 return HttpNotFound();
@@ -39,6 +40,7 @@ namespace Przychodnia
         // GET: Oddzial/Create
         public ActionResult Create()
         {
+            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKAs, "ID_PLACOWKA", "NAZWA");
             return View();
         }
 
@@ -47,15 +49,16 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID_ODDZIAL,NAZWA,MIEJSCOWOSC")] ODDZIAL oDDZIAL)
+        public async Task<ActionResult> Create([Bind(Include = "ID_ODDZIAL,NAZWA,MIEJSCOWOSC,ID_PLACOWKA")] ODDZIAL oDDZIAL)
         {
             if (ModelState.IsValid)
             {
-                db.ODDZIALY.Add(oDDZIAL);
+                db.ODDZIALs.Add(oDDZIAL);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKAs, "ID_PLACOWKA", "NAZWA", oDDZIAL.ID_PLACOWKA);
             return View(oDDZIAL);
         }
 
@@ -66,11 +69,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = await db.ODDZIALY.FindAsync(id);
+            ODDZIAL oDDZIAL = await db.ODDZIALs.FindAsync(id);
             if (oDDZIAL == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKAs, "ID_PLACOWKA", "NAZWA", oDDZIAL.ID_PLACOWKA);
             return View(oDDZIAL);
         }
 
@@ -79,7 +83,7 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID_ODDZIAL,NAZWA,MIEJSCOWOSC")] ODDZIAL oDDZIAL)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_ODDZIAL,NAZWA,MIEJSCOWOSC,ID_PLACOWKA")] ODDZIAL oDDZIAL)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +91,7 @@ namespace Przychodnia
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKAs, "ID_PLACOWKA", "NAZWA", oDDZIAL.ID_PLACOWKA);
             return View(oDDZIAL);
         }
 
@@ -97,7 +102,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = await db.ODDZIALY.FindAsync(id);
+            ODDZIAL oDDZIAL = await db.ODDZIALs.FindAsync(id);
             if (oDDZIAL == null)
             {
                 return HttpNotFound();
@@ -110,8 +115,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ODDZIAL oDDZIAL = await db.ODDZIALY.FindAsync(id);
-            db.ODDZIALY.Remove(oDDZIAL);
+            ODDZIAL oDDZIAL = await db.ODDZIALs.FindAsync(id);
+            db.ODDZIALs.Remove(oDDZIAL);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

@@ -18,8 +18,8 @@ namespace Przychodnia
         // GET: Pracownik
         public async Task<ActionResult> Index()
         {
-            //var pRACOWNICY = db.PRACOWNICY.Include(p => p.ODDZIAL_PRACOWNIK1).Include(p => p.DYZUR).Include(p => p.SPECJALIZACJA);
-            //return View(await pRACOWNICY.ToListAsync());
+            var pRACOWNIKs = db.PRACOWNIKs.Include(p => p.SPECJALIZACJA);
+            return View(await pRACOWNIKs.ToListAsync());
         }
 
         // GET: Pracownik/Details/5
@@ -29,7 +29,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = await db.PRACOWNICY.FindAsync(id);
+            PRACOWNIK pRACOWNIK = await db.PRACOWNIKs.FindAsync(id);
             if (pRACOWNIK == null)
             {
                 return HttpNotFound();
@@ -40,9 +40,7 @@ namespace Przychodnia
         // GET: Pracownik/Create
         public ActionResult Create()
         {
-            ViewBag.ID_ODDZIAL_PRACOWNIK = new SelectList(db.ODDZIAL_PRACOWNIK, "ID_ODDZIAL_PRACOWNIK", "ID_ODDZIAL_PRACOWNIK");
-            ViewBag.ID_PRACOWNIK = new SelectList(db.DYZURY, "ID_PRACOWNIK", "ID_PRACOWNIK");
-            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA");
+            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJAs, "ID_SPECJALIZACJA", "NAZWA");
             return View();
         }
 
@@ -51,18 +49,16 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY,ID_SPECJALIZACJA,ID_ODDZIAL_PRACOWNIK")] PRACOWNIK pRACOWNIK)
+        public async Task<ActionResult> Create([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY,ID_SPECJALIZACJA")] PRACOWNIK pRACOWNIK)
         {
             if (ModelState.IsValid)
             {
-                db.PRACOWNICY.Add(pRACOWNIK);
+                db.PRACOWNIKs.Add(pRACOWNIK);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            //ViewBag.ID_ODDZIAL_PRACOWNIK = new SelectList(db.ODDZIAL_PRACOWNIK, "ID_ODDZIAL_PRACOWNIK", "ID_ODDZIAL_PRACOWNIK", pRACOWNIK.ID_ODDZIAL_PRACOWNIK);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.DYZURY, "ID_PRACOWNIK", "ID_PRACOWNIK", pRACOWNIK.ID_PRACOWNIK);
-            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
+            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJAs, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
             return View(pRACOWNIK);
         }
 
@@ -73,14 +69,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = await db.PRACOWNICY.FindAsync(id);
+            PRACOWNIK pRACOWNIK = await db.PRACOWNIKs.FindAsync(id);
             if (pRACOWNIK == null)
             {
                 return HttpNotFound();
             }
-            //ViewBag.ID_ODDZIAL_PRACOWNIK = new SelectList(db.ODDZIAL_PRACOWNIK, "ID_ODDZIAL_PRACOWNIK", "ID_ODDZIAL_PRACOWNIK", pRACOWNIK.ID_ODDZIAL_PRACOWNIK);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.DYZURY, "ID_PRACOWNIK", "ID_PRACOWNIK", pRACOWNIK.ID_PRACOWNIK);
-            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
+            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJAs, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
             return View(pRACOWNIK);
         }
 
@@ -89,7 +83,7 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY,ID_SPECJALIZACJA,ID_ODDZIAL_PRACOWNIK")] PRACOWNIK pRACOWNIK)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY,ID_SPECJALIZACJA")] PRACOWNIK pRACOWNIK)
         {
             if (ModelState.IsValid)
             {
@@ -97,9 +91,7 @@ namespace Przychodnia
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            //ViewBag.ID_ODDZIAL_PRACOWNIK = new SelectList(db.ODDZIAL_PRACOWNIK, "ID_ODDZIAL_PRACOWNIK", "ID_ODDZIAL_PRACOWNIK", pRACOWNIK.ID_ODDZIAL_PRACOWNIK);
-            ViewBag.ID_PRACOWNIK = new SelectList(db.DYZURY, "ID_PRACOWNIK", "ID_PRACOWNIK", pRACOWNIK.ID_PRACOWNIK);
-            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
+            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJAs, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
             return View(pRACOWNIK);
         }
 
@@ -110,7 +102,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = await db.PRACOWNICY.FindAsync(id);
+            PRACOWNIK pRACOWNIK = await db.PRACOWNIKs.FindAsync(id);
             if (pRACOWNIK == null)
             {
                 return HttpNotFound();
@@ -123,8 +115,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            PRACOWNIK pRACOWNIK = await db.PRACOWNICY.FindAsync(id);
-            db.PRACOWNICY.Remove(pRACOWNIK);
+            PRACOWNIK pRACOWNIK = await db.PRACOWNIKs.FindAsync(id);
+            db.PRACOWNIKs.Remove(pRACOWNIK);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

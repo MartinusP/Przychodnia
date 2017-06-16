@@ -18,7 +18,7 @@ namespace Przychodnia
         // GET: Specjalizacja
         public async Task<ActionResult> Index()
         {
-            return View(await db.SPECJALIZACJE.ToListAsync());
+            return View(await db.SPECJALIZACJAs.ToListAsync());
         }
 
         // GET: Specjalizacja/Details/5
@@ -28,7 +28,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJE.FindAsync(id);
+            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJAs.FindAsync(id);
             if (sPECJALIZACJA == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace Przychodnia
         {
             if (ModelState.IsValid)
             {
-                db.SPECJALIZACJE.Add(sPECJALIZACJA);
+                db.SPECJALIZACJAs.Add(sPECJALIZACJA);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJE.FindAsync(id);
+            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJAs.FindAsync(id);
             if (sPECJALIZACJA == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJE.FindAsync(id);
+            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJAs.FindAsync(id);
             if (sPECJALIZACJA == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJE.FindAsync(id);
-            db.SPECJALIZACJE.Remove(sPECJALIZACJA);
+            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJAs.FindAsync(id);
+            db.SPECJALIZACJAs.Remove(sPECJALIZACJA);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
