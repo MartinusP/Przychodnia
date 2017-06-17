@@ -29,12 +29,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJE.FindAsync(id);
-            if (sPECJALIZACJA == null)
+            SPECJALIZACJA specjalizacja = await db.SPECJALIZACJE.FindAsync(id);
+            if (specjalizacja == null)
             {
                 return HttpNotFound();
             }
-            return View(sPECJALIZACJA);
+            return View(specjalizacja);
         }
 
         // GET: Specjalizacja/Create
@@ -48,16 +48,16 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "NAZWA")] SPECJALIZACJA sPECJALIZACJA)
+        public async Task<ActionResult> Create([Bind(Include = "NAZWA")] SPECJALIZACJA specjalizacja)
         {
             if (ModelState.IsValid)
             {
-                db.SPECJALIZACJE.Add(sPECJALIZACJA);
+                db.SPECJALIZACJE.Add(specjalizacja);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(sPECJALIZACJA);
+            return View(specjalizacja);
         }
 
         // GET: Specjalizacja/Edit/5
@@ -67,12 +67,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJE.FindAsync(id);
-            if (sPECJALIZACJA == null)
+            SPECJALIZACJA specjalizacja = await db.SPECJALIZACJE.FindAsync(id);
+            if (specjalizacja == null)
             {
                 return HttpNotFound();
             }
-            return View(sPECJALIZACJA);
+            return View(specjalizacja);
         }
 
         // POST: Specjalizacja/Edit/5
@@ -80,15 +80,15 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "NAZWA")] SPECJALIZACJA sPECJALIZACJA)
+        public async Task<ActionResult> Edit([Bind(Include = "NAZWA")] SPECJALIZACJA specjalizacja)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sPECJALIZACJA).State = EntityState.Modified;
+                db.Entry(specjalizacja).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(sPECJALIZACJA);
+            return View(specjalizacja);
         }
 
         // GET: Specjalizacja/Delete/5
@@ -98,12 +98,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJE.FindAsync(id);
-            if (sPECJALIZACJA == null)
+            SPECJALIZACJA specjalizacja = await db.SPECJALIZACJE.FindAsync(id);
+            if (specjalizacja == null)
             {
                 return HttpNotFound();
             }
-            return View(sPECJALIZACJA);
+            return View(specjalizacja);
         }
 
         // POST: Specjalizacja/Delete/5
@@ -111,8 +111,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            SPECJALIZACJA sPECJALIZACJA = await db.SPECJALIZACJE.FindAsync(id);
-            db.SPECJALIZACJE.Remove(sPECJALIZACJA);
+            SPECJALIZACJA specjalizacja = await db.SPECJALIZACJE.FindAsync(id);
+            db.SPECJALIZACJE.Remove(specjalizacja);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

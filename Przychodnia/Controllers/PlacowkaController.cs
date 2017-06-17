@@ -29,12 +29,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
-            if (pLACOWKA == null)
+            PLACOWKA placowka = await db.PLACOWKI.FindAsync(id);
+            if (placowka == null)
             {
                 return HttpNotFound();
             }
-            return View(pLACOWKA);
+            return View(placowka);
         }
 
         // GET: Placowka/Create
@@ -48,16 +48,16 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "NAZWA,MIEJSCOWOSC,ADRES")] PLACOWKA pLACOWKA)
+        public async Task<ActionResult> Create([Bind(Include = "NAZWA,MIEJSCOWOSC,ADRES")] PLACOWKA placowka)
         {
             if (ModelState.IsValid)
             {
-                db.PLACOWKI.Add(pLACOWKA);
+                db.PLACOWKI.Add(placowka);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(pLACOWKA);
+            return View(placowka);
         }
 
         // GET: Placowka/Edit/5
@@ -67,12 +67,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
-            if (pLACOWKA == null)
+            PLACOWKA placowka = await db.PLACOWKI.FindAsync(id);
+            if (placowka == null)
             {
                 return HttpNotFound();
             }
-            return View(pLACOWKA);
+            return View(placowka);
         }
 
         // POST: Placowka/Edit/5
@@ -80,15 +80,15 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "NAZWA,MIEJSCOWOSC,ADRES")] PLACOWKA pLACOWKA)
+        public async Task<ActionResult> Edit([Bind(Include = "NAZWA,MIEJSCOWOSC,ADRES")] PLACOWKA placowka)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pLACOWKA).State = EntityState.Modified;
+                db.Entry(placowka).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(pLACOWKA);
+            return View(placowka);
         }
 
         // GET: Placowka/Delete/5
@@ -98,12 +98,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
-            if (pLACOWKA == null)
+            PLACOWKA placowka = await db.PLACOWKI.FindAsync(id);
+            if (placowka == null)
             {
                 return HttpNotFound();
             }
-            return View(pLACOWKA);
+            return View(placowka);
         }
 
         // POST: Placowka/Delete/5
@@ -111,8 +111,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            PLACOWKA pLACOWKA = await db.PLACOWKI.FindAsync(id);
-            db.PLACOWKI.Remove(pLACOWKA);
+            PLACOWKA placowka = await db.PLACOWKI.FindAsync(id);
+            db.PLACOWKI.Remove(placowka);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

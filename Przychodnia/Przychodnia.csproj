@@ -209,7 +209,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
-    <Compile Include="DyzurController.cs" />
+    <Compile Include="Controllers\DyzurController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,7 +218,6 @@
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\CheckBoxViewModel.cs" />
     <Compile Include="Models\Dyzur.cs" />
-    <Compile Include="Models\DyzurController.cs" />
     <Compile Include="Models\Oddzial.cs" />
     <Compile Include="Models\OddzialPracownik.cs" />
     <Compile Include="Models\Pacjent.cs" />
@@ -236,7 +235,7 @@
     <Compile Include="Controllers\PacjentController.cs" />
     <Compile Include="Controllers\PlacowkaController.cs" />
     <Compile Include="Controllers\PracownikController.cs" />
-    <Compile Include="OddzialController.cs" />
+    <Compile Include="Controllers\OddzialController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ReceptaController.cs" />
     <Compile Include="Controllers\SalaController.cs" />
