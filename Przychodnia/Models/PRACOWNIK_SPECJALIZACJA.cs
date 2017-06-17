@@ -6,15 +6,15 @@ using System.Web;
 
 namespace Przychodnia.Models
 {
-    public class PRACOWNIK_SPECJALIZACJA
+    public class Pracownik_Specjalizacja
     {
         [Key]
-        public int ID_ODDZIAL_PRACOWNIK { get; set; }
+        public int ID_PRACOWNIK_SPECJALIZACJA { get; set; }
         public int ID_PRACOWNIK { get; set; }
-        public int ID_ODDZIAL { get; set; }
+        public int ID_SPECJALIZACJA { get; set; }
 
 
-        public virtual Pracownik PRACOWNICY { get; set; }
-        public virtual SPECJALIZACJA SPECJALIZACJE { get; set; }
+        public virtual PRACOWNIK Pracownik2 { get; set; }
+        public virtual SPECJALIZACJA Specjalizacja { get; set; }
     }
 }

@@ -58,16 +58,14 @@ namespace Przychodnia
 
             return View(pRACOWNIK);
         }
-
-        // GET: Pracownik/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
-            if (pRACOWNIK == null)
+            PRACOWNIK author = db.PRACOWNICY.Find(id);
+            if (author == null)
             {
                 return HttpNotFound();
             }
@@ -82,60 +80,95 @@ namespace Przychodnia
                                           select ab).Count() > 0)
                           };
 
-            var MyViewModel = new PracownikOddzialViewModel();
+            var Results2 = from b in db.SPECJALIZACJE
+                           select new
+                           {
+                               b.ID_SPECJALIZACJA,
+                               b.NAZWA,
+                               Checked = ((from ab in db.Pracownik_Specjalizacje
+                                           where (ab.ID_PRACOWNIK == id) & (ab.ID_SPECJALIZACJA == b.ID_SPECJALIZACJA)
+                                           select ab).Count() > 0)
+                           };
+
+
+
+            var MyViewModel = new PracownikViewModel();
 
             MyViewModel.ID_PRACOWNIK = id.Value;
-            MyViewModel.IMIE = pRACOWNIK.IMIE;
-            MyViewModel.NAZWISKO = pRACOWNIK.NAZWISKO;
+            MyViewModel.IMIE = author.IMIE;
+            MyViewModel.NAZWISKO = author.NAZWISKO;
 
             var MyCheckBoxList = new List<CheckBoxViewModel>();
+            var MyCheckBoxList2 = new List<CheckBoxViewModel>();
 
             foreach (var item in Results)
             {
                 MyCheckBoxList.Add(new CheckBoxViewModel { ID = item.ID_ODDZIAL, Name = item.NAZWA, Checked = item.Checked });
             }
 
-            MyViewModel.ODDZIAL_PRACOWNICY = MyCheckBoxList;
+            foreach (var item in Results2)
+            {
+                MyCheckBoxList2.Add(new CheckBoxViewModel { ID = item.ID_SPECJALIZACJA, Name = item.NAZWA, Checked = item.Checked });
+            }
+
+            MyViewModel.Books = MyCheckBoxList;
+            MyViewModel.Books2 = MyCheckBoxList2;
 
             return View(MyViewModel);
-
         }
 
-        // POST: Pracownik/Edit/5
+        // POST: /Authors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(PracownikOddzialViewModel pRACOWNIK)
+        public ActionResult Edit(PracownikViewModel author)
         {
             if (ModelState.IsValid)
             {
-                var MyAuthor = db.PRACOWNICY.Find(pRACOWNIK.ID_PRACOWNIK);
+                var MyAuthor = db.PRACOWNICY.Find(author.ID_PRACOWNIK);
 
-                MyAuthor.IMIE = pRACOWNIK.IMIE;
-                MyAuthor.NAZWISKO = pRACOWNIK.NAZWISKO;
+                MyAuthor.IMIE = author.IMIE;
+                MyAuthor.NAZWISKO = author.NAZWISKO;
 
                 foreach (var item in db.ODDZIAL_PRACOWNICY)
                 {
-                    if (item.ID_PRACOWNIK == pRACOWNIK.ID_PRACOWNIK)
+                    if (item.ID_PRACOWNIK == author.ID_PRACOWNIK)
                     {
                         db.Entry(item).State = System.Data.Entity.EntityState.Deleted;
                     }
                 }
 
-                foreach (var item in pRACOWNIK.ODDZIAL_PRACOWNICY)
+                foreach (var item in db.Pracownik_Specjalizacje)
+                {
+                    if (item.ID_PRACOWNIK == author.ID_PRACOWNIK)
+                    {
+                        db.Entry(item).State = System.Data.Entity.EntityState.Deleted;
+                    }
+                }
+
+                foreach (var item in author.Books)
                 {
                     if (item.Checked)
                     {
-                        db.ODDZIAL_PRACOWNICY.Add(new ODDZIAL_PRACOWNIK() { ID_PRACOWNIK = pRACOWNIK.ID_PRACOWNIK, ID_ODDZIAL = item.ID });
+                        db.ODDZIAL_PRACOWNICY.Add(new ODDZIAL_PRACOWNIK() { ID_PRACOWNIK = author.ID_PRACOWNIK, ID_ODDZIAL = item.ID });
+                    }
+                }
+
+                foreach (var item in author.Books2)
+                {
+                    if (item.Checked)
+                    {
+                        db.Pracownik_Specjalizacje.Add(new Pracownik_Specjalizacja() { ID_PRACOWNIK = author.ID_PRACOWNIK, ID_SPECJALIZACJA = item.ID });
                     }
                 }
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(pRACOWNIK);
+            return View(author);
         }
+
 
         // GET: Pracownik/Delete/5
         public ActionResult Delete(int? id)

@@ -231,6 +231,8 @@
     <Compile Include="Models\Pacjent.cs" />
     <Compile Include="Models\Placowka.cs" />
     <Compile Include="Models\Pracownik.cs" />
+    <Compile Include="Models\PracownikViewModel.cs" />
+    <Compile Include="Models\Pracownik_Specjalizacja.cs" />
     <Compile Include="Models\Recepta.cs" />
     <Compile Include="Models\Sala.cs" />
     <Compile Include="Models\Specjalizacja.cs" />

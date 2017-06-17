@@ -35,6 +35,7 @@ namespace Przychodnia.Context
             public System.Data.Entity.DbSet<Przychodnia.Models.Book2> Books2 { get; set; }
 
             public System.Data.Entity.DbSet<Przychodnia.Models.AuthorToBook2> AuthorsToBooks2 { get; set; }
+        public System.Data.Entity.DbSet<Przychodnia.Models.Pracownik_Specjalizacja> Pracownik_Specjalizacje { get; set; }
 
     }
 }

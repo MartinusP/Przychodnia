@@ -6,16 +6,13 @@ using System.Web;
 
 namespace Przychodnia.Models
 {
-    public class PRACOWNIK
+    public class PracownikViewModel
     {
-
         [Key]
         public int ID_PRACOWNIK { get; set; }
         public string IMIE { get; set; }
         public string NAZWISKO { get; set; }
-
-        public virtual ICollection<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNICY { get; set; }
-        public virtual ICollection<Pracownik_Specjalizacja> Pracownik_Specjalizacje { get; set; }
-
+        public List<CheckBoxViewModel> Books { get; set; }
+        public List<CheckBoxViewModel> Books2 { get; set; }
     }
 }
