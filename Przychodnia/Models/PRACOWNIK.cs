@@ -29,7 +29,7 @@ namespace Przychodnia.Models
         //public virtual ICollection<DYZUR> DYZURY { get; set; }
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNICY { get; set; }
-        //public virtual SPECJALIZACJA SPECJALIZACJA { get; set; }
+        public virtual SPECJALIZACJA SPECJALIZACJA { get; set; }
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         //public virtual ICollection<WIZYTA> WIZYTY { get; set; }
     }

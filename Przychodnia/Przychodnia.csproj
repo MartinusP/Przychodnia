@@ -203,6 +203,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\Book2Controller.cs" />
     <Compile Include="Controllers\AuthorsController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Context\PRZYCHODNIAEntities.cs" />
@@ -221,7 +222,9 @@
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\AuthorsViewModel.cs" />
     <Compile Include="Models\AuthorToBook.cs" />
+    <Compile Include="Models\AuthorToBook2.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\Book2.cs" />
     <Compile Include="Models\Dyzur.cs" />
     <Compile Include="Models\Oddzial.cs" />
     <Compile Include="Models\OddzialPracownik.cs" />
@@ -410,6 +413,11 @@
     <Content Include="Views\Authors - Copy\Details.cshtml" />
     <Content Include="Views\Authors - Copy\Edit.cshtml" />
     <Content Include="Views\Authors - Copy\Index.cshtml" />
+    <Content Include="Views\Book2\Create.cshtml" />
+    <Content Include="Views\Book2\Delete.cshtml" />
+    <Content Include="Views\Book2\Details.cshtml" />
+    <Content Include="Views\Book2\Edit.cshtml" />
+    <Content Include="Views\Book2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

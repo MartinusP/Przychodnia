@@ -13,5 +13,6 @@ namespace Przychodnia.Models
         public string IMIE { get; set; }
         public string NAZWISKO { get; set; }
         public List<CheckBoxViewModel> Books { get; set; }
+        public List<CheckBoxViewModel> Books2 { get; set; }
     }
 }

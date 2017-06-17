@@ -6,14 +6,12 @@ using System.Web;
 
 namespace Przychodnia.Models
 {
-    public class Author
+    public class Book2
     {
         [Key]
-        public int ID_PRACOWNIK { get; set; }
-        public string IMIE { get; set; }
-        public string NAZWISKO { get; set; }
+        public int ID_ODDZIAL { get; set; }
+        public string NAZWA { get; set; }
 
-        public virtual ICollection<AuthorToBook> AuthorsToBooks { get; set; }
         public virtual ICollection<AuthorToBook2> AuthorsToBooks2 { get; set; }
     }
 }

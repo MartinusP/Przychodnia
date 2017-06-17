@@ -108,6 +108,18 @@ namespace Przychodnia.Controllers
                                           select ab).Count() > 0)
                           };
 
+            var Results2 = from b in db.Books2
+                          select new
+                          {
+                              b.ID_ODDZIAL,
+                              b.NAZWA,
+                              Checked = ((from ab in db.AuthorsToBooks2
+                                          where (ab.ID_PRACOWNIK == id) & (ab.ID_ODDZIAL == b.ID_ODDZIAL)
+                                          select ab).Count() > 0)
+                          };
+
+
+
             var MyViewModel = new AuthorsViewModel();
 
             MyViewModel.ID_PRACOWNIK = id.Value;
@@ -115,13 +127,20 @@ namespace Przychodnia.Controllers
             MyViewModel.NAZWISKO = author.NAZWISKO;
 
             var MyCheckBoxList = new List<CheckBoxViewModel>();
+            var MyCheckBoxList2 = new List<CheckBoxViewModel>();
 
             foreach (var item in Results)
             {
                 MyCheckBoxList.Add(new CheckBoxViewModel { ID = item.ID_ODDZIAL, Name = item.NAZWA, Checked = item.Checked });
             }
 
+            foreach (var item in Results2)
+            {
+                MyCheckBoxList2.Add(new CheckBoxViewModel { ID = item.ID_ODDZIAL, Name = item.NAZWA, Checked = item.Checked });
+            }
+
             MyViewModel.Books = MyCheckBoxList;
+            MyViewModel.Books2 = MyCheckBoxList2;
 
             return View(MyViewModel);
         }
@@ -148,11 +167,27 @@ namespace Przychodnia.Controllers
                     }
                 }
 
+                foreach (var item in db.AuthorsToBooks2)
+                {
+                    if (item.ID_PRACOWNIK == author.ID_PRACOWNIK)
+                    {
+                        db.Entry(item).State = System.Data.Entity.EntityState.Deleted;
+                    }
+                }
+
                 foreach (var item in author.Books)
                 {
                     if (item.Checked)
                     {
                         db.AuthorsToBooks.Add(new AuthorToBook() { ID_PRACOWNIK = author.ID_PRACOWNIK, ID_ODDZIAL = item.ID });
+                    }
+                }
+
+                foreach (var item in author.Books2)
+                {
+                    if (item.Checked)
+                    {
+                        db.AuthorsToBooks2.Add(new AuthorToBook2() { ID_PRACOWNIK = author.ID_PRACOWNIK, ID_ODDZIAL = item.ID });
                     }
                 }
 
