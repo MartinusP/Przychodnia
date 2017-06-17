@@ -17,8 +17,8 @@ namespace Przychodnia.Models
         public Nullable<int> ID_PRACOWNIK { get; set; }
         public Nullable<int> ID_ODDZIAL { get; set; }
 
-        public virtual ODDZIAL ODDZIAL { get; set; }
-        public virtual PRACOWNIK PRACOWNIK { get; set; }
+        //public virtual ODDZIAL ODDZIAL { get; set; }
+        //public virtual PRACOWNIK PRACOWNIK { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRACOWNIK> PRACOWNIKs { get; set; }
     }

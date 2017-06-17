@@ -10,10 +10,11 @@ namespace Przychodnia.Models
     {
         [Key]
         public int ID_ODDZIAL_PRACOWNIK { get; set; }
-        public Nullable<int> ID_PRACOWNIK { get; set; }
-        public Nullable<int> ID_ODDZIAL { get; set; }
+        public int ID_PRACOWNIK { get; set; }
+        public int ID_ODDZIAL { get; set; }
 
-        public virtual ODDZIAL ODDZIAL { get; set; }
-        public virtual PRACOWNIK PRACOWNIK { get; set; }
+
+        public virtual Author Author { get; set; }
+        public virtual Book Book { get; set; }
     }
 }
