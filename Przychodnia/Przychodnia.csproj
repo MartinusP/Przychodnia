@@ -203,28 +203,19 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\Book2Controller.cs" />
-    <Compile Include="Controllers\AuthorsController.cs" />
-    <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Context\PRZYCHODNIAEntities.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
-    <Compile Include="Controllers\DyzurController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
-    <Compile Include="Models\Author.cs" />
-    <Compile Include="Models\AuthorsViewModel.cs" />
-    <Compile Include="Models\AuthorToBook.cs" />
-    <Compile Include="Models\AuthorToBook2.cs" />
-    <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\Book2.cs" />
+    <Compile Include="Models\CheckBoxViewModel.cs" />
     <Compile Include="Models\Dyzur.cs" />
     <Compile Include="Models\Oddzial.cs" />
     <Compile Include="Models\OddzialPracownik.cs" />
@@ -237,13 +228,11 @@
     <Compile Include="Models\Sala.cs" />
     <Compile Include="Models\Specjalizacja.cs" />
     <Compile Include="Models\Wizyta.cs" />
-    <Compile Include="Models\CheckBoxViewModel.cs" />
     <Compile Include="Models\DyzurViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Controllers\PacjentController.cs" />
     <Compile Include="Controllers\PlacowkaController.cs" />
-    <Compile Include="Models\PracownikOddzialViewModel.cs" />
     <Compile Include="Controllers\OddzialController.cs" />
     <Compile Include="Controllers\PracownikController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -400,26 +389,6 @@
     <Content Include="Views\Oddzial\Details.cshtml" />
     <Content Include="Views\Oddzial\Edit.cshtml" />
     <Content Include="Views\Oddzial\Index.cshtml" />
-    <Content Include="Views\Authors\Create.cshtml" />
-    <Content Include="Views\Authors\Delete.cshtml" />
-    <Content Include="Views\Authors\Details.cshtml" />
-    <Content Include="Views\Authors\Edit.cshtml" />
-    <Content Include="Views\Authors\Index.cshtml" />
-    <Content Include="Views\Books\Create.cshtml" />
-    <Content Include="Views\Books\Delete.cshtml" />
-    <Content Include="Views\Books\Details.cshtml" />
-    <Content Include="Views\Books\Edit.cshtml" />
-    <Content Include="Views\Books\Index.cshtml" />
-    <Content Include="Views\Authors - Copy\Create.cshtml" />
-    <Content Include="Views\Authors - Copy\Delete.cshtml" />
-    <Content Include="Views\Authors - Copy\Details.cshtml" />
-    <Content Include="Views\Authors - Copy\Edit.cshtml" />
-    <Content Include="Views\Authors - Copy\Index.cshtml" />
-    <Content Include="Views\Book2\Create.cshtml" />
-    <Content Include="Views\Book2\Delete.cshtml" />
-    <Content Include="Views\Book2\Details.cshtml" />
-    <Content Include="Views\Book2\Edit.cshtml" />
-    <Content Include="Views\Book2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

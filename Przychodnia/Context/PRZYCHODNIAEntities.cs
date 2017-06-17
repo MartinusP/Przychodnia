@@ -27,15 +27,7 @@ namespace Przychodnia.Context
             public DbSet<SPECJALIZACJA> SPECJALIZACJE { get; set; }
             public DbSet<Przychodnia.Models.WIZYTA> WIZYTY { get; set; }
             public DbSet<Przychodnia.Models.ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNICY { get; set; }
-            public System.Data.Entity.DbSet<Przychodnia.Models.Author> Authors { get; set; }
-
-            public System.Data.Entity.DbSet<Przychodnia.Models.Book> Books { get; set; }
-
-            public System.Data.Entity.DbSet<Przychodnia.Models.AuthorToBook> AuthorsToBooks { get; set; }
-            public System.Data.Entity.DbSet<Przychodnia.Models.Book2> Books2 { get; set; }
-
-            public System.Data.Entity.DbSet<Przychodnia.Models.AuthorToBook2> AuthorsToBooks2 { get; set; }
-        public System.Data.Entity.DbSet<Przychodnia.Models.Pracownik_Specjalizacja> Pracownik_Specjalizacje { get; set; }
+            public System.Data.Entity.DbSet<Przychodnia.Models.Pracownik_Specjalizacja> Pracownik_Specjalizacje { get; set; }
 
     }
 }
