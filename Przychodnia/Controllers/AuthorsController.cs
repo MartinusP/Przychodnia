@@ -111,10 +111,10 @@ namespace Przychodnia.Controllers
             var Results2 = from b in db.Books2
                           select new
                           {
-                              b.ID_ODDZIAL,
+                              b.ID_SPECJALIZACJA,
                               b.NAZWA,
                               Checked = ((from ab in db.AuthorsToBooks2
-                                          where (ab.ID_PRACOWNIK == id) & (ab.ID_ODDZIAL == b.ID_ODDZIAL)
+                                          where (ab.ID_PRACOWNIK == id) & (ab.ID_ODDZIAL == b.ID_SPECJALIZACJA)
                                           select ab).Count() > 0)
                           };
 
@@ -136,7 +136,7 @@ namespace Przychodnia.Controllers
 
             foreach (var item in Results2)
             {
-                MyCheckBoxList2.Add(new CheckBoxViewModel { ID = item.ID_ODDZIAL, Name = item.NAZWA, Checked = item.Checked });
+                MyCheckBoxList2.Add(new CheckBoxViewModel { ID = item.ID_SPECJALIZACJA, Name = item.NAZWA, Checked = item.Checked });
             }
 
             MyViewModel.Books = MyCheckBoxList;

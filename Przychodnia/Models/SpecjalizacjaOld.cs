@@ -6,12 +6,20 @@ using System.Web;
 
 namespace Przychodnia.Models
 {
-    public class Book2
+    public partial class SPECJALIZACJA_OLD
+
     {
+        /*
+        public SPECJALIZACJA()
+        {
+            this.PRACOWNICY = new HashSet<PRACOWNIK>();
+        }
+        */
         [Key]
         public int ID_SPECJALIZACJA { get; set; }
         public string NAZWA { get; set; }
 
-        public virtual ICollection<AuthorToBook2> AuthorsToBooks2 { get; set; }
+
+        //public virtual ICollection<PRACOWNIK> PRACOWNICY { get; set; }
     }
 }
