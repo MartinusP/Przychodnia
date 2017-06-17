@@ -15,21 +15,21 @@
         <h4>Author</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.AuthorID)
+        @Html.HiddenFor(model => model.ID_PRACOWNIK)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IMIE, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
+                @Html.EditorFor(model => model.IMIE)
+                @Html.ValidationMessageFor(model => model.IMIE)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Surname, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.NAZWISKO, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Surname)
-                @Html.ValidationMessageFor(model => model.Surname)
+                @Html.EditorFor(model => model.NAZWISKO)
+                @Html.ValidationMessageFor(model => model.NAZWISKO)
             </div>
         </div>
 

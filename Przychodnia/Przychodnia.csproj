@@ -215,26 +215,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706162141223_InitialCreate.cs" />
-    <Compile Include="Migrations\201706162141223_InitialCreate.Designer.cs">
-      <DependentUpon>201706162141223_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706162206127_initial.cs" />
-    <Compile Include="Migrations\201706162206127_initial.Designer.cs">
-      <DependentUpon>201706162206127_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706162321295_initial2.cs" />
-    <Compile Include="Migrations\201706162321295_initial2.Designer.cs">
-      <DependentUpon>201706162321295_initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706170015533_initial3.cs" />
-    <Compile Include="Migrations\201706170015533_initial3.Designer.cs">
-      <DependentUpon>201706170015533_initial3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706170025259_initial31.cs" />
-    <Compile Include="Migrations\201706170025259_initial31.Designer.cs">
-      <DependentUpon>201706170025259_initial31.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -307,21 +287,6 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EmbeddedResource Include="Migrations\201706162141223_InitialCreate.resx">
-      <DependentUpon>201706162141223_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706162206127_initial.resx">
-      <DependentUpon>201706162206127_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706162321295_initial2.resx">
-      <DependentUpon>201706162321295_initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706170015533_initial3.resx">
-      <DependentUpon>201706170015533_initial3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706170025259_initial31.resx">
-      <DependentUpon>201706170025259_initial31.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />

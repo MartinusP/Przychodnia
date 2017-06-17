@@ -47,7 +47,7 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BookID,Title")] Book book)
+        public ActionResult Create([Bind(Include = "ID_ODDZIAL,NAZWA")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BookID,Title")] Book book)
+        public ActionResult Edit([Bind(Include = "ID_ODDZIAL,NAZWA")] Book book)
         {
             if (ModelState.IsValid)
             {

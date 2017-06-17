@@ -37,24 +37,24 @@ namespace Przychodnia.Controllers
             var Results = from b in db.Books
                           select new
                           {
-                              b.BookID,
-                              b.Title,
+                              b.ID_ODDZIAL,
+                              b.NAZWA,
                               Checked = ((from ab in db.AuthorsToBooks
-                                          where (ab.AuthorID == id) & (ab.BookID == b.BookID)
+                                          where (ab.ID_PRACOWNIK == id) & (ab.ID_ODDZIAL == b.ID_ODDZIAL)
                                           select ab).Count() > 0)
                           };
 
             var MyViewModel = new AuthorsViewModel();
 
-            MyViewModel.AuthorID = id.Value;
-            MyViewModel.Name = author.Name;
-            MyViewModel.Surname = author.Surname;
+            MyViewModel.ID_PRACOWNIK = id.Value;
+            MyViewModel.IMIE = author.IMIE;
+            MyViewModel.NAZWISKO = author.NAZWISKO;
 
             var MyCheckBoxList = new List<CheckBoxViewModel>();
 
             foreach (var item in Results)
             {
-                MyCheckBoxList.Add(new CheckBoxViewModel { ID = item.BookID, Name = item.Title, Checked = item.Checked });
+                MyCheckBoxList.Add(new CheckBoxViewModel { ID = item.ID_ODDZIAL, Name = item.NAZWA, Checked = item.Checked });
             }
 
             MyViewModel.Books = MyCheckBoxList;
@@ -73,7 +73,7 @@ namespace Przychodnia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AuthorID,Name,Surname")] Author author)
+        public ActionResult Create([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO")] Author author)
         {
             if (ModelState.IsValid)
             {
@@ -101,24 +101,24 @@ namespace Przychodnia.Controllers
             var Results = from b in db.Books
                           select new
                           {
-                              b.BookID,
-                              b.Title,
+                              b.ID_ODDZIAL,
+                              b.NAZWA,
                               Checked = ((from ab in db.AuthorsToBooks
-                                          where (ab.AuthorID == id) & (ab.BookID == b.BookID)
+                                          where (ab.ID_PRACOWNIK == id) & (ab.ID_ODDZIAL == b.ID_ODDZIAL)
                                           select ab).Count() > 0)
                           };
 
             var MyViewModel = new AuthorsViewModel();
 
-            MyViewModel.AuthorID = id.Value;
-            MyViewModel.Name = author.Name;
-            MyViewModel.Surname = author.Surname;
+            MyViewModel.ID_PRACOWNIK = id.Value;
+            MyViewModel.IMIE = author.IMIE;
+            MyViewModel.NAZWISKO = author.NAZWISKO;
 
             var MyCheckBoxList = new List<CheckBoxViewModel>();
 
             foreach (var item in Results)
             {
-                MyCheckBoxList.Add(new CheckBoxViewModel { ID = item.BookID, Name = item.Title, Checked = item.Checked });
+                MyCheckBoxList.Add(new CheckBoxViewModel { ID = item.ID_ODDZIAL, Name = item.NAZWA, Checked = item.Checked });
             }
 
             MyViewModel.Books = MyCheckBoxList;
@@ -135,14 +135,14 @@ namespace Przychodnia.Controllers
         {
             if (ModelState.IsValid)
             {
-                var MyAuthor = db.Authors.Find(author.AuthorID);
+                var MyAuthor = db.Authors.Find(author.ID_PRACOWNIK);
 
-                MyAuthor.Name = author.Name;
-                MyAuthor.Surname = author.Surname;
+                MyAuthor.IMIE = author.IMIE;
+                MyAuthor.NAZWISKO = author.NAZWISKO;
 
                 foreach (var item in db.AuthorsToBooks)
                 {
-                    if (item.AuthorID == author.AuthorID)
+                    if (item.ID_PRACOWNIK == author.ID_PRACOWNIK)
                     {
                         db.Entry(item).State = System.Data.Entity.EntityState.Deleted;
                     }
@@ -152,7 +152,7 @@ namespace Przychodnia.Controllers
                 {
                     if (item.Checked)
                     {
-                        db.AuthorsToBooks.Add(new AuthorToBook() { AuthorID = author.AuthorID, BookID = item.ID });
+                        db.AuthorsToBooks.Add(new AuthorToBook() { ID_PRACOWNIK = author.ID_PRACOWNIK, ID_ODDZIAL = item.ID });
                     }
                 }
 
