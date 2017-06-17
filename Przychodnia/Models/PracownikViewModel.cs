@@ -12,7 +12,7 @@ namespace Przychodnia.Models
         public int ID_PRACOWNIK { get; set; }
         public string IMIE { get; set; }
         public string NAZWISKO { get; set; }
-        public List<CheckBoxViewModel> Books { get; set; }
-        public List<CheckBoxViewModel> Books2 { get; set; }
+        public List<CheckBoxViewModel> ListaOddzialPracownicy { get; set; }
+        public List<CheckBoxViewModel> ListaPracownicySpecjalizacje { get; set; }
     }
 }

@@ -111,8 +111,8 @@ namespace Przychodnia
                 MyCheckBoxList2.Add(new CheckBoxViewModel { ID = item.ID_SPECJALIZACJA, Name = item.NAZWA, Checked = item.Checked });
             }
 
-            MyViewModel.Books = MyCheckBoxList;
-            MyViewModel.Books2 = MyCheckBoxList2;
+            MyViewModel.ListaOddzialPracownicy = MyCheckBoxList;
+            MyViewModel.ListaPracownicySpecjalizacje = MyCheckBoxList2;
 
             return View(MyViewModel);
         }
@@ -147,7 +147,7 @@ namespace Przychodnia
                     }
                 }
 
-                foreach (var item in pRACOWNIK.Books)
+                foreach (var item in pRACOWNIK.ListaOddzialPracownicy)
                 {
                     if (item.Checked)
                     {
@@ -155,7 +155,7 @@ namespace Przychodnia
                     }
                 }
 
-                foreach (var item in pRACOWNIK.Books2)
+                foreach (var item in pRACOWNIK.ListaPracownicySpecjalizacje)
                 {
                     if (item.Checked)
                     {
