@@ -64,8 +64,8 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK author = db.PRACOWNICY.Find(id);
-            if (author == null)
+            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
+            if (pRACOWNIK == null)
             {
                 return HttpNotFound();
             }
@@ -95,8 +95,8 @@ namespace Przychodnia
             var MyViewModel = new PracownikViewModel();
 
             MyViewModel.ID_PRACOWNIK = id.Value;
-            MyViewModel.IMIE = author.IMIE;
-            MyViewModel.NAZWISKO = author.NAZWISKO;
+            MyViewModel.IMIE = pRACOWNIK.IMIE;
+            MyViewModel.NAZWISKO = pRACOWNIK.NAZWISKO;
 
             var MyCheckBoxList = new List<CheckBoxViewModel>();
             var MyCheckBoxList2 = new List<CheckBoxViewModel>();
@@ -122,18 +122,18 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(PracownikViewModel author)
+        public ActionResult Edit(PracownikViewModel pRACOWNIK)
         {
             if (ModelState.IsValid)
             {
-                var MyAuthor = db.PRACOWNICY.Find(author.ID_PRACOWNIK);
+                var MyAuthor = db.PRACOWNICY.Find(pRACOWNIK.ID_PRACOWNIK);
 
-                MyAuthor.IMIE = author.IMIE;
-                MyAuthor.NAZWISKO = author.NAZWISKO;
+                MyAuthor.IMIE = pRACOWNIK.IMIE;
+                MyAuthor.NAZWISKO = pRACOWNIK.NAZWISKO;
 
                 foreach (var item in db.ODDZIAL_PRACOWNICY)
                 {
-                    if (item.ID_PRACOWNIK == author.ID_PRACOWNIK)
+                    if (item.ID_PRACOWNIK == pRACOWNIK.ID_PRACOWNIK)
                     {
                         db.Entry(item).State = System.Data.Entity.EntityState.Deleted;
                     }
@@ -141,32 +141,32 @@ namespace Przychodnia
 
                 foreach (var item in db.Pracownik_Specjalizacje)
                 {
-                    if (item.ID_PRACOWNIK == author.ID_PRACOWNIK)
+                    if (item.ID_PRACOWNIK == pRACOWNIK.ID_PRACOWNIK)
                     {
                         db.Entry(item).State = System.Data.Entity.EntityState.Deleted;
                     }
                 }
 
-                foreach (var item in author.Books)
+                foreach (var item in pRACOWNIK.Books)
                 {
                     if (item.Checked)
                     {
-                        db.ODDZIAL_PRACOWNICY.Add(new ODDZIAL_PRACOWNIK() { ID_PRACOWNIK = author.ID_PRACOWNIK, ID_ODDZIAL = item.ID });
+                        db.ODDZIAL_PRACOWNICY.Add(new ODDZIAL_PRACOWNIK() { ID_PRACOWNIK = pRACOWNIK.ID_PRACOWNIK, ID_ODDZIAL = item.ID });
                     }
                 }
 
-                foreach (var item in author.Books2)
+                foreach (var item in pRACOWNIK.Books2)
                 {
                     if (item.Checked)
                     {
-                        db.Pracownik_Specjalizacje.Add(new Pracownik_Specjalizacja() { ID_PRACOWNIK = author.ID_PRACOWNIK, ID_SPECJALIZACJA = item.ID });
+                        db.Pracownik_Specjalizacje.Add(new Pracownik_Specjalizacja() { ID_PRACOWNIK = pRACOWNIK.ID_PRACOWNIK, ID_SPECJALIZACJA = item.ID });
                     }
                 }
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(author);
+            return View(pRACOWNIK);
         }
 
 

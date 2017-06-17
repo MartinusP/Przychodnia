@@ -8,10 +8,16 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink(MultiLanguage.CreateNew, "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ODDZIAL.NAZWA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.DZIEN_DYZURU)
         </th>
@@ -21,17 +27,17 @@
         <th>
             @Html.DisplayNameFor(model => model.DO)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ODDZIAL.NAZWA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ODDZIAL.NAZWA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRACOWNIK.IMIE)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.DZIEN_DYZURU)
         </td>
@@ -42,15 +48,9 @@
             @Html.DisplayFor(modelItem => item.DO)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ODDZIAL.NAZWA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PRACOWNIK.IMIE)
-        </td>
-        <td>
-            @Html.ActionLink(MultiLanguage.Edit, "Edit", new { id=item.ID_DYZUR }) |
-            @Html.ActionLink(MultiLanguage.Details, "Details", new { id=item.ID_DYZUR }) |
-            @Html.ActionLink(MultiLanguage.Delete, "Delete", new { id=item.ID_DYZUR })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_DYZUR }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_DYZUR }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_DYZUR })
         </td>
     </tr>
 }
