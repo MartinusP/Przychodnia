@@ -47,7 +47,7 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO")] PRACOWNIK pRACOWNIK)
+        public ActionResult Create([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY")] PRACOWNIK pRACOWNIK)
         {
             if (ModelState.IsValid)
             {
@@ -97,6 +97,8 @@ namespace Przychodnia
             MyViewModel.ID_PRACOWNIK = id.Value;
             MyViewModel.IMIE = pRACOWNIK.IMIE;
             MyViewModel.NAZWISKO = pRACOWNIK.NAZWISKO;
+            MyViewModel.ADRES = pRACOWNIK.ADRES;
+            MyViewModel.EMAIL_KONTAKTOWY = pRACOWNIK.EMAIL_KONTAKTOWY;
 
             var MyCheckBoxList = new List<CheckBoxViewModel>();
             var MyCheckBoxList2 = new List<CheckBoxViewModel>();
@@ -130,6 +132,8 @@ namespace Przychodnia
 
                 MyAuthor.IMIE = pRACOWNIK.IMIE;
                 MyAuthor.NAZWISKO = pRACOWNIK.NAZWISKO;
+                MyAuthor.ADRES = pRACOWNIK.ADRES;
+                MyAuthor.EMAIL_KONTAKTOWY = pRACOWNIK.EMAIL_KONTAKTOWY;
 
                 foreach (var item in db.ODDZIAL_PRACOWNICY)
                 {

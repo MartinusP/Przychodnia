@@ -21,9 +21,7 @@ namespace Przychodnia.Models
         public string NAZWISKO { get; set; }
         public string ADRES { get; set; }
         public string EMAIL_KONTAKTOWY { get; set; }
-        public Nullable<int> ID_SPECJALIZACJA { get; set; }
-
-        
+         
         public virtual ICollection<DYZUR> DYZURY { get; set; }
         public virtual ICollection<WIZYTA> WIZYTY { get; set; }
         public virtual ICollection<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNIK { get; set; }

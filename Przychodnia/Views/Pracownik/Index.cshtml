@@ -17,6 +17,12 @@
         <th>
             @Html.DisplayNameFor(model => model.NAZWISKO)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ADRES)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMAIL_KONTAKTOWY)
+        </th>
         <th></th>
     </tr>
 
@@ -27,6 +33,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.NAZWISKO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADRES)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMAIL_KONTAKTOWY)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID_PRACOWNIK }) |
