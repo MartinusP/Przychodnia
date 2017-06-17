@@ -9,156 +9,181 @@ using System.Web.Mvc;
 using Przychodnia.Context;
 using Przychodnia.Models;
 
-namespace Przychodnia
+namespace Przychodnia.Controllers
 {
-    public class PracownikController : Controller
+    public class AuthorsController : Controller
     {
         private PRZYCHODNIAEntities db = new PRZYCHODNIAEntities();
 
-        // GET: Pracownik
+        // GET: /Authors/
         public ActionResult Index()
         {
-            return View(db.PRACOWNICY.ToList());
+            return View(db.Authors.ToList());
         }
 
-        // GET: Pracownik/Details/5
+        // GET: /Authors/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
-            if (pRACOWNIK == null)
+            Author author = db.Authors.Find(id);
+            if (author == null)
             {
                 return HttpNotFound();
             }
-            return View(pRACOWNIK);
+
+            var Results = from b in db.Books
+                          select new
+                          {
+                              b.BookID,
+                              b.Title,
+                              Checked = ((from ab in db.AuthorsToBooks
+                                          where (ab.AuthorID == id) & (ab.BookID == b.BookID)
+                                          select ab).Count() > 0)
+                          };
+
+            var MyViewModel = new AuthorsViewModel();
+
+            MyViewModel.AuthorID = id.Value;
+            MyViewModel.Name = author.Name;
+            MyViewModel.Surname = author.Surname;
+
+            var MyCheckBoxList = new List<CheckBoxViewModel>();
+
+            foreach (var item in Results)
+            {
+                MyCheckBoxList.Add(new CheckBoxViewModel { ID = item.BookID, Name = item.Title, Checked = item.Checked });
+            }
+
+            MyViewModel.Books = MyCheckBoxList;
+
+            return View(MyViewModel);
         }
 
-        // GET: Pracownik/Create
+        // GET: /Authors/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Pracownik/Create
+        // POST: /Authors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO")] PRACOWNIK pRACOWNIK)
+        public ActionResult Create([Bind(Include = "AuthorID,Name,Surname")] Author author)
         {
             if (ModelState.IsValid)
             {
-                db.PRACOWNICY.Add(pRACOWNIK);
+                db.Authors.Add(author);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(pRACOWNIK);
+            return View(author);
         }
 
-        // GET: Pracownik/Edit/5
+        // GET: /Authors/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
-            if (pRACOWNIK == null)
+            Author author = db.Authors.Find(id);
+            if (author == null)
             {
                 return HttpNotFound();
             }
 
-            var Results = from b in db.ODDZIALY
+            var Results = from b in db.Books
                           select new
                           {
-                              b.ID_ODDZIAL,
-                              b.NAZWA,
-                              Checked = ((from ab in db.ODDZIAL_PRACOWNICY
-                                          where (ab.ID_PRACOWNIK == id) & (ab.ID_ODDZIAL == b.ID_ODDZIAL)
+                              b.BookID,
+                              b.Title,
+                              Checked = ((from ab in db.AuthorsToBooks
+                                          where (ab.AuthorID == id) & (ab.BookID == b.BookID)
                                           select ab).Count() > 0)
                           };
 
-            var MyViewModel = new PracownikOddzialViewModel();
+            var MyViewModel = new AuthorsViewModel();
 
-            MyViewModel.ID_PRACOWNIK = id.Value;
-            MyViewModel.IMIE = pRACOWNIK.IMIE;
-            MyViewModel.NAZWISKO = pRACOWNIK.NAZWISKO;
+            MyViewModel.AuthorID = id.Value;
+            MyViewModel.Name = author.Name;
+            MyViewModel.Surname = author.Surname;
 
             var MyCheckBoxList = new List<CheckBoxViewModel>();
 
             foreach (var item in Results)
             {
-                MyCheckBoxList.Add(new CheckBoxViewModel { ID = item.ID_ODDZIAL, Name = item.NAZWA, Checked = item.Checked });
+                MyCheckBoxList.Add(new CheckBoxViewModel { ID = item.BookID, Name = item.Title, Checked = item.Checked });
             }
 
-            MyViewModel.ODDZIAL_PRACOWNICY = MyCheckBoxList;
+            MyViewModel.Books = MyCheckBoxList;
 
             return View(MyViewModel);
-
         }
 
-        // POST: Pracownik/Edit/5
+        // POST: /Authors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(PracownikOddzialViewModel pRACOWNIK)
+        public ActionResult Edit(AuthorsViewModel author)
         {
             if (ModelState.IsValid)
             {
-                var MyAuthor = db.PRACOWNICY.Find(pRACOWNIK.ID_PRACOWNIK);
+                var MyAuthor = db.Authors.Find(author.AuthorID);
 
-                MyAuthor.IMIE = pRACOWNIK.IMIE;
-                MyAuthor.NAZWISKO = pRACOWNIK.NAZWISKO;
+                MyAuthor.Name = author.Name;
+                MyAuthor.Surname = author.Surname;
 
-                foreach (var item in db.ODDZIAL_PRACOWNICY)
+                foreach (var item in db.AuthorsToBooks)
                 {
-                    if (item.ID_PRACOWNIK == pRACOWNIK.ID_PRACOWNIK)
+                    if (item.AuthorID == author.AuthorID)
                     {
                         db.Entry(item).State = System.Data.Entity.EntityState.Deleted;
                     }
                 }
 
-                foreach (var item in pRACOWNIK.ODDZIAL_PRACOWNICY)
+                foreach (var item in author.Books)
                 {
                     if (item.Checked)
                     {
-                        db.ODDZIAL_PRACOWNICY.Add(new ODDZIAL_PRACOWNIK() { ID_PRACOWNIK = pRACOWNIK.ID_PRACOWNIK, ID_ODDZIAL = item.ID });
+                        db.AuthorsToBooks.Add(new AuthorToBook() { AuthorID = author.AuthorID, BookID = item.ID });
                     }
                 }
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(pRACOWNIK);
+            return View(author);
         }
 
-        // GET: Pracownik/Delete/5
+        // GET: /Authors/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
-            if (pRACOWNIK == null)
+            Author author = db.Authors.Find(id);
+            if (author == null)
             {
                 return HttpNotFound();
             }
-            return View(pRACOWNIK);
+            return View(author);
         }
 
-        // POST: Pracownik/Delete/5
+        // POST: /Authors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
-            db.PRACOWNICY.Remove(pRACOWNIK);
+            Author author = db.Authors.Find(id);
+            db.Authors.Remove(author);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,8 +1,7 @@
-﻿@using Przychodnia.App_GlobalResources;
-@model Przychodnia.Models.PRACOWNIK
+﻿@model Przychodnia.Models.PRACOWNIK
 
 @{
-    ViewBag.Title = "@Resources.MultiLanguage.Delete";
+    ViewBag.Title = "Delete";
 }
 
 <h2>Delete</h2>
@@ -28,38 +27,14 @@
             @Html.DisplayFor(model => model.NAZWISKO)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ADRES)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ADRES)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EMAIL_KONTAKTOWY)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EMAIL_KONTAKTOWY)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SPECJALIZACJA.NAZWA)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SPECJALIZACJA.NAZWA)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="@Resources.MultiLanguage.Delete" class="btn btn-default" /> |
-            @Html.ActionLink(MultiLanguage.BackToList, "Index")
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

@@ -203,6 +203,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AuthorsController.cs" />
+    <Compile Include="BooksController.cs" />
     <Compile Include="Context\PRZYCHODNIAEntities.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -213,8 +215,33 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706162141223_InitialCreate.cs" />
+    <Compile Include="Migrations\201706162141223_InitialCreate.Designer.cs">
+      <DependentUpon>201706162141223_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706162206127_initial.cs" />
+    <Compile Include="Migrations\201706162206127_initial.Designer.cs">
+      <DependentUpon>201706162206127_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706162321295_initial2.cs" />
+    <Compile Include="Migrations\201706162321295_initial2.Designer.cs">
+      <DependentUpon>201706162321295_initial2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706170015533_initial3.cs" />
+    <Compile Include="Migrations\201706170015533_initial3.Designer.cs">
+      <DependentUpon>201706170015533_initial3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706170025259_initial31.cs" />
+    <Compile Include="Migrations\201706170025259_initial31.Designer.cs">
+      <DependentUpon>201706170025259_initial31.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\Author.cs" />
+    <Compile Include="Models\AuthorsViewModel.cs" />
+    <Compile Include="Models\AuthorToBook.cs" />
+    <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Dyzur.cs" />
     <Compile Include="Models\Oddzial.cs" />
     <Compile Include="Models\OddzialPracownik.cs" />
@@ -229,12 +256,11 @@
     <Compile Include="Models\DyzurViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Controllers\OddzialController.cs" />
-    <Compile Include="Controllers\OddzialPracownikController.cs" />
     <Compile Include="Controllers\PacjentController.cs" />
     <Compile Include="Controllers\PlacowkaController.cs" />
-    <Compile Include="Controllers\PracownikController.cs" />
     <Compile Include="Models\PracownikOddzialViewModel.cs" />
+    <Compile Include="Controllers\OddzialController.cs" />
+    <Compile Include="Controllers\PracownikController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ReceptaController.cs" />
     <Compile Include="Controllers\SalaController.cs" />
@@ -281,6 +307,21 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EmbeddedResource Include="Migrations\201706162141223_InitialCreate.resx">
+      <DependentUpon>201706162141223_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706162206127_initial.resx">
+      <DependentUpon>201706162206127_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706162321295_initial2.resx">
+      <DependentUpon>201706162321295_initial2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706170015533_initial3.resx">
+      <DependentUpon>201706170015533_initial3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706170025259_initial31.resx">
+      <DependentUpon>201706170025259_initial31.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -349,16 +390,6 @@
     <Content Include="Views\Dyzur\Details.cshtml" />
     <Content Include="Views\Dyzur\Edit.cshtml" />
     <Content Include="Views\Dyzur\Index.cshtml" />
-    <Content Include="Views\Oddzial\Create.cshtml" />
-    <Content Include="Views\Oddzial\Delete.cshtml" />
-    <Content Include="Views\Oddzial\Details.cshtml" />
-    <Content Include="Views\Oddzial\Edit.cshtml" />
-    <Content Include="Views\Oddzial\Index.cshtml" />
-    <Content Include="Views\OddzialPracownik\Create.cshtml" />
-    <Content Include="Views\OddzialPracownik\Delete.cshtml" />
-    <Content Include="Views\OddzialPracownik\Details.cshtml" />
-    <Content Include="Views\OddzialPracownik\Edit.cshtml" />
-    <Content Include="Views\OddzialPracownik\Index.cshtml" />
     <Content Include="Views\Pacjent\Create.cshtml" />
     <Content Include="Views\Pacjent\Delete.cshtml" />
     <Content Include="Views\Pacjent\Details.cshtml" />
@@ -369,11 +400,6 @@
     <Content Include="Views\Placowka\Details.cshtml" />
     <Content Include="Views\Placowka\Edit.cshtml" />
     <Content Include="Views\Placowka\Index.cshtml" />
-    <Content Include="Views\Pracownik\Create.cshtml" />
-    <Content Include="Views\Pracownik\Delete.cshtml" />
-    <Content Include="Views\Pracownik\Details.cshtml" />
-    <Content Include="Views\Pracownik\Edit.cshtml" />
-    <Content Include="Views\Pracownik\Index.cshtml" />
     <Content Include="Views\Recepta\Create.cshtml" />
     <Content Include="Views\Recepta\Delete.cshtml" />
     <Content Include="Views\Recepta\Details.cshtml" />
@@ -394,6 +420,31 @@
     <Content Include="Views\Wizyta\Details.cshtml" />
     <Content Include="Views\Wizyta\Edit.cshtml" />
     <Content Include="Views\Wizyta\Index.cshtml" />
+    <Content Include="Views\Pracownik\Create.cshtml" />
+    <Content Include="Views\Pracownik\Delete.cshtml" />
+    <Content Include="Views\Pracownik\Details.cshtml" />
+    <Content Include="Views\Pracownik\Edit.cshtml" />
+    <Content Include="Views\Pracownik\Index.cshtml" />
+    <Content Include="Views\Oddzial\Create.cshtml" />
+    <Content Include="Views\Oddzial\Delete.cshtml" />
+    <Content Include="Views\Oddzial\Details.cshtml" />
+    <Content Include="Views\Oddzial\Edit.cshtml" />
+    <Content Include="Views\Oddzial\Index.cshtml" />
+    <Content Include="Views\Authors\Create.cshtml" />
+    <Content Include="Views\Authors\Delete.cshtml" />
+    <Content Include="Views\Authors\Details.cshtml" />
+    <Content Include="Views\Authors\Edit.cshtml" />
+    <Content Include="Views\Authors\Index.cshtml" />
+    <Content Include="Views\Books\Create.cshtml" />
+    <Content Include="Views\Books\Delete.cshtml" />
+    <Content Include="Views\Books\Details.cshtml" />
+    <Content Include="Views\Books\Edit.cshtml" />
+    <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\Authors - Copy\Create.cshtml" />
+    <Content Include="Views\Authors - Copy\Delete.cshtml" />
+    <Content Include="Views\Authors - Copy\Details.cshtml" />
+    <Content Include="Views\Authors - Copy\Edit.cshtml" />
+    <Content Include="Views\Authors - Copy\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

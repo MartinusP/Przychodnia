@@ -11,107 +11,107 @@ using Przychodnia.Models;
 
 namespace Przychodnia
 {
-    public class OddzialController : Controller
+    public class BooksController : Controller
     {
         private PRZYCHODNIAEntities db = new PRZYCHODNIAEntities();
 
-        // GET: Oddzial
+        // GET: Books
         public ActionResult Index()
         {
-            return View(db.ODDZIALY.ToList());
+            return View(db.Books.ToList());
         }
 
-        // GET: Oddzial/Details/5
+        // GET: Books/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = db.ODDZIALY.Find(id);
-            if (oDDZIAL == null)
+            Book book = db.Books.Find(id);
+            if (book == null)
             {
                 return HttpNotFound();
             }
-            return View(oDDZIAL);
+            return View(book);
         }
 
-        // GET: Oddzial/Create
+        // GET: Books/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Oddzial/Create
+        // POST: Books/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_ODDZIAL,NAZWA")] ODDZIAL oDDZIAL)
+        public ActionResult Create([Bind(Include = "BookID,Title")] Book book)
         {
             if (ModelState.IsValid)
             {
-                db.ODDZIALY.Add(oDDZIAL);
+                db.Books.Add(book);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(oDDZIAL);
+            return View(book);
         }
 
-        // GET: Oddzial/Edit/5
+        // GET: Books/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = db.ODDZIALY.Find(id);
-            if (oDDZIAL == null)
+            Book book = db.Books.Find(id);
+            if (book == null)
             {
                 return HttpNotFound();
             }
-            return View(oDDZIAL);
+            return View(book);
         }
 
-        // POST: Oddzial/Edit/5
+        // POST: Books/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_ODDZIAL,NAZWA")] ODDZIAL oDDZIAL)
+        public ActionResult Edit([Bind(Include = "BookID,Title")] Book book)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(oDDZIAL).State = EntityState.Modified;
+                db.Entry(book).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(oDDZIAL);
+            return View(book);
         }
 
-        // GET: Oddzial/Delete/5
+        // GET: Books/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = db.ODDZIALY.Find(id);
-            if (oDDZIAL == null)
+            Book book = db.Books.Find(id);
+            if (book == null)
             {
                 return HttpNotFound();
             }
-            return View(oDDZIAL);
+            return View(book);
         }
 
-        // POST: Oddzial/Delete/5
+        // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ODDZIAL oDDZIAL = db.ODDZIALY.Find(id);
-            db.ODDZIALY.Remove(oDDZIAL);
+            Book book = db.Books.Find(id);
+            db.Books.Remove(book);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
