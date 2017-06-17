@@ -28,12 +28,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
-            if (pRACOWNIK == null)
+            PRACOWNIK pracownik = db.PRACOWNICY.Find(id);
+            if (pracownik == null)
             {
                 return HttpNotFound();
             }
-            return View(pRACOWNIK);
+            return View(pracownik);
         }
 
         // GET: Pracownik/Create
@@ -47,16 +47,16 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY")] PRACOWNIK pRACOWNIK)
+        public ActionResult Create([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY")] PRACOWNIK pracownik)
         {
             if (ModelState.IsValid)
             {
-                db.PRACOWNICY.Add(pRACOWNIK);
+                db.PRACOWNICY.Add(pracownik);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(pRACOWNIK);
+            return View(pracownik);
         }
         public ActionResult Edit(int? id)
         {
@@ -64,8 +64,8 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
-            if (pRACOWNIK == null)
+            PRACOWNIK pracownik = db.PRACOWNICY.Find(id);
+            if (pracownik == null)
             {
                 return HttpNotFound();
             }
@@ -92,31 +92,31 @@ namespace Przychodnia
 
 
 
-            var MyViewModel = new PracownikViewModel();
+            var pracownikViewModel = new PracownikViewModel();
 
-            MyViewModel.ID_PRACOWNIK = id.Value;
-            MyViewModel.IMIE = pRACOWNIK.IMIE;
-            MyViewModel.NAZWISKO = pRACOWNIK.NAZWISKO;
-            MyViewModel.ADRES = pRACOWNIK.ADRES;
-            MyViewModel.EMAIL_KONTAKTOWY = pRACOWNIK.EMAIL_KONTAKTOWY;
+            pracownikViewModel.ID_PRACOWNIK = id.Value;
+            pracownikViewModel.IMIE = pracownik.IMIE;
+            pracownikViewModel.NAZWISKO = pracownik.NAZWISKO;
+            pracownikViewModel.ADRES = pracownik.ADRES;
+            pracownikViewModel.EMAIL_KONTAKTOWY = pracownik.EMAIL_KONTAKTOWY;
 
-            var MyCheckBoxList = new List<CheckBoxViewModel>();
-            var MyCheckBoxList2 = new List<CheckBoxViewModel>();
+            var oddzialCheckBoxList = new List<CheckBoxViewModel>();
+            var specjalizacjaCheckBoxList = new List<CheckBoxViewModel>();
 
             foreach (var item in Results)
             {
-                MyCheckBoxList.Add(new CheckBoxViewModel { ID = item.ID_ODDZIAL, Name = item.NAZWA, Checked = item.Checked });
+                oddzialCheckBoxList.Add(new CheckBoxViewModel { ID = item.ID_ODDZIAL, Name = item.NAZWA, Checked = item.Checked });
             }
 
             foreach (var item in Results2)
             {
-                MyCheckBoxList2.Add(new CheckBoxViewModel { ID = item.ID_SPECJALIZACJA, Name = item.NAZWA, Checked = item.Checked });
+                specjalizacjaCheckBoxList.Add(new CheckBoxViewModel { ID = item.ID_SPECJALIZACJA, Name = item.NAZWA, Checked = item.Checked });
             }
 
-            MyViewModel.ListaOddzialPracownicy = MyCheckBoxList;
-            MyViewModel.ListaPracownicySpecjalizacje = MyCheckBoxList2;
+            pracownikViewModel.ListaOddzialPracownicy = oddzialCheckBoxList;
+            pracownikViewModel.ListaPracownicySpecjalizacje = specjalizacjaCheckBoxList;
 
-            return View(MyViewModel);
+            return View(pracownikViewModel);
         }
 
         // POST: /Authors/Edit/5
@@ -124,20 +124,20 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(PracownikViewModel pRACOWNIK)
+        public ActionResult Edit(PracownikViewModel pracownik)
         {
             if (ModelState.IsValid)
             {
-                var MyAuthor = db.PRACOWNICY.Find(pRACOWNIK.ID_PRACOWNIK);
+                var osoba = db.PRACOWNICY.Find(pracownik.ID_PRACOWNIK);
 
-                MyAuthor.IMIE = pRACOWNIK.IMIE;
-                MyAuthor.NAZWISKO = pRACOWNIK.NAZWISKO;
-                MyAuthor.ADRES = pRACOWNIK.ADRES;
-                MyAuthor.EMAIL_KONTAKTOWY = pRACOWNIK.EMAIL_KONTAKTOWY;
+                osoba.IMIE = pracownik.IMIE;
+                osoba.NAZWISKO = pracownik.NAZWISKO;
+                osoba.ADRES = pracownik.ADRES;
+                osoba.EMAIL_KONTAKTOWY = pracownik.EMAIL_KONTAKTOWY;
 
                 foreach (var item in db.ODDZIAL_PRACOWNICY)
                 {
-                    if (item.ID_PRACOWNIK == pRACOWNIK.ID_PRACOWNIK)
+                    if (item.ID_PRACOWNIK == pracownik.ID_PRACOWNIK)
                     {
                         db.Entry(item).State = System.Data.Entity.EntityState.Deleted;
                     }
@@ -145,32 +145,32 @@ namespace Przychodnia
 
                 foreach (var item in db.Pracownik_Specjalizacje)
                 {
-                    if (item.ID_PRACOWNIK == pRACOWNIK.ID_PRACOWNIK)
+                    if (item.ID_PRACOWNIK == pracownik.ID_PRACOWNIK)
                     {
                         db.Entry(item).State = System.Data.Entity.EntityState.Deleted;
                     }
                 }
 
-                foreach (var item in pRACOWNIK.ListaOddzialPracownicy)
+                foreach (var item in pracownik.ListaOddzialPracownicy)
                 {
                     if (item.Checked)
                     {
-                        db.ODDZIAL_PRACOWNICY.Add(new ODDZIAL_PRACOWNIK() { ID_PRACOWNIK = pRACOWNIK.ID_PRACOWNIK, ID_ODDZIAL = item.ID });
+                        db.ODDZIAL_PRACOWNICY.Add(new ODDZIAL_PRACOWNIK() { ID_PRACOWNIK = pracownik.ID_PRACOWNIK, ID_ODDZIAL = item.ID });
                     }
                 }
 
-                foreach (var item in pRACOWNIK.ListaPracownicySpecjalizacje)
+                foreach (var item in pracownik.ListaPracownicySpecjalizacje)
                 {
                     if (item.Checked)
                     {
-                        db.Pracownik_Specjalizacje.Add(new Pracownik_Specjalizacja() { ID_PRACOWNIK = pRACOWNIK.ID_PRACOWNIK, ID_SPECJALIZACJA = item.ID });
+                        db.Pracownik_Specjalizacje.Add(new Pracownik_Specjalizacja() { ID_PRACOWNIK = pracownik.ID_PRACOWNIK, ID_SPECJALIZACJA = item.ID });
                     }
                 }
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(pRACOWNIK);
+            return View(pracownik);
         }
 
 
@@ -181,12 +181,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
-            if (pRACOWNIK == null)
+            PRACOWNIK pracownik = db.PRACOWNICY.Find(id);
+            if (pracownik == null)
             {
                 return HttpNotFound();
             }
-            return View(pRACOWNIK);
+            return View(pracownik);
         }
 
         // POST: Pracownik/Delete/5
@@ -194,8 +194,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
-            db.PRACOWNICY.Remove(pRACOWNIK);
+            PRACOWNIK pracownik = db.PRACOWNICY.Find(id);
+            db.PRACOWNICY.Remove(pracownik);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
