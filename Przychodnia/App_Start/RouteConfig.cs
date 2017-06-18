@@ -9,14 +9,11 @@ namespace Przychodnia
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            //routes.LowercaseUrls = true;
-            routes.MapRoute("Default", "{controller}/{action}/{id}", new
-            {
-                controller = "Home",
-                action = "Index",
-                id = UrlParameter.Optional
-            }).RouteHandler = new DashRouteHandler();
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
 
             /*
             routes.MapRoute(

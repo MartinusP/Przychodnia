@@ -1,8 +1,7 @@
-﻿@using Przychodnia.App_GlobalResources;
-@model Przychodnia.Models.DYZUR
+﻿@model Przychodnia.Models.DYZUR
 
 @{
-    ViewBag.Title = "@Resources.MultiLanguage.Delete";
+    ViewBag.Title = "Delete";
 }
 
 <h2>Delete</h2>
@@ -12,6 +11,22 @@
     <h4>DYZUR</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ODDZIAL.NAZWA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ODDZIAL.NAZWA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRACOWNIK.IMIE)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.DZIEN_DYZURU)
         </dt>
@@ -36,30 +51,14 @@
             @Html.DisplayFor(model => model.DO)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ODDZIAL.NAZWA)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ODDZIAL.NAZWA)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PRACOWNIK.IMIE)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PRACOWNIK.IMIE)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="@Resources.MultiLanguage.Delete" class="btn btn-default" /> |
-            @Html.ActionLink(MultiLanguage.BackToList, "Index")
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

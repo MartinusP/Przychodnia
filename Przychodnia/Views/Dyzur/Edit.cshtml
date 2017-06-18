@@ -1,5 +1,4 @@
-﻿@using Przychodnia.App_GlobalResources;
-@model Przychodnia.Models.DYZUR
+﻿@model Przychodnia.Models.DYZUR
 
 @{
     ViewBag.Title = "Edit";
@@ -59,6 +58,24 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.DZIEN_DYZURU, htmlAttributes: new { @class = "lead col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.DZIEN_DYZURU, new { @class = "datetimepicker form-control" })
+                @Html.ValidationMessageFor(model => model.DZIEN_DYZURU, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DZIEN_DYZURU, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DZIEN_DYZURU, new { @class = "date-picker" })
+                @Html.ValidationMessageFor(model => model.DZIEN_DYZURU)
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
@@ -67,7 +84,7 @@
 }
 
 <div>
-    @Html.ActionLink(MultiLanguage.BackToList, "Index")
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

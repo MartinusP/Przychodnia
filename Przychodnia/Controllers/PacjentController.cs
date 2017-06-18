@@ -29,12 +29,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PACJENT pACJENT = await db.PACJENCI.FindAsync(id);
-            if (pACJENT == null)
+            PACJENT pacjent = await db.PACJENCI.FindAsync(id);
+            if (pacjent == null)
             {
                 return HttpNotFound();
             }
-            return View(pACJENT);
+            return View(pacjent);
         }
 
         // GET: Pacjent/Create
@@ -48,16 +48,16 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "IMIE,NAZWISKO,ADRES,PESEL,TELEFON_KONTAKTOWY,EMAIL_KONTAKTOWY")] PACJENT pACJENT)
+        public async Task<ActionResult> Create([Bind(Include = "IMIE,NAZWISKO,ADRES,PESEL,TELEFON_KONTAKTOWY,EMAIL_KONTAKTOWY")] PACJENT pacjent)
         {
             if (ModelState.IsValid)
             {
-                db.PACJENCI.Add(pACJENT);
+                db.PACJENCI.Add(pacjent);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(pACJENT);
+            return View(pacjent);
         }
 
         // GET: Pacjent/Edit/5
@@ -67,12 +67,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PACJENT pACJENT = await db.PACJENCI.FindAsync(id);
-            if (pACJENT == null)
+            PACJENT pacjent = await db.PACJENCI.FindAsync(id);
+            if (pacjent == null)
             {
                 return HttpNotFound();
             }
-            return View(pACJENT);
+            return View(pacjent);
         }
 
         // POST: Pacjent/Edit/5
@@ -80,15 +80,15 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "IMIE,NAZWISKO,ADRES,PESEL,TELEFON_KONTAKTOWY,EMAIL_KONTAKTOWY")] PACJENT pACJENT)
+        public async Task<ActionResult> Edit([Bind(Include = "IMIE,NAZWISKO,ADRES,PESEL,TELEFON_KONTAKTOWY,EMAIL_KONTAKTOWY")] PACJENT pacjent)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pACJENT).State = EntityState.Modified;
+                db.Entry(pacjent).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(pACJENT);
+            return View(pacjent);
         }
 
         // GET: Pacjent/Delete/5
@@ -98,12 +98,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PACJENT pACJENT = await db.PACJENCI.FindAsync(id);
-            if (pACJENT == null)
+            PACJENT pacjent = await db.PACJENCI.FindAsync(id);
+            if (pacjent == null)
             {
                 return HttpNotFound();
             }
-            return View(pACJENT);
+            return View(pacjent);
         }
 
         // POST: Pacjent/Delete/5
@@ -111,8 +111,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            PACJENT pACJENT = await db.PACJENCI.FindAsync(id);
-            db.PACJENCI.Remove(pACJENT);
+            PACJENT pacjent = await db.PACJENCI.FindAsync(id);
+            db.PACJENCI.Remove(pacjent);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

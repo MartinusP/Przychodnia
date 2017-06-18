@@ -9,7 +9,7 @@ using System.Web;
 namespace Przychodnia.Context
 {
 
-        public partial class PRZYCHODNIAEntities : DbContext
+        public class PRZYCHODNIAEntities : DbContext
         {
             public PRZYCHODNIAEntities()
                 : base("name=PRZYCHODNIAEntities")
@@ -17,22 +17,18 @@ namespace Przychodnia.Context
 
             }
 
-            protected override void OnModelCreating(DbModelBuilder modelBuilder)
-            {
-                //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-        }
-
             public DbSet<DYZUR> DYZURY { get; set; }
-            public DbSet<ODDZIAL> ODDZIALY { get; set; }
-            public DbSet<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNIK { get; set; }
+            public DbSet<Przychodnia.Models.ODDZIAL> ODDZIALY { get; set; }
             public DbSet<PACJENT> PACJENCI { get; set; }
             public DbSet<PLACOWKA> PLACOWKI { get; set; }
-            public DbSet<PRACOWNIK> PRACOWNICY { get; set; }
+            public DbSet<Przychodnia.Models.PRACOWNIK> PRACOWNICY { get; set; }
             public DbSet<RECEPTA> RECEPTY { get; set; }
             public DbSet<SALA> SALE { get; set; }
             public DbSet<SPECJALIZACJA> SPECJALIZACJE { get; set; }
             public DbSet<Przychodnia.Models.WIZYTA> WIZYTY { get; set; }
+            public DbSet<Przychodnia.Models.ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNICY { get; set; }
+            public System.Data.Entity.DbSet<Przychodnia.Models.Pracownik_Specjalizacja> Pracownik_Specjalizacje { get; set; }
 
-        }
+    }
 }
 

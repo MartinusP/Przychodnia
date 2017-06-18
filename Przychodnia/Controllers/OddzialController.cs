@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Przychodnia.Models;
 using Przychodnia.Context;
+using Przychodnia.Models;
 
 namespace Przychodnia
 {
     public class OddzialController : Controller
     {
-        private Context.PRZYCHODNIAEntities db = new Context.PRZYCHODNIAEntities();
+        private PRZYCHODNIAEntities db = new PRZYCHODNIAEntities();
 
         // GET: Oddzial
         public async Task<ActionResult> Index()
         {
-            var oDDZIALs = db.ODDZIALY.Include(o => o.PLACOWKA);
-            return View(await oDDZIALs.ToListAsync());
+            var oddzialy = db.ODDZIALY.Include(o => o.PLACOWKA);
+            return View(await oddzialy.ToListAsync());
         }
 
         // GET: Oddzial/Details/5
@@ -30,12 +30,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = await db.ODDZIALY.FindAsync(id);
-            if (oDDZIAL == null)
+            ODDZIAL oddzial = await db.ODDZIALY.FindAsync(id);
+            if (oddzial == null)
             {
                 return HttpNotFound();
             }
-            return View(oDDZIAL);
+            return View(oddzial);
         }
 
         // GET: Oddzial/Create
@@ -50,17 +50,17 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "NAZWA,MIEJSCOWOSC,ID_PLACOWKA")] ODDZIAL oDDZIAL)
+        public async Task<ActionResult> Create([Bind(Include = "ID_ODDZIAL,NAZWA,MIEJSCOWOSC,ID_PLACOWKA")] ODDZIAL oddzial)
         {
             if (ModelState.IsValid)
             {
-                db.ODDZIALY.Add(oDDZIAL);
+                db.ODDZIALY.Add(oddzial);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKI, "ID_PLACOWKA", "NAZWA", oDDZIAL.ID_PLACOWKA);
-            return View(oDDZIAL);
+            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKI, "ID_PLACOWKA", "NAZWA", oddzial.ID_PLACOWKA);
+            return View(oddzial);
         }
 
         // GET: Oddzial/Edit/5
@@ -70,13 +70,13 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = await db.ODDZIALY.FindAsync(id);
-            if (oDDZIAL == null)
+            ODDZIAL oddzial = await db.ODDZIALY.FindAsync(id);
+            if (oddzial == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKI, "ID_PLACOWKA", "NAZWA", oDDZIAL.ID_PLACOWKA);
-            return View(oDDZIAL);
+            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKI, "ID_PLACOWKA", "NAZWA", oddzial.ID_PLACOWKA);
+            return View(oddzial);
         }
 
         // POST: Oddzial/Edit/5
@@ -84,16 +84,16 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID_ODDZIAL,NAZWA,MIEJSCOWOSC,ID_PLACOWKA")] ODDZIAL oDDZIAL)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_ODDZIAL,NAZWA,MIEJSCOWOSC,ID_PLACOWKA")] ODDZIAL oddzial)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(oDDZIAL).State = EntityState.Modified;
+                db.Entry(oddzial).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKI, "ID_PLACOWKA", "NAZWA", oDDZIAL.ID_PLACOWKA);
-            return View(oDDZIAL);
+            ViewBag.ID_PLACOWKA = new SelectList(db.PLACOWKI, "ID_PLACOWKA", "NAZWA", oddzial.ID_PLACOWKA);
+            return View(oddzial);
         }
 
         // GET: Oddzial/Delete/5
@@ -103,12 +103,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ODDZIAL oDDZIAL = await db.ODDZIALY.FindAsync(id);
-            if (oDDZIAL == null)
+            ODDZIAL oddzial = await db.ODDZIALY.FindAsync(id);
+            if (oddzial == null)
             {
                 return HttpNotFound();
             }
-            return View(oDDZIAL);
+            return View(oddzial);
         }
 
         // POST: Oddzial/Delete/5
@@ -116,8 +116,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ODDZIAL oDDZIAL = await db.ODDZIALY.FindAsync(id);
-            db.ODDZIALY.Remove(oDDZIAL);
+            ODDZIAL oddzial = await db.ODDZIALY.FindAsync(id);
+            db.ODDZIALY.Remove(oddzial);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

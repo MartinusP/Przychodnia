@@ -9,8 +9,8 @@ namespace Przychodnia.Models
     public class CheckBoxViewModel
     {
         [Key]
-        public int ID_CheckBoxViewModel { get; set; }
-        public string Nazwa { get; set; }
-        public bool Zaznaczenie { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public bool Checked { get; set; }
     }
 }

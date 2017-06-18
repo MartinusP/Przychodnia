@@ -10,7 +10,9 @@ namespace Przychodnia.Models
     {
         [Key]
         public int ID_DYZUR { get; set; }
-        public Nullable<System.DateTime> DZIEN_DYZURU { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime DZIEN_DYZURU { get; set; }
         public Nullable<System.DateTime> OD { get; set; }
         public Nullable<System.DateTime> DO { get; set; }
         public int ID_PRACOWNIK { get; set; }

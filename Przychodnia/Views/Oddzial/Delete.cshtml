@@ -2,7 +2,7 @@
 @model Przychodnia.Models.ODDZIAL
 
 @{
-    ViewBag.Title = "@Resources.MultiLanguage.Delete";
+    ViewBag.Title = "Delete";
 }
 
 <h2>Delete</h2>
@@ -12,6 +12,14 @@
     <h4>ODDZIAL</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PLACOWKA.NAZWA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PLACOWKA.NAZWA)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.NAZWA)
         </dt>
@@ -28,22 +36,14 @@
             @Html.DisplayFor(model => model.MIEJSCOWOSC)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PLACOWKA.NAZWA)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PLACOWKA.NAZWA)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="@Resources.MultiLanguage.Delete" class="btn btn-default" /> |
-            @Html.ActionLink(MultiLanguage.BackToList, "Index")
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

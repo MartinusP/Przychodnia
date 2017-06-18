@@ -1,5 +1,4 @@
-﻿@using Przychodnia.App_GlobalResources;
-@model Przychodnia.Models.PracownikOddzialViewModel
+﻿@model Przychodnia.Models.PracownikViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -11,19 +10,70 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>PRACOWNIK</h4>
-        <hr />
 
+    <div class="form-horizontal">
+        <h4>Author</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID_PRACOWNIK)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IMIE, "IMIĘ", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-               @for (int i = 0; i < Model.Oddzialy.Count(); i++)
-               {
-                    @Html.EditorFor(m => Model.Oddzialy[i].Zaznaczenie)
-                    @Html.DisplayFor(m => Model.Oddzialy[i].Nazwa)
-                    @Html.HiddenFor(m => Model.Oddzialy[i].Nazwa)
-                    @Html.HiddenFor(m => Model.Oddzialy[i].ID_CheckBoxViewModel)
-               }
+                @Html.EditorFor(model => model.IMIE, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IMIE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NAZWISKO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NAZWISKO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NAZWISKO, "", new { @class = "text-danger" })
+            </div>
+        </div> 
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ADRES, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ADRES, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ADRES, "", new { @class = "text-danger" })
+            </div>
+        </div>  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EMAIL_KONTAKTOWY, "EMAIL KONTAKTOWY", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EMAIL_KONTAKTOWY, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EMAIL_KONTAKTOWY, "", new { @class = "text-danger" })
+            </div>
+        </div> 
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ListaOddzialPracownicy, "LISTA ODDZIAŁÓW DO KTÓREJ NALEŻY PRACOWNIK",new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @for (int i = 0; i < Model.ListaOddzialPracownicy.Count(); i++)
+                {
+                    @Html.EditorFor(m => Model.ListaOddzialPracownicy[i].Checked)
+                    @Html.DisplayFor(m => Model.ListaOddzialPracownicy[i].Name)
+
+                    @Html.HiddenFor(m => Model.ListaOddzialPracownicy[i].Name)
+                    @Html.HiddenFor(m => Model.ListaOddzialPracownicy[i].ID)
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ListaPracownicySpecjalizacje, "SPECJALIZACJE PRACOWNIKA",new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @for (int i = 0; i < Model.ListaPracownicySpecjalizacje.Count(); i++)
+                {
+                    @Html.EditorFor(m => Model.ListaPracownicySpecjalizacje[i].Checked)
+                    @Html.DisplayFor(m => Model.ListaPracownicySpecjalizacje[i].Name)
+
+                    @Html.HiddenFor(m => Model.ListaPracownicySpecjalizacje[i].Name)
+                    @Html.HiddenFor(m => Model.ListaPracownicySpecjalizacje[i].ID)
+                }
             </div>
         </div>
 
@@ -32,11 +82,11 @@
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
-
+    </div>
 }
 
 <div>
-    @Html.ActionLink(MultiLanguage.BackToList, "Index")
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

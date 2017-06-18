@@ -7,6 +7,12 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/datePicker")
+    @Styles.Render("~/Content/datepicker")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetime")
+
 
 </head>
 <body>
@@ -36,8 +42,8 @@
                                         <li>@Html.ActionLink("Placówka", "Index", "Placowka")</li>
                                         <li>@Html.ActionLink("Sala", "Index", "Sala")</li>
                                         <li>@Html.ActionLink("Specjalizacja", "Index", "Specjalizacja")</li>
-                                        <li>@Html.ActionLink(MultiLanguage.RolesAdmin, "Index", "RolesAdmin")</li>
-                                        <li>@Html.ActionLink(MultiLanguage.UsersAdmin, "Index", "UsersAdmin")</li>
+                                        @*<li>@Html.ActionLink(MultiLanguage.RolesAdmin, "Index", "RolesAdmin")</li>*@
+                                        @*<li>@Html.ActionLink(MultiLanguage.UsersAdmin, "Index", "UsersAdmin")</li>*@
                                     </ul>
                                 </li>
                                 <li>
@@ -114,5 +120,9 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+
+
 </body>
 </html>

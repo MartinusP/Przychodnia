@@ -29,12 +29,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RECEPTA rECEPTA = await db.RECEPTY.FindAsync(id);
-            if (rECEPTA == null)
+            RECEPTA recepta = await db.RECEPTY.FindAsync(id);
+            if (recepta == null)
             {
                 return HttpNotFound();
             }
-            return View(rECEPTA);
+            return View(recepta);
         }
 
         // GET: Recepta/Create
@@ -48,16 +48,16 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA rECEPTA)
+        public async Task<ActionResult> Create([Bind(Include = "DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA recepta)
         {
             if (ModelState.IsValid)
             {
-                db.RECEPTY.Add(rECEPTA);
+                db.RECEPTY.Add(recepta);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(rECEPTA);
+            return View(recepta);
         }
 
         // GET: Recepta/Edit/5
@@ -67,12 +67,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RECEPTA rECEPTA = await db.RECEPTY.FindAsync(id);
-            if (rECEPTA == null)
+            RECEPTA recepta = await db.RECEPTY.FindAsync(id);
+            if (recepta == null)
             {
                 return HttpNotFound();
             }
-            return View(rECEPTA);
+            return View(recepta);
         }
 
         // POST: Recepta/Edit/5
@@ -80,15 +80,15 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA rECEPTA)
+        public async Task<ActionResult> Edit([Bind(Include = "DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA recepta)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(rECEPTA).State = EntityState.Modified;
+                db.Entry(recepta).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(rECEPTA);
+            return View(recepta);
         }
 
         // GET: Recepta/Delete/5
@@ -98,12 +98,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RECEPTA rECEPTA = await db.RECEPTY.FindAsync(id);
-            if (rECEPTA == null)
+            RECEPTA recepta = await db.RECEPTY.FindAsync(id);
+            if (recepta == null)
             {
                 return HttpNotFound();
             }
-            return View(rECEPTA);
+            return View(recepta);
         }
 
         // POST: Recepta/Delete/5
@@ -111,8 +111,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            RECEPTA rECEPTA = await db.RECEPTY.FindAsync(id);
-            db.RECEPTY.Remove(rECEPTA);
+            RECEPTA recepta = await db.RECEPTY.FindAsync(id);
+            db.RECEPTY.Remove(recepta);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

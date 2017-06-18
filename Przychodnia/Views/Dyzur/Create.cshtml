@@ -1,9 +1,15 @@
-﻿@using Przychodnia.App_GlobalResources;
-@model Przychodnia.Models.DYZUR
+﻿@model Przychodnia.Models.DYZUR
 
 @{
     ViewBag.Title = "Create";
 }
+
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/datePicker")
+@Styles.Render("~/Content/datepicker")
+@Scripts.Render("~/bundles/bootstrap")
 
 <h2>Create</h2>
 
@@ -11,63 +17,119 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>DYZUR</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.DZIEN_DYZURU, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DZIEN_DYZURU, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DZIEN_DYZURU, "", new { @class = "text-danger" })
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DZIEN_DYZURU, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class='input-group date' id='datetimepicker2'>
+                            @Html.TextBoxFor(model => model.DZIEN_DYZURU, new { @class = "form-control datetimepicker2" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            @Html.ValidationMessageFor(model => model.DZIEN_DYZURU, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function ()
+                    {
+                        $('.datetimepicker2').datetimepicker({
+                            locale: 'pl',
+                            pickDate: true,                 //en/disables the date picker
+                            pickTime: true,                 //en/disables the time picker
+                            useMinutes: false,              //en/disables the minutes picker
+                            useSeconds: false,              //en/disables the seconds picker
+                            startDate: moment().subtract('days', 1)// a minimum date
+                        });
+                    });
+                </script>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class='col-sm-6'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#datetimepicker1').datetimepicker({ locale: 'pl' });
+                        });
+                    </script>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OD, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.OD, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OD, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DO, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ID_PRACOWNIK, "ID_PRACOWNIK", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ID_PRACOWNIK", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ID_PRACOWNIK, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ID_ODDZIAL, "ID_ODDZIAL", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ID_ODDZIAL", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ID_ODDZIAL, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.OD, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OD, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OD, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DO, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DO, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DO, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ID_PRACOWNIK, "ID_PRACOWNIK", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ID_PRACOWNIK", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ID_PRACOWNIK, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ID_ODDZIAL, "ID_ODDZIAL", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ID_ODDZIAL", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ID_ODDZIAL, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@Resources.MultiLanguage.Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+                    <script src="~/Scripts/jquery-3.1.1.js"></script>
+                    <script src="~/Scripts/moment.js"></script>
+                    <script src="~/Scripts/moment-with-locales.js"></script>
+                    <script src="~/Scripts/bootstrap.js"></script>
+                    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+                    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+                    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
 
-<div>
-    @Html.ActionLink(MultiLanguage.BackToList, "Index")
-</div>
+                }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

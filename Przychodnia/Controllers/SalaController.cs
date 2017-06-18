@@ -29,12 +29,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALA sALA = await db.SALE.FindAsync(id);
-            if (sALA == null)
+            SALA sala = await db.SALE.FindAsync(id);
+            if (sala == null)
             {
                 return HttpNotFound();
             }
-            return View(sALA);
+            return View(sala);
         }
 
         // GET: Sala/Create
@@ -48,16 +48,16 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "NUMER_SALI")] SALA sALA)
+        public async Task<ActionResult> Create([Bind(Include = "NUMER_SALI")] SALA sala)
         {
             if (ModelState.IsValid)
             {
-                db.SALE.Add(sALA);
+                db.SALE.Add(sala);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(sALA);
+            return View(sala);
         }
 
         // GET: Sala/Edit/5
@@ -67,12 +67,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALA sALA = await db.SALE.FindAsync(id);
-            if (sALA == null)
+            SALA sala = await db.SALE.FindAsync(id);
+            if (sala == null)
             {
                 return HttpNotFound();
             }
-            return View(sALA);
+            return View(sala);
         }
 
         // POST: Sala/Edit/5
@@ -80,15 +80,15 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "NUMER_SALI")] SALA sALA)
+        public async Task<ActionResult> Edit([Bind(Include = "NUMER_SALI")] SALA sala)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sALA).State = EntityState.Modified;
+                db.Entry(sala).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(sALA);
+            return View(sala);
         }
 
         // GET: Sala/Delete/5
@@ -98,12 +98,12 @@ namespace Przychodnia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALA sALA = await db.SALE.FindAsync(id);
-            if (sALA == null)
+            SALA sala = await db.SALE.FindAsync(id);
+            if (sala == null)
             {
                 return HttpNotFound();
             }
-            return View(sALA);
+            return View(sala);
         }
 
         // POST: Sala/Delete/5
@@ -111,8 +111,8 @@ namespace Przychodnia
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            SALA sALA = await db.SALE.FindAsync(id);
-            db.SALE.Remove(sALA);
+            SALA sala = await db.SALE.FindAsync(id);
+            db.SALE.Remove(sala);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

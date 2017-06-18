@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Przychodnia.Models;
 using Przychodnia.Context;
+using Przychodnia.Models;
 
 namespace Przychodnia
 {
@@ -17,31 +16,29 @@ namespace Przychodnia
         private PRZYCHODNIAEntities db = new PRZYCHODNIAEntities();
 
         // GET: Pracownik
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var pRACOWNIKs = db.PRACOWNICY.Include(p => p.SPECJALIZACJA);
-            return View(await pRACOWNIKs.ToListAsync());
+            return View(db.PRACOWNICY.ToList());
         }
 
         // GET: Pracownik/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = await db.PRACOWNICY.FindAsync(id);
-            if (pRACOWNIK == null)
+            PRACOWNIK pracownik = db.PRACOWNICY.Find(id);
+            if (pracownik == null)
             {
                 return HttpNotFound();
             }
-            return View(pRACOWNIK);
+            return View(pracownik);
         }
 
         // GET: Pracownik/Create
         public ActionResult Create()
         {
-            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA");
             return View();
         }
 
@@ -50,126 +47,156 @@ namespace Przychodnia
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY,ID_SPECJALIZACJA")] PRACOWNIK pRACOWNIK)
+        public ActionResult Create([Bind(Include = "ID_PRACOWNIK,IMIE,NAZWISKO,ADRES,EMAIL_KONTAKTOWY")] PRACOWNIK pracownik)
         {
             if (ModelState.IsValid)
             {
-                db.PRACOWNICY.Add(pRACOWNIK);
-                await db.SaveChangesAsync();
+                db.PRACOWNICY.Add(pracownik);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
-            return View(pRACOWNIK);
+            return View(pracownik);
         }
-
-        // GET: Pracownik/Edit/5
-            public  ActionResult Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = db.PRACOWNICY.Find(id);
-            if (pRACOWNIK == null)
+            PRACOWNIK pracownik = db.PRACOWNICY.Find(id);
+            if (pracownik == null)
             {
                 return HttpNotFound();
             }
 
-            var result = from x in db.ODDZIALY
-                         select new
-                         {
-                             x.ID_ODDZIAL,
-                             x.NAZWA,
-                             Checked = ((from ab in db.ODDZIAL_PRACOWNIK
-                                         where (ab.ID_PRACOWNIK == id) & (ab.ID_ODDZIAL == x.ID_ODDZIAL)
-                                         select ab).Count() > 0)
-                         };
+            var Results = from b in db.ODDZIALY
+                          select new
+                          {
+                              b.ID_ODDZIAL,
+                              b.NAZWA,
+                              Checked = ((from ab in db.ODDZIAL_PRACOWNICY
+                                          where (ab.ID_PRACOWNIK == id) & (ab.ID_ODDZIAL == b.ID_ODDZIAL)
+                                          select ab).Count() > 0)
+                          };
 
-            var MyViewModel = new PracownikOddzialViewModel();
-            MyViewModel.ID_PRACOWNIK = id.Value;
-            MyViewModel.Nazwisko = pRACOWNIK.NAZWISKO;
-     
-            var MyCheckBoxList = new List<CheckBoxViewModel>();
+            var Results2 = from b in db.SPECJALIZACJE
+                           select new
+                           {
+                               b.ID_SPECJALIZACJA,
+                               b.NAZWA,
+                               Checked = ((from ab in db.Pracownik_Specjalizacje
+                                           where (ab.ID_PRACOWNIK == id) & (ab.ID_SPECJALIZACJA == b.ID_SPECJALIZACJA)
+                                           select ab).Count() > 0)
+                           };
 
-            foreach (var item in result)
+
+
+            var pracownikViewModel = new PracownikViewModel();
+
+            pracownikViewModel.ID_PRACOWNIK = id.Value;
+            pracownikViewModel.IMIE = pracownik.IMIE;
+            pracownikViewModel.NAZWISKO = pracownik.NAZWISKO;
+            pracownikViewModel.ADRES = pracownik.ADRES;
+            pracownikViewModel.EMAIL_KONTAKTOWY = pracownik.EMAIL_KONTAKTOWY;
+
+            var oddzialCheckBoxList = new List<CheckBoxViewModel>();
+            var specjalizacjaCheckBoxList = new List<CheckBoxViewModel>();
+
+            foreach (var item in Results)
             {
-                MyCheckBoxList.Add(new Models.CheckBoxViewModel
-                {
-                    ID_CheckBoxViewModel = item.ID_ODDZIAL,
-                    Nazwa = item.NAZWA,
-                    Zaznaczenie = item.Checked
-                });
+                oddzialCheckBoxList.Add(new CheckBoxViewModel { ID = item.ID_ODDZIAL, Name = item.NAZWA, Checked = item.Checked });
             }
 
-            MyViewModel.Oddzialy = MyCheckBoxList;
+            foreach (var item in Results2)
+            {
+                specjalizacjaCheckBoxList.Add(new CheckBoxViewModel { ID = item.ID_SPECJALIZACJA, Name = item.NAZWA, Checked = item.Checked });
+            }
 
-         //ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
-            return View(MyViewModel);
+            pracownikViewModel.ListaOddzialPracownicy = oddzialCheckBoxList;
+            pracownikViewModel.ListaPracownicySpecjalizacje = specjalizacjaCheckBoxList;
+
+            return View(pracownikViewModel);
         }
 
-        // POST: Pracownik/Edit/5
+        // POST: /Authors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(PracownikOddzialViewModel pRACOWNIK)
+        public ActionResult Edit(PracownikViewModel pracownik)
         {
             if (ModelState.IsValid)
             {
-                var Pracownik = db.PRACOWNICY.Find(pRACOWNIK.ID_PRACOWNIK);
-                //Pracownik.NAZWISKO = pRACOWNIK.Nazwisko;
-                
-                foreach (var item in db.ODDZIAL_PRACOWNIK)
+                var osoba = db.PRACOWNICY.Find(pracownik.ID_PRACOWNIK);
+
+                osoba.IMIE = pracownik.IMIE;
+                osoba.NAZWISKO = pracownik.NAZWISKO;
+                osoba.ADRES = pracownik.ADRES;
+                osoba.EMAIL_KONTAKTOWY = pracownik.EMAIL_KONTAKTOWY;
+
+                foreach (var item in db.ODDZIAL_PRACOWNICY)
                 {
-                    if(item.ID_PRACOWNIK == pRACOWNIK.ID_PRACOWNIK)
+                    if (item.ID_PRACOWNIK == pracownik.ID_PRACOWNIK)
                     {
                         db.Entry(item).State = System.Data.Entity.EntityState.Deleted;
                     }
                 }
 
-                foreach (var item in pRACOWNIK.Oddzialy)
+                foreach (var item in db.Pracownik_Specjalizacje)
                 {
-                    if (item.Zaznaczenie)
+                    if (item.ID_PRACOWNIK == pracownik.ID_PRACOWNIK)
                     {
-                        db.ODDZIAL_PRACOWNIK.Add(new ODDZIAL_PRACOWNIK()
-                        {
-                            ID_PRACOWNIK = pRACOWNIK.ID_PRACOWNIK,
-                            ID_ODDZIAL = item.ID_CheckBoxViewModel
-                        });
+                        db.Entry(item).State = System.Data.Entity.EntityState.Deleted;
                     }
                 }
-                //db.Entry(pRACOWNIK).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+
+                foreach (var item in pracownik.ListaOddzialPracownicy)
+                {
+                    if (item.Checked)
+                    {
+                        db.ODDZIAL_PRACOWNICY.Add(new ODDZIAL_PRACOWNIK() { ID_PRACOWNIK = pracownik.ID_PRACOWNIK, ID_ODDZIAL = item.ID });
+                    }
+                }
+
+                foreach (var item in pracownik.ListaPracownicySpecjalizacje)
+                {
+                    if (item.Checked)
+                    {
+                        db.Pracownik_Specjalizacje.Add(new Pracownik_Specjalizacja() { ID_PRACOWNIK = pracownik.ID_PRACOWNIK, ID_SPECJALIZACJA = item.ID });
+                    }
+                }
+
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //ViewBag.ID_SPECJALIZACJA = new SelectList(db.SPECJALIZACJE, "ID_SPECJALIZACJA", "NAZWA", pRACOWNIK.ID_SPECJALIZACJA);
-            return View(pRACOWNIK);
+            return View(pracownik);
         }
 
+
         // GET: Pracownik/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRACOWNIK pRACOWNIK = await db.PRACOWNICY.FindAsync(id);
-            if (pRACOWNIK == null)
+            PRACOWNIK pracownik = db.PRACOWNICY.Find(id);
+            if (pracownik == null)
             {
                 return HttpNotFound();
             }
-            return View(pRACOWNIK);
+            return View(pracownik);
         }
 
         // POST: Pracownik/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            PRACOWNIK pRACOWNIK = await db.PRACOWNICY.FindAsync(id);
-            db.PRACOWNICY.Remove(pRACOWNIK);
-            await db.SaveChangesAsync();
+            PRACOWNIK pracownik = db.PRACOWNICY.Find(id);
+            db.PRACOWNICY.Remove(pracownik);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
