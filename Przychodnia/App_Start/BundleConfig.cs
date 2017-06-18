@@ -26,6 +26,26 @@ namespace Przychodnia
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datePicker").Include(
+                          "~/Scripts/jquery-{version}.js",
+                          "~/Scripts/moment.min.js",
+                       "~/Scripts/bootstrap.min.js",
+                        "~/Scripts/bootstrap-datetimepicker.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/datepicker").Include(
+                      "~/Content/bootstrap.min.csss",
+                     "~/Content/bootstrap-datetimepicker.min.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                "~/Scripts/moment.min.js",
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-datetimepicker.js",
+                      "~/Scripts/datetimepicker-setup.js",
+                      "~/Scripts/respond.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datetime").Include(
+                "~/Scripts/moment*",
+                "~/Scripts/bootstrap-datetimepicker*"));
             //
             /*
             bundles.Add(new StyleBundle("~/content/smartadmin").IncludeDirectory("~/content/css", "*.min.css"));

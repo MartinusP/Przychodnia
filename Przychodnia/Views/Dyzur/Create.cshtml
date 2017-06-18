@@ -4,24 +4,55 @@
     ViewBag.Title = "Create";
 }
 
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/datePicker")
+@Styles.Render("~/Content/datepicker")
+@Scripts.Render("~/bundles/bootstrap")
+
 <h2>Create</h2>
 
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
+    <div>Click textbox to open datetime picker: <input type="text" id="fromDate" class="datepicker" /></div>
+
     <div class="form-horizontal">
         <h4>DYZUR</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.DZIEN_DYZURU, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DZIEN_DYZURU, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10" id='DZIEN_DYZURU'>
+                @Html.EditorFor(model => model.DZIEN_DYZURU, new { htmlAttributes = new {  @class = "datetimepicker" } })
                 @Html.ValidationMessageFor(model => model.DZIEN_DYZURU, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker1').datetimepicker({ locale: 'pl' });
+            });
+                </script>
+            </div>
+        </div>
+
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.OD, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -63,10 +94,29 @@
     </div>
 }
 
+
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<script src="~/Scripts/moment.js"></script>
+<script src="~/Scripts/moment-with-locales.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+            $('#DZIEN_DYZURU').datetimepicker({
+                locale: 'pl'
+            });
+        });
+    </script>
+
+
 }
+
