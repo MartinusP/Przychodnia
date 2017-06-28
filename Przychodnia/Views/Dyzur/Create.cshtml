@@ -5,13 +5,35 @@
     ViewBag.Title = "Create";
 }
 
+<script>
+                    $(document).ready(function ()
+                    {
+                        $('#DZIEN_DYZURU').datetimepicker({
+                            viewMode : 'days',
+                            format: 'YYYY/MM/DD'
+                        });
+                        $('#OD').datetimepicker({
+                            viewMode: 'days',
+                            format: 'YYYY/MM/DD HH:mm'
+                        });
+                        $('#DO').datetimepicker({
+                            viewMode: 'days',
+                            format: 'YYYY/MM/DD HH:mm'
+                        });
+                        $("#DZIEN_DYZURU").on("dp.change", function (e) {
+                            $('#OD').val(e.date.format('YYYY/MM/DD HH:mm'));
+                            $('#DO').val(e.date.format('YYYY/MM/DD HH:mm'));
+                            $('#OD').data("DateTimePicker").enabledDates([e.date]);
+                            $('#DO').data("DateTimePicker").enabledDates([e.date]);
 
-@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/modernizr")
-@Scripts.Render("~/bundles/datePicker")
-@Styles.Render("~/Content/datepicker")
-@Scripts.Render("~/bundles/bootstrap")
+                        });
+                        $("#OD").on("dp.change", function (e) {
+                            $('#DO').val(e.date.format('YYYY/MM/DD HH:mm'));
+                            $('#DO').data("DateTimePicker").enabledDates([e.date]);
 
+                        });
+                    });
+</script>
 <h2>Create</h2>
 
 
@@ -22,63 +44,20 @@
     <div class="form-horizontal">
         <h4>DYZUR</h4>
         <hr />
-        <div class="container">
-            <div class="row">
-                <div class='col-sm-6'>
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.DZIEN_DYZURU, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class='input-group date' id='datetimepicker2'>
-                            @Html.TextBoxFor(model => model.DZIEN_DYZURU, new { @class = "form-control datetimepicker2" })
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                            @Html.ValidationMessageFor(model => model.DZIEN_DYZURU, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <script>
-                    $(document).ready(function ()
-                    {
-                        $('.datetimepicker2').datetimepicker({
-                            locale: 'pl',
-                            pickDate: true,                 //en/disables the date picker
-                            pickTime: true,                 //en/disables the time picker
-                            useMinutes: false,              //en/disables the minutes picker
-                            useSeconds: false,              //en/disables the seconds picker
-                            startDate: moment().subtract('days', 1)// a minimum date
-                        });
-                    });
-                </script>
-                </div>
-            </div>
 
-            <div class="container">
-                <div class="row">
-                    <div class='col-sm-6'>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#datetimepicker1').datetimepicker({ locale: 'pl' });
-                        });
-                    </script>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DZIEN_DYZURU, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.DZIEN_DYZURU, new { @id = "DZIEN_DYZURU", @class = "form-control datetimepicker2" })
+                    @Html.ValidationMessageFor(model => model.DZIEN_DYZURU, "", new { @class = "text-danger" })
                 </div>
-            </div>
-
+        </div>
 
 
             <div class="form-group">
                 @Html.LabelFor(model => model.OD, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.OD, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.OD, new { htmlAttributes = new { @id = "OD", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.OD, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -86,7 +65,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.DO, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.DO, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.DO, new { htmlAttributes = new { @id = "DO", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.DO, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -123,14 +102,6 @@
 
                 @section Scripts {
                     @Scripts.Render("~/bundles/jqueryval")
-
-                    <script src="~/Scripts/jquery-3.1.1.js"></script>
-                    <script src="~/Scripts/moment.js"></script>
-                    <script src="~/Scripts/moment-with-locales.js"></script>
-                    <script src="~/Scripts/bootstrap.js"></script>
-                    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
-                    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-                    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
 
                 }
 
