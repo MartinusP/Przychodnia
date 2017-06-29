@@ -142,7 +142,16 @@ namespace Przychodnia.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DUTY DAY.
+        ///   Looks up a localized string similar to Duty.
+        /// </summary>
+        public static string Duty {
+            get {
+                return ResourceManager.GetString("Duty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duty Day.
         /// </summary>
         public static string DutyDay {
             get {
@@ -160,7 +169,7 @@ namespace Przychodnia.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EMPLOYEE.
+        ///   Looks up a localized string similar to Employee.
         /// </summary>
         public static string Employee {
             get {
@@ -187,7 +196,7 @@ namespace Przychodnia.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FROM.
+        ///   Looks up a localized string similar to From.
         /// </summary>
         public static string From {
             get {
@@ -223,11 +232,20 @@ namespace Przychodnia.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HOSPITAL WARD.
+        ///   Looks up a localized string similar to Hospital Ward.
         /// </summary>
         public static string HospitalWard {
             get {
                 return ResourceManager.GetString("HospitalWard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Institution.
+        /// </summary>
+        public static string Institution {
+            get {
+                return ResourceManager.GetString("Institution", resourceCulture);
             }
         }
         
@@ -250,11 +268,29 @@ namespace Przychodnia.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Patient.
+        /// </summary>
+        public static string Patient {
+            get {
+                return ResourceManager.GetString("Patient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Polish.
         /// </summary>
         public static string Polish {
             get {
                 return ResourceManager.GetString("Polish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prescription.
+        /// </summary>
+        public static string Prescription {
+            get {
+                return ResourceManager.GetString("Prescription", resourceCulture);
             }
         }
         
@@ -286,6 +322,15 @@ namespace Przychodnia.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Room.
+        /// </summary>
+        public static string Room {
+            get {
+                return ResourceManager.GetString("Room", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
@@ -295,7 +340,16 @@ namespace Przychodnia.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TO.
+        ///   Looks up a localized string similar to Specialization.
+        /// </summary>
+        public static string Specialization {
+            get {
+                return ResourceManager.GetString("Specialization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
         /// </summary>
         public static string To {
             get {
@@ -309,6 +363,15 @@ namespace Przychodnia.App_GlobalResources {
         public static string UsersAdmin {
             get {
                 return ResourceManager.GetString("UsersAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visit.
+        /// </summary>
+        public static string Visit {
+            get {
+                return ResourceManager.GetString("Visit", resourceCulture);
             }
         }
     }
