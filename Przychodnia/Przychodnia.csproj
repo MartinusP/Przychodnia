@@ -249,12 +249,6 @@
     <Compile Include="Controllers\SpecjalizacjaController.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\WizytaController.cs" />
-    <Compile Include="Tests\Functional\DyzurCreate.cs" />
-    <Compile Include="Tests\Functional\OddzialCreate.cs" />
-    <Compile Include="Tests\Functional\PlacowkaCreate.cs" />
-    <Compile Include="Tests\Functional\PracownikCreate.cs" />
-    <Compile Include="Tests\Functional\TestSuiteDyzurCreate.cs" />
-    <Compile Include="Tests\Functional\UserLogin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datetimepicker.css" />
