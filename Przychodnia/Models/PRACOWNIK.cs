@@ -27,7 +27,9 @@ namespace Przychodnia.Models
         public string ADRES { get; set; }
         [EmailAddress]
         public string EMAIL_KONTAKTOWY { get; set; }
-         
+        [NotMapped]
+        public string NAZWA_PRACOWNIKA => NAZWISKO + " " + IMIE;
+
         public virtual ICollection<DYZUR> DYZURY { get; set; }
         public virtual ICollection<WIZYTA> WIZYTY { get; set; }
         public virtual ICollection<ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNIK { get; set; }
