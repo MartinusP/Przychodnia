@@ -144,14 +144,17 @@
   <data name="Details" xml:space="preserve">
     <value>Details</value>
   </data>
+  <data name="Duty" xml:space="preserve">
+    <value>Duty</value>
+  </data>
   <data name="DutyDay" xml:space="preserve">
-    <value>DUTY DAY</value>
+    <value>Duty Day</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
   <data name="Employee" xml:space="preserve">
-    <value>EMPLOYEE</value>
+    <value>Employee</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>English</value>
@@ -160,7 +163,7 @@
     <value>Forget your password</value>
   </data>
   <data name="From" xml:space="preserve">
-    <value>FROM</value>
+    <value>From</value>
   </data>
   <data name="German" xml:space="preserve">
     <value>German</value>
@@ -172,7 +175,10 @@
     <value>Home</value>
   </data>
   <data name="HospitalWard" xml:space="preserve">
-    <value>HOSPITAL WARD</value>
+    <value>Hospital Ward</value>
+  </data>
+  <data name="Institution" xml:space="preserve">
+    <value>Institution</value>
   </data>
   <data name="LogIn" xml:space="preserve">
     <value>Log in</value>
@@ -180,8 +186,14 @@
   <data name="LogOff" xml:space="preserve">
     <value>Log Off</value>
   </data>
+  <data name="Patient" xml:space="preserve">
+    <value>Patient</value>
+  </data>
   <data name="Polish" xml:space="preserve">
     <value>Polish</value>
+  </data>
+  <data name="Prescription" xml:space="preserve">
+    <value>Prescription</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
@@ -192,13 +204,22 @@
   <data name="RolesAdmin" xml:space="preserve">
     <value>Roles Admin</value>
   </data>
+  <data name="Room" xml:space="preserve">
+    <value>Room</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="Specialization" xml:space="preserve">
+    <value>Specialization</value>
+  </data>
   <data name="To" xml:space="preserve">
-    <value>TO</value>
+    <value>To</value>
   </data>
   <data name="UsersAdmin" xml:space="preserve">
     <value>Users Admin</value>
+  </data>
+  <data name="Visit" xml:space="preserve">
+    <value>Visit</value>
   </data>
 </root>
