@@ -6,7 +6,35 @@
 }
 
 <h2>Edit</h2>
+<script>
+                    $(document).ready(function ()
+                    {
+                        $('#DZIEN_DYZURU').datetimepicker({
+                            viewMode : 'days',
+                            format: 'YYYY/MM/DD'
+                        });
+                        $('#OD').datetimepicker({
+                            viewMode: 'days',
+                            format: 'YYYY/MM/DD HH:mm'
+                        });
+                        $('#DO').datetimepicker({
+                            viewMode: 'days',
+                            format: 'YYYY/MM/DD HH:mm'
+                        });
+                        $("#DZIEN_DYZURU").on("dp.change", function (e) {
+                            $('#OD').val(e.date.format('YYYY/MM/DD HH:mm'));
+                            $('#DO').val(e.date.format('YYYY/MM/DD HH:mm'));
+                            $('#OD').data("DateTimePicker").enabledDates([e.date]);
+                            $('#DO').data("DateTimePicker").enabledDates([e.date]);
 
+                        });
+                        $("#OD").on("dp.change", function (e) {
+                            $('#DO').val(e.date.format('YYYY/MM/DD HH:mm'));
+                            $('#DO').data("DateTimePicker").enabledDates([e.date]);
+
+                        });
+                    });
+</script>
 
 @using (Html.BeginForm())
 {
@@ -21,7 +49,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DZIEN_DYZURU, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DZIEN_DYZURU, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DZIEN_DYZURU, new { htmlAttributes = new { @id = "DZIEN_DYZURU", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DZIEN_DYZURU, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -29,7 +57,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OD, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OD, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.OD, new { htmlAttributes = new { @id = "OD", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OD, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -37,7 +65,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DO, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DO, new { htmlAttributes = new { @id = "DO", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DO, "", new { @class = "text-danger" })
             </div>
         </div>
