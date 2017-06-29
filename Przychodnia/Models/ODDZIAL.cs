@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace Przychodnia.Models
 {
+    [Table("ODDZIAL")]
     public partial class ODDZIAL
     {
         public ODDZIAL()
@@ -15,7 +17,9 @@ namespace Przychodnia.Models
         }
         [Key]
         public int ID_ODDZIAL { get; set; }
+        [Required]
         public string NAZWA { get; set; }
+        [Required]
         public string MIEJSCOWOSC { get; set; }
         public int ID_PLACOWKA { get; set; }
 

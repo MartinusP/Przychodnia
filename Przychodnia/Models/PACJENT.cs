@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace Przychodnia.Models
 {
+    [Table("PACJENT")]
     public partial class PACJENT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -15,11 +17,17 @@ namespace Przychodnia.Models
         }
         [Key]
         public int ID_PACJENT { get; set; }
+        [Required]
         public string IMIE { get; set; }
+        [Required]
         public string NAZWISKO { get; set; }
+        [Required]
         public string ADRES { get; set; }
-        public Nullable<long> PESEL { get; set; }
+        [Required]
+        public long PESEL { get; set; } 
+        [Phone]
         public string TELEFON_KONTAKTOWY { get; set; }
+        [EmailAddress]
         public string EMAIL_KONTAKTOWY { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

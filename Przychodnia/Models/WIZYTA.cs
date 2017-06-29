@@ -1,21 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace Przychodnia.Models
 {
+    [Table("WIZYTA")]
     public partial class WIZYTA
     {
         [Key]
         public int ID_WIZYTA { get; set; }
-        public Nullable<System.DateTime> DATA_WIZYTY { get; set; }
-        public Nullable<int> ID_SALA { get; set; }
-        public Nullable<int> ID_PRACOWNIK { get; set; }
-        public Nullable<int> ID_ODDZIAL { get; set; }
-        public Nullable<int> ID_PACJENT { get; set; }
-        public Nullable<int> ID_RECEPTA { get; set; }
+        [Required]
+        public DateTime DATA_WIZYTY { get; set; }
+        [Required]
+        public int ID_SALA { get; set; }
+        [Required]
+        public int ID_PRACOWNIK { get; set; }
+        [Required]
+        public int ID_ODDZIAL { get; set; }
+        [Required]
+        public int ID_PACJENT { get; set; }
+        [Required]
+        public int ID_RECEPTA { get; set; }
         public string UWAGI { get; set; }
 
         public virtual ODDZIAL ODDZIAL { get; set; }
