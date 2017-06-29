@@ -213,11 +213,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\LekController.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\CheckBoxViewModel.cs" />
     <Compile Include="Models\Dyzur.cs" />
+    <Compile Include="Models\Lek.cs" />
     <Compile Include="Models\Oddzial.cs" />
     <Compile Include="Models\OddzialPracownik.cs" />
     <Compile Include="Models\Pacjent.cs" />
@@ -236,6 +238,7 @@
     <Compile Include="Controllers\PlacowkaController.cs" />
     <Compile Include="Controllers\PracownikController.cs" />
     <Compile Include="Controllers\OddzialController.cs" />
+    <Compile Include="Models\WizytaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ReceptaController.cs" />
     <Compile Include="Controllers\SalaController.cs" />
@@ -523,6 +526,11 @@
     <Content Include="Views\Oddzial\Details.cshtml" />
     <Content Include="Views\Oddzial\Edit.cshtml" />
     <Content Include="Views\Oddzial\Index.cshtml" />
+    <Content Include="Views\Lek\Create.cshtml" />
+    <Content Include="Views\Lek\Delete.cshtml" />
+    <Content Include="Views\Lek\Details.cshtml" />
+    <Content Include="Views\Lek\Edit.cshtml" />
+    <Content Include="Views\Lek\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
