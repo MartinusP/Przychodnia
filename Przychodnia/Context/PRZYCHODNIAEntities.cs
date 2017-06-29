@@ -28,6 +28,7 @@ namespace Przychodnia.Context
             public DbSet<Przychodnia.Models.WIZYTA> WIZYTY { get; set; }
             public DbSet<Przychodnia.Models.ODDZIAL_PRACOWNIK> ODDZIAL_PRACOWNICY { get; set; }
             public System.Data.Entity.DbSet<Przychodnia.Models.Pracownik_Specjalizacja> Pracownik_Specjalizacje { get; set; }
+            public System.Data.Entity.DbSet<Przychodnia.Models.LEK> LEKI { get; set; }
 
     }
 }
