@@ -22,6 +22,7 @@ namespace Przychodnia.Models
         public int ID_PACJENT { get; set; }
         [Required]
         public int ID_RECEPTA { get; set; }
+
         public string UWAGI { get; set; }
 
         public virtual ODDZIAL ODDZIAL { get; set; }
