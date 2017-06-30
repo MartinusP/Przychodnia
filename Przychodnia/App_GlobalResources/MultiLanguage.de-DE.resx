@@ -144,14 +144,17 @@
   <data name="Details" xml:space="preserve">
     <value>Details</value>
   </data>
+  <data name="Duty" xml:space="preserve">
+    <value>Duty</value>
+  </data>
   <data name="DutyDay" xml:space="preserve">
-    <value>TAG OF DUTY</value>
+    <value>Tag of Dutry</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Bearbeiten</value>
   </data>
   <data name="Employee" xml:space="preserve">
-    <value>ARBEITER</value>
+    <value>Arbeiter</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>Englisch</value>
@@ -160,7 +163,7 @@
     <value>Passwort vergessen</value>
   </data>
   <data name="From" xml:space="preserve">
-    <value>VON</value>
+    <value>Von</value>
   </data>
   <data name="German" xml:space="preserve">
     <value>Deutsch</value>
@@ -172,7 +175,10 @@
     <value>Startseite</value>
   </data>
   <data name="HospitalWard" xml:space="preserve">
-    <value>KRANKENHAUSSTATION</value>
+    <value>Krankenhausstation</value>
+  </data>
+  <data name="Institution" xml:space="preserve">
+    <value>Vorposten</value>
   </data>
   <data name="LogIn" xml:space="preserve">
     <value>Einloggen</value>
@@ -180,8 +186,14 @@
   <data name="LogOff" xml:space="preserve">
     <value>Ausloggen</value>
   </data>
+  <data name="Patient" xml:space="preserve">
+    <value>Patient</value>
+  </data>
   <data name="Polish" xml:space="preserve">
     <value>Polnisch</value>
+  </data>
+  <data name="Prescription" xml:space="preserve">
+    <value>Rezept</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Registrieren</value>
@@ -192,13 +204,22 @@
   <data name="RolesAdmin" xml:space="preserve">
     <value>RollenAdmin</value>
   </data>
+  <data name="Room" xml:space="preserve">
+    <value>Zimmer</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Sparen</value>
   </data>
+  <data name="Specialization" xml:space="preserve">
+    <value>Spezialisierung</value>
+  </data>
   <data name="To" xml:space="preserve">
-    <value>ZUR</value>
+    <value>Zur</value>
   </data>
   <data name="UsersAdmin" xml:space="preserve">
     <value>BenutzerAdmin</value>
+  </data>
+  <data name="Visit" xml:space="preserve">
+    <value>Besuch</value>
   </data>
 </root>

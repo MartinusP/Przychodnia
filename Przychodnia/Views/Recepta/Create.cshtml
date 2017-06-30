@@ -6,7 +6,15 @@
 }
 
 <h2>Create</h2>
-
+<script>
+                    $(document).ready(function ()
+                    {
+                        $('#DATA_WYKORZYSTANIA').datetimepicker({
+                            viewMode : 'days',
+                            format: 'YYYY/MM/DD'
+                        });
+                    });
+</script>
 
 @using (Html.BeginForm()) 
 {
@@ -19,16 +27,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DATA_WYKORZYSTANIA, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DATA_WYKORZYSTANIA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DATA_WYKORZYSTANIA, new { htmlAttributes = new { @id = "DATA_WYKORZYSTANIA", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DATA_WYKORZYSTANIA, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NAZWA_LEKU, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ID_LEKU, "LEK", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NAZWA_LEKU, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NAZWA_LEKU, "", new { @class = "text-danger" })
+                @Html.DropDownList("ID_LEKU", (MultiSelectList)ViewBag.ID_LEKU, new { multiple = "multiple" })
+                @Html.ValidationMessageFor(model => model.ID_LEKU, "", new { @class = "text-danger" })
             </div>
         </div>
 

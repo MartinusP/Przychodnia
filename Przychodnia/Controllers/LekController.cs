@@ -7,115 +7,112 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Przychodnia.Models;
 using Przychodnia.Context;
+using Przychodnia.Models;
 
 namespace Przychodnia
 {
-    public class ReceptaController : Controller
+    public class LekController : Controller
     {
         private PRZYCHODNIAEntities db = new PRZYCHODNIAEntities();
 
-        // GET: Recepta
+        // GET: Lek
         public async Task<ActionResult> Index()
         {
-            return View(await db.RECEPTY.ToListAsync());
+            return View(await db.LEKI.ToListAsync());
         }
 
-        // GET: Recepta/Details/5
+        // GET: Lek/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RECEPTA recepta = await db.RECEPTY.FindAsync(id);
-            if (recepta == null)
+            LEK lEK = await db.LEKI.FindAsync(id);
+            if (lEK == null)
             {
                 return HttpNotFound();
             }
-            return View(recepta);
+            return View(lEK);
         }
 
-        // GET: Recepta/Create
+        // GET: Lek/Create
         public ActionResult Create()
         {
-            ViewBag.ID_LEKU = new MultiSelectList(db.LEKI, "ID_LEKU", "NAZWA_LEKU");
             return View();
         }
 
-        // POST: Recepta/Create
+        // POST: Lek/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA recepta)
+        public async Task<ActionResult> Create([Bind(Include = "ID_LEKU,NAZWA_LEKU,UWAGI")] LEK lEK)
         {
             if (ModelState.IsValid)
             {
-                db.RECEPTY.Add(recepta);
+                db.LEKI.Add(lEK);
                 await db.SaveChangesAsync();
-
-                ViewBag.ID_LEKU = new MultiSelectList(db.LEKI, "ID_LEKU", "NAZWA_LEKU");
                 return RedirectToAction("Index");
             }
 
-            return View(recepta);
+            return View(lEK);
         }
 
-        // GET: Recepta/Edit/5
+        // GET: Lek/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RECEPTA recepta = await db.RECEPTY.FindAsync(id);
-            if (recepta == null)
+            LEK lEK = await db.LEKI.FindAsync(id);
+            if (lEK == null)
             {
                 return HttpNotFound();
             }
-            return View(recepta);
+            return View(lEK);
         }
 
-        // POST: Recepta/Edit/5
+        // POST: Lek/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "DATA_WYKORZYSTANIA,NAZWA_LEKU,UWAGI")] RECEPTA recepta)
+        public async Task<ActionResult> Edit([Bind(Include = "ID_LEKU,NAZWA_LEKU,UWAGI")] LEK lEK)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(recepta).State = EntityState.Modified;
+                db.Entry(lEK).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(recepta);
+            return View(lEK);
         }
 
-        // GET: Recepta/Delete/5
+        // GET: Lek/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RECEPTA recepta = await db.RECEPTY.FindAsync(id);
-            if (recepta == null)
+            LEK lEK = await db.LEKI.FindAsync(id);
+            if (lEK == null)
             {
                 return HttpNotFound();
             }
-            return View(recepta);
+            return View(lEK);
         }
 
-        // POST: Recepta/Delete/5
+        // POST: Lek/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            RECEPTA recepta = await db.RECEPTY.FindAsync(id);
-            db.RECEPTY.Remove(recepta);
+            LEK lEK = await db.LEKI.FindAsync(id);
+            db.LEKI.Remove(lEK);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
